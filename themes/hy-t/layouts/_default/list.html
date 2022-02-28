@@ -1,9 +1,0 @@
-{{ define "main" }}
-{{ $list_html_array := (slice "list-1.html" "list-2.html" "list-3.html" "list-4.html") }}
-{{ if ne .Params.style nil }}
-{{ partial (index $list_html_array (.Params.style)) . }}
-{{ else }}
-{{ partial "list-1.html" . }}
-{{ end }}
-{{ end }}
-
