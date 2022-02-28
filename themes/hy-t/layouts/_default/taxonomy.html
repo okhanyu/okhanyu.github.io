@@ -1,0 +1,23 @@
+
+{{ define "main" }}
+
+{{ $title := .Title }}
+
+{{ $list_html_array := .Site.Data.data.listTemplate }}
+
+{{ $style := 0 }}
+
+{{ range .Site.Data.data.categoriesNav.map}}
+{{ if eq .name $title}}
+{{ $style = .style }}
+{{ end }}
+{{ end }}
+
+{{ if ne $style 0}}
+{{ partial (index $list_html_array ($style)) . }}
+{{ else }}
+{{ partial "list-1.html" . }}
+{{ end }}
+
+{{ end }}
+

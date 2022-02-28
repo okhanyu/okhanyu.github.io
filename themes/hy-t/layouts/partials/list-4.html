@@ -1,0 +1,106 @@
+
+    <!-- Start Main content -->
+    <main>
+        <!--archive header-->
+        <div class="archive-header pt-50 text-center">
+            <div class="container">
+                <h2 class="font-weight-900">{{.Title}}</h2>
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> {{.Title}}
+                </div>
+                <div class="bt-1 border-color-1 mt-30 mb-50"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="loop-grid mb-30">
+                 {{ $paginator := .Paginate .RegularPages }}
+               {{ $color := dict "0" "text-primary" "1" "text-success" "2" "text-warning" "3" "text-danger"}}
+                <div class="row">
+                    <div class="col-lg-8 mb-30">
+                        <div class="carausel-post-1 hover-up border-radius-10 overflow-hidden transition-normal position-relative wow fadeInUp animated">
+                            <div class="arrow-cover"></div>
+                            <div class="slide-fade">
+                                {{ $cTitle := .Title}}
+
+                {{ range .Site.Taxonomies.categories }}  
+                {{ $pTitle := .Page.Title }}
+                {{ if eq $pTitle $cTitle}}
+                {{ range first 2 .Pages }}
+
+                                <div class="position-relative post-thumb">
+                                    <div class="thumb-overlay img-hover-slide position-relative" style="background-image: url({{ .Params.custom_cover}})">
+                                        <a class="img-link" href="{{ .Permalink }}"></a>
+                                        <span class="top-left-icon bg-warning"><i class="elegant-icon icon_star_alt"></i></span>
+                                        <div class="post-content-overlay text-white ml-30 mr-30 pb-30">
+                                            <div class="entry-meta meta-0 font-small mb-20">
+                                              {{ range $num,$name := (.GetTerms "categories") }}  
+                                      <a  href="{{ .Permalink }}" tabindex="0"><span class="post-cat {{ echoParam $color (string (index (shuffle (seq 0 3)) 0)) }} text-uppercase">{{ .LinkTitle }}</span></a>
+                                      {{ end }}
+                                      {{ range $num,$name := (.GetTerms "tags") }}  
+                                      <a  href="{{ .Permalink }}" tabindex="0" class="post-cat {{ echoParam $color (string (index (shuffle (seq 0 3)) 0)) }} text-uppercase"># {{ .LinkTitle }}</a>
+                                      {{ end }}
+
+                                            </div>
+                                            <h3 class="post-title font-weight-900 mb-20">
+                                                <a class="text-white" href="{{ .Permalink }}">{{ .Title }}</a>
+                                            </h3>
+                                            <div class="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">
+                                                <span class="post-on">{{ .Date.Format "Monday, January 2, 2006"  }}</span>
+                                                <span class="hit-count has-dot">{{ .ReadingTime  }} mins read</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             {{ end  }}
+                             {{ end  }}
+                             {{end }}
+                            </div>
+                        </div>
+                    </div>
+
+                {{ range  $num,$name :=  after 2 $paginator.Pages  }}
+                {{ $s :=  string (mod $num 4)}}
+           
+                    <article class="col-lg-4 col-md-6 mb-30 wow fadeInUp animated" data-wow-delay="0.2s">
+                        <div class="post-card-1 border-radius-10 hover-up">
+                            <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{.Params.custom_cover}})">
+                                <a class="img-link" href="{{ .Permalink }}"></a>
+                                <span class="top-right-icon bg-success"><i class="elegant-icon icon_camera_alt"></i></span>
+                                <ul class="social-share">
+                                    <li><a href="javascript:alert('暂时无法使用分享功能')"><i class="elegant-icon social_share"></i></a></li>
+                                    <li><a class="fb" href="javascript:alert('暂时无法使用分享功能')" title="Share on Facebook" ><i class="elegant-icon social_facebook"></i></a></li>
+                                    <li><a class="tw" href="javascript:alert('暂时无法使用分享功能')"  title="Tweet now"><i class="elegant-icon social_twitter"></i></a></li>
+                                    <li><a class="pt" href="javascript:alert('暂时无法使用分享功能')"  title="Pin it"><i class="elegant-icon social_pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="post-content p-30">
+                                <div class="entry-meta meta-0 font-small mb-10">
+                                    {{ range $num,$name := (.GetTerms "categories") }}  
+                                      <a  href="{{ .Permalink }}" tabindex="0"><span class="post-cat {{ echoParam $color (string (index (shuffle (seq 0 3)) 0)) }} text-uppercase">{{ .LinkTitle }}</span></a>
+                                      {{ end }}
+                                      {{ range $num,$name := (.GetTerms "tags") }}  
+                                      <a  href="{{ .Permalink }}" tabindex="0" class="post-cat {{ echoParam $color (string (index (shuffle (seq 0 3)) 0)) }} text-uppercase"># {{ .LinkTitle }}</a>
+                                      {{ end }}
+
+                                </div>
+                                <div class="d-flex post-card-content">
+                                    <h5 class="post-title mb-20 font-weight-900">
+                                         <a href="{{ .Permalink }}">{{ .Title }}</a>
+                                    </h5>
+                                    <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                        <span class="post-on">{{ .Date.Format "Monday, January 2, 2006"  }}</span>
+                                    <span class="time-reading has-dot">{{ .ReadingTime  }} mins read</span>
+                                    <span class="post-by has-dot">{{ .WordCount }} words</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {{ end }}
+                </div>
+                 {{  partial "paginator.html" . }} 
+            </div>
+        </div>
+    </main>
+   

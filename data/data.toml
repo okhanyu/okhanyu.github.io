@@ -1,0 +1,50 @@
+listTemplate = ["list-1.html","list-2.html","list-3.html","list-4.html"]
+singleTemplate = ["single-1.html","single-2.html","single-3.html","single-4.html"]
+favico = "http://file.hanyu.cool/site/tech/static/v1/img/favicon.png"
+[text]
+	listCardIntroTitle = "嘿，我是韩西瓜"
+	listCardIntroContent = "我是西瓜，黑龙江五常人，说到这可以找我买大米hahhaa~，在北京工作。2021年3月份，也就是3个月前，我开始了一个冬天的自我反省，这将永远改变我的人生轨迹。"
+	intro = "我是西瓜，用技术感受生活。"
+
+[blogAuthor]
+	[[blogAuthor.avatar]] 
+		name = "韩西瓜"
+		avatarurl = "/assets/imgs/news/thumb-1.jpg"
+	[[blogAuthor.avatar]] 
+		name = "王若行"
+		avatarurl = "/assets/imgs/news/thumb-2.jpg"
+	[[blogAuthor.avatar]] 
+		name = "李涛"
+		avatarurl = "/assets/imgs/news/thumb-3.jpg"
+	[[blogAuthor.avatar]] 
+		name = "王加军"
+		avatarurl = "/assets/imgs/news/thumb-4.jpg"
+	[[blogAuthor.avatar]] 
+		name = "波波"
+		avatarurl = "/assets/imgs/news/thumb-5.jpg"
+	[[blogAuthor.avatar]] 
+		name = "莫非"
+		avatarurl = "/assets/imgs/news/thumb-6.jpg"
+
+
+[categoriesNav]
+	[[categoriesNav.map]] 
+		name = "原理"
+		style = 0
+	[[categoriesNav.map]] 
+		name = "架构"
+		style = 1
+	[[categoriesNav.map]] 
+		name = "笔记"
+		style = 2
+	[[categoriesNav.map]] 
+		name = "反思"
+		style = 3
+	[[categoriesNav.map]] 
+		name = "教程"
+		style = 3
+	[[categoriesNav.map]] 
+		name = "源码"
+		style = 0
+
+

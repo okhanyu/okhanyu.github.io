@@ -1,0 +1,69 @@
+<div class="scroll-progress primary-bg"></div>
+    <!-- Start Preloader -->
+    <!--     <div class="preloader text-center">
+        <div class="circle"></div>
+    </div> -->
+    <!--Offcanvas sidebar-->
+    <aside id="sidebar-wrapper" class="custom-scrollbar offcanvas-sidebar">
+        <button class="off-canvas-close"><i class="elegant-icon icon_close"></i></button>
+        <div class="sidebar-inner">
+            <!--Categories-->
+            <div class="sidebar-widget widget_categories mb-50 mt-30">
+                <div class="widget-header-2 position-relative">
+                    <h5 class="mt-5 mb-15">Hot topics</h5>
+                </div>
+                <div class="widget_nav_menu">
+                    <ul>
+                       {{ range .Site.Taxonomies.categories }}  
+                        <li class="cat-item cat-item-2"><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> <span class="post-count">{{ .Count }}</span></li>
+                          {{ end }}
+                      <!--   <li class="cat-item cat-item-3"><a href="category-grid.html">Book review</a> <span class="post-count">25</span></li>
+                        <li class="cat-item cat-item-4"><a href="category-list.html">Hotel review</a> <span class="post-count">16</span></li>
+                        <li class="cat-item cat-item-5"><a href="category-masonry.html">Destinations </a> <span class="post-count">22</span></li>
+                        <li class="cat-item cat-item-6"><a href="category-big.html">Lifestyle</a> <span class="post-count">25</span></li> -->
+                    </ul>
+                </div>
+            </div>
+            <!--Latest-->
+            <div class="sidebar-widget widget-latest-posts mb-50">
+                <div class="widget-header-2 position-relative mb-30">
+                    <h5 class="mt-5 mb-30">Don't miss</h5>
+                </div>
+                <div class="post-block-list post-module-1 post-module-5">
+                    <ul class="list-post">
+
+                         {{ range first 4  ((where  $.Site.RegularPages "Params.dontmiss" "true").ByDate.Reverse)   }}
+                        <li class="mb-30">
+                            <div class="d-flex hover-up-2 transition-normal">
+                                <div class="post-thumb post-thumb-80 d-flex mr-15 border-radius-5 img-hover-scale overflow-hidden">
+                                    <a class="color-white" href="{{ .Permalink }}">
+                                        <img src="{{ .Params.custom_cover }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="post-content media-body">
+                                    <h6 class="post-title mb-15 text-limit-2-row font-medium"><a href="{{ .Permalink }}">{{ .Title }}</a></h6>
+                                    <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                        <span class="post-on">{{ .Date.Format "January 2, 2006" }}</span>
+                                        <span class="post-by has-dot">{{.ReadingTime}} mins read</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+            <!--Ads-->
+            <div class="sidebar-widget widget-ads">
+                <div class="widget-header-2 position-relative mb-30">
+                    <h5 class="mt-5 mb-30">Advertise banner</h5>
+                </div>
+                {{ range where $.Site.RegularPages "Params.advertise_banner" "true" }}
+                <a href="{{ .Permalink }}" target="_blank">
+                    <img class="advertise-img border-radius-5" src="{{ .Params.custom_cover }}" alt="">
+                </a>
+                {{ end }}
+            </div>
+        </div>
+    </aside>
+  

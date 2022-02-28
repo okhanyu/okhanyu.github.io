@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ if eq .Site.Params.home_mode "main_3" }}
+{{ partial "main-3.html" . }}
+{{ else  if eq .Site.Params.home_mode "main_2" }}
+{{ partial "main-2.html" . }}
+{{ else  }}
+{{ partial "main-1.html" . }}
+{{ end }}
+{{- partial "side-bottom.html" . -}}
+{{ end }}
+

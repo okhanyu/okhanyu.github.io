@@ -1,0 +1,5 @@
+{{ .Title }}
+{{.Content }}
+{{ range where $.Site.Pages ".Params.author" .Title }}
+<br/>{{ .Title }}
+{{ end }}
