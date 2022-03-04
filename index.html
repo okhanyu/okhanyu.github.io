@@ -1,315 +1,338 @@
 <!DOCTYPE html>
-<!-- 原创意由siitake.cn设计 付费下载地址：https://blog.zezeshe.com/archives/siitake-cn.html-->
-<html lang="zh">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="referrer" content="never">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="description" content="韩西瓜,一个年轻人,想全世界走走逛逛拍拍玩玩">
-    <meta name="keywords" content="韩西瓜,博客,Developer,杂话铺">
-    <link rel="icon" href="https://file.hanyu.cool/site/home/img/favicon.png">
-    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/favicon.png">
-    <title>
-      韩西瓜的杂话铺！
-    </title>
-    <style>
-    
-      /**{margin:0;padding:0;font-family:Arial,sans-serif} */
-      *{margin:0;padding:0;font-family: "Comic Sans MS", 幼圆, 黑体, sans-serif;} html{height:100vh}
-      body{font-size:1em} .main{margin-top:35vh;margin-left:300px;transition:margin
-      .5s} .logo{width:160px;height:50px;background-color:black;border-radius:3px}
-      .logo::before{content:"Hope!";position:relative;font-size:36px;line-height:50px;top:0;padding-left:10px;color:white}
-      .logo::after{content:"";display:block;opacity:0;transition:opacity .5s;position:relative;width:calc(61px
-      * 1.5);height:calc(49px * 1.5);top:-115px;left:-4px;background-image:url('https://file.hanyu.cool/site/home/img/22.png');background-size:cover}
-      .logo:hover::after{opacity:1} .desc{margin:15px 0;color:black;font-size:16px;line-height:20px}
-      .nav{text-align:center;font-size:14px;text-align:left} .nav ul{list-style:none}
-      .nav li{display:inline-block;margin-right:5px} .nav a{color:black;transition:color
-      .5s} .nav a:hover{color:gray} .footer{width:100vw;height:65px;position:fixed;bottom:0;text-align:center;color:#d1d1d1;transition:color
-      .5s} .footer:hover{color:black} .icp{font-size:10px;line-height:100px}
-      .antiselect{user-select:none;-ms-user-select:none;-moz-user-select:none;-webkit-user-select:none}
-      .link{position:fixed;top:0;left:0;width:calc(100vw - 40px);height:calc(100vh
-      - 40px);background-color:whitesmoke;padding:20px;overflow-y:scroll;transition:opacity
-      .5s,top .5s;-webkit-overflow-scrolling:touch} .l-back{position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;-webkit-filter:blur(100px);-moz-filter:blur(100px);-o-filter:blur(100px);-ms-filter:blur(100px);filter:blur(100px);opacity:.5;transition:background
-      .25s} .l-hidden{top:100vh;opacity:0} .l-close{position:fixed;top:20px;right:20px;width:40px;height:40px;z-index:9999;filter:grayscale(100%);transition:filter
-      .3s} .l-close:hover{filter:grayscale(0%)} .lc-1,.lc-2{display:block;position:absolute;top:15px;left:0px;width:40px;height:10px;background-color:skyblue;border-radius:3px;transition:background
-      .5s} .lc-1{transform:rotate(45deg)} .lc-2{transform:rotate(-45deg)} .l-group{width:100%}
-      .l-title{margin:20px} .l-box{width:100%} .l-box:before,.l-box:after{content:'';display:table}
-      .l-box:after{clear:both} .l-item{position:relative;float:left;width:calc(20%
-      - 40px);height:64px;padding:10px;margin:10px;border-radius:15px;transition:background
-      .5s} .l-item:hover{background-color:skyblue} .li-logo{display:inline-block;float:left;width:64px;height:64px;background-color:white;background-size:cover;background-position:center;border-radius:32px;transition:transform
-      .5s,border-radius .5s} .l-item:hover .li-logo{transform:rotate(0deg);border-radius:12px}
-      .l-item h2,.l-item span{margin-left:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-      .l-item h2{display:inline-block;float:left;width:calc(100% - 70px);height:38px;line-height:38px;font-size:22px;font-weight:normal}
-      .l-item span{display:inline-block;float:left;max-width:calc(100% - 70px)}
-      .l-icon{padding-left:20px;background-size:auto 90%;background-repeat:no-repeat;background-position:left}
-      .qrCode{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,.9)}
-      .qrCode #qrImg{display:block;width:260px;height:260px;background-color:white;border:15px
-      solid white;border-radius:10px;margin-top:calc(40vh - 130px);margin-left:auto;margin-right:auto}
-      .qrCode p{display:block;width:360px;margin:20px auto;font-size:20px;color:white;text-align:center}
-      .qrCode span{font-size:12px;line-height:20px;color:whitesmoke;text-align:center}
-      #maomao{position:fixed;bottom:40px;right:-5px;width:57px;height:70px;background-image:url(https://file.hanyu.cool/site/home/img/mao.svg);background-position:center;background-size:cover;background-repeat:no-repeat;transition:background
-      .3s} #maomao:hover{background-position:60px 50%} @media screen and (max-width:1199px){.main{margin-left:200px}
-      .l-item{width:calc(25% - 40px)} }@media screen and (max-width:991px){.main{margin-left:150px}
-      .l-item{width:calc(33.33% - 40px)} }@media screen and (max-width:767px){.main{margin-left:100px}
-      .l-item{width:calc(50% - 40px)} }@media screen and (max-width:512px){.main{margin-left:50px}
-      .l-item{width:calc(100% - 40px)} }
-    </style>
-    <script src="https://file.hanyu.cool/site/home/js/qrcode.js">
-    </script>
-  <script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw==" src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
-  </head>
-  <body class="antiselect">
-    <div class="main">
-      <div style="color:#e9e9e9;font-size:xx-small">Welcome to 韩西瓜的杂话铺！</div>
-      <div class="logo">
-
-      </div>
-
-      <div class="desc">
-        <p>
-          <span id="hitokoto">
-            load...
-          </span>
-          <!-- 傻瓜才在年轻时不做傻事，羡慕别人有故事。 -->
-        </p>
-      </div>
-      <ul class="nav">
-       <!--  <span><a href="./sky.html" style="text-decoration: none;color:#e9e9e9;font-size:xx-small" >切换风格</a></span> -->
-          <li>
-          <a href="./sky.html">
-            STYLE!
-          </a>
-        </li>
-        /
-        <li>
-          <a target="_blank" href="./about">
-            ABOUT
-          </a>
-        </li>
-        /
-        <li>
-          <a target="_blank" href="./lifeblog">
-            LIFE
-          </a>
-        </li>
-        /
-        <li>
-          <a target="_blank" href="./techblog">
-            TECH
-          </a>
-        </li>
-        /
-        <li>
-          <a target="_blank" href="https://github.com/okhanyu">
-            GITHUB
-          </a>
-        </li>
-        /
-        <li>
-          <a target="_blank" href="./mp.html">
-            公众号!
-          </a>
-        </li>
-        /
-        <li>
-          <a href="javascript:swLinks(1);">
-            杂话铺
-          </a>
-        </li>
-        <!-- <li>
-        <a href="javascript:swLinks(1);" >
-        LET'S GO!
-        </a>
-        </li> -->
-        <!-- <section style="margin: 15px 0px 0px 0px;">
-        <li>
-        <a style="text-decoration: none;" target="_blank" href="http://beian.miit.gov.cn">
-        LIFE /
-        </a>
-        </li>
-        <li>
-        <a style="text-decoration: none;" target="_blank" href="http://beian.miit.gov.cn">
-        TECH /
-        </a>
-        </li>
-        <li>
-        <a style="text-decoration: none;" target="_blank" href="http://beian.miit.gov.cn">
-        GITHUB /
-        </a>
-        </li>
-        <li>
-        <a style="text-decoration: none;" target="_blank" href="http://beian.miit.gov.cn">
-        公众号 /
-        </a>
-        </li>
-        <li>
-        <a style="text-decoration: none;" href="javascript:swLinks(1);">
-        看看杂话铺! 
-        </a>
-        </li>
-        </section> -->
-        <!-- <section style="margin: 10px 0;">
-        <li><a style="text-decoration: none;" target="_blank" href="http://beian.miit.gov.cn">京ICP备18031874号</a></li>
-        </section> -->
-      </ul>
-    </div>
-    <div class="footer" onmouseover="exWords('#icp', '京ICP备18031874号')" onmouseout="exWords('#icp', '京ICP备18031874号')">
-      <div class="icp">
-        <p id="icp">
-          京ICP备18031874号
-        </p>
-      </div>
-    </div>
-    <div class="link l-hidden" id="link">
-      <div class="l-back l-hidden" id="l-back">
-        111
-      </div>
-      <div class="l-close" onclick="swLinks(0);">
-        <span class="lc-1">
-        </span>
-        <span class="lc-2">
-        </span>
-      </div>
-    </div>
-    <div id="qrCode" class="qrCode" onclick="hideQr()">
-      <section id="qrImg">
-        <img src="./src/qrcode.png" />
-      </section>
-      <p id="qrDesc">
-        请扫码
-      </p>
-    </div>
-    <div id="maomao" onMouseOut="duoMaomao()">
-    </div>
-    <script>
-      var xhr = new XMLHttpRequest();
-      xhr.open('get', 'https://v1.hitokoto.cn?c=i');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-          var data = JSON.parse(xhr.responseText);
-          var hitokoto = document.getElementById('hitokoto');
-          hitokoto.innerHTML = "";
-          //hitokoto.appendChild(document.createTextNode(data.hitokoto))
-          var typed = new Typed("#hitokoto", {
-            strings: [data.hitokoto],
-            typeSpeed: 80
-          });
-        }
-      }
-      xhr.send();
-
-      var plaaaay = function(id) {
-        //$('#' + id)[0].play();
-      }
-      var exWords = function(id, str) {
-        $(id).html(str);
-      }
-      var swLinks = function(st) {
-        if (st == 1) {
-          $('#link').removeClass('l-hidden');
-          $('#l-back').removeClass('l-hidden');
-          plaaaay('ruready');
-        } else if (st == 0) {
-          $('#link').addClass('l-hidden');
-          $('#l-back').addClass('l-hidden');
-        }
-      }
-      var getLinks = function(url) {
-        $.getJSON(url, {
-          t: Date.parse(new Date())
-        },
-        function(result) {
-          $.each(result,
-          function(i, obj) {
-            $.each(obj,
-            function(n, links) {
-              var l_group = $('<div class="l-group"></div>');
-              var l_title = $('<div class="l-title"><h1>' + n + '</h1></div>');
-              l_group.append(l_title);
-              var l_box = $('<div class="l-box"></div>');
-              //links.sort(function(){ return 0.5 - Math.random() }); // random
-              $.each(links,
-              function(j, link) {
-                var lil_url = link.logo != null ? link.logo: './src/loading.svg';
-                var lid_text = link.desc != null ? link.desc: '暂无描述 ┑(￣Д ￣)┍';
-                var l_item = $('<div class="l-item"></div>');
-                l_item.attr("title", '✦ ' + link.name + '\n✧ ' + lid_text + '\n✧ ' + link.href);
-                l_item.bind('click',
-                function() {
-                  window.open(link.href + (link.noUtm === undefined ? '?utm_source=hanyu.cool': ''));
-                }).bind("contextmenu",
-                function() {
-                  showQr(link.href + (link.noUtm === undefined ? '?qrCode=hanyu.cool': ''), link.name + '<br><span>' + lid_text + '</span>', lil_url);
-                  return false;
-                });
-                var li_logo = $('<div class="li-logo"></div>');
-                li_logo.css('background-image', 'url(' + lil_url + ')');
-                l_item.append(li_logo);
-                var li_name = $('<h2>' + link.name + '</h2>');
-                l_item.append(li_name);
-                var li_desc = $('<span>' + lid_text + '</span>');
-                l_item.append(li_desc);
-                l_item.bind('mouseover',
-                function() {
-                  $('.l-back').css('background-image', 'url(' + lil_url + ')');
-                });
-                l_box.append(l_item);
-              });
-              l_group.append(l_box);
-              $('#link').append(l_group);
-            });
-          });
-        });
-      }
-      var randomNum = function(minNum, maxNum) {
-        switch (arguments.length) {
-        case 1:
-          return parseInt(Math.random() * minNum + 1, 10);
-          break;
-        case 2:
-          return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-          break;
-        default:
-          return 0;
-          break;
-        }
-      }
-      var showQr = function(url, txt, logo) {
-        var qrnode = new AraleQRCode({
-          render: 'canvas',
-          correctLevel: 2,
-          text: url,
-          size: 260,
-          background: '#fff',
-          foreground: '#000',
-          pdground: '#f33',
-          image: logo,
-          imageSize: 32
-        });
-        $('#qrImg').html(qrnode);
-        $('#qrCode').css('display', 'block');
-        $('#qrDesc').html(txt);
-      }
-      var hideQr = function(url) {
-        $('#qrCode').css('display', 'none');
-      }
-      var duoMaomao = function() {
-        var maomao = $('#maomao');
-        maomao.css('bottom', randomNum(5, 80) + 'vh');
-      }
-      $(function() {
-        //getLinks('./links.json');
-        getLinks('https://file.hanyu.cool/site/home/json/links.json');
-        if (location.hash == '#link') {
-          $('#link').removeClass('l-hidden');
-          $('#l-back').removeClass('l-hidden');
-        }
-      });
-    </script>
-  </body>
+<html lang="zh-CN">
+	<head>
+		<title>
+			韩西瓜的杂话铺！
+		</title>
+		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="KEYWords" contect="韩西瓜,杂话铺,博客,Developer">
+		<meta name="Description" contect="韩西瓜，一个年轻人，一个Developer，想全世界走走逛逛拍拍玩玩。">
+		<meta name="Author" contect="韩西瓜°">
+		<meta name="Robots" contect="all">
+		<link rel="icon" href="https://file.hanyu.cool/site/home/img/favicon.png?x-oss-process=image/resize,h_32,m_lfit" sizes="32x32">
+		<link rel="stylesheet" href="https://file.hanyu.cool/site/home/css/skyfiles/style.css">
+		<script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
+		<script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw==" src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 主体开始 -->
+			<div class="hander">
+				<!-- 导航开始 -->
+				<nav id="nav-menu">
+					<a href="#" data-rel="home-me-section" class="active">
+						Home
+					</a>
+					<a href="#" data-rel="website-exp-section">
+						Things
+					</a>
+					<a href="#" data-rel="about-exp-section">
+						AboutMe
+					</a>
+					<a href="#" data-rel="course-exp-section">
+						Memory
+					</a>
+				</nav>
+			</div>
+			<!-- 导航结束 -->
+			<div class="content">
+				<!-- 内容开始 -->
+				<section class="home-me-section active-section">
+					<!-- 首页开始 -->
+					<div class="main">
+						<!-- 首页内容 -->
+						<img src="https://file.hanyu.cool/site/home/img/skyfiles/bgo.jpg" class="bgo"
+						/>
+						<img src="http://file.hanyu.cool/photo/avatar/a0c739cbb9b36f5f762a2bb4edf12860.jpeg" class="ato"
+						onclick="alert('戳我干嘛 ￣へ￣')" />
+						<div class="name" 
+						style="font-size: small;">
+							<span style="width:60px;border-bottom:1px solid gray">韩西瓜的杂话铺</span>
+						</div>
+						<div class="motto" onclick="javascript:this.innerHTML=(this.innerHTML=='心存敬畏 行有所止'?'Be in awe and stop':'心存敬畏 行有所止');"
+						style="font-size: xx-small;">
+							<span id="hitokoto">
+								load...
+							</span>
+						</div>
+						<div class="navo">
+							<ul>
+								<li>
+									<a href="https://github.com/okhanyu" target="_blank">
+										<i class="fab fa-github">
+										</i>
+									</a>
+								</li>
+								<!-- github -->
+								<li>
+									<a href="https://weibo.com/sohanyu" target="_blank">
+										<i class="fab fa-weibo">
+										</i>
+									</a>
+								</li>
+								<!-- 微博 -->
+								<li>
+									<a href="https://www.zhihu.com/people/okhanyu" target="_blank">
+										<i class="fab fa-zhihu">
+										</i>
+									</a>
+								</li>
+								<!-- 知乎 -->
+								<li>
+									<a href="javascript:alert('hi@hanyu.cool')" >
+										<i class="fas fa-envelope">
+										</i>
+									</a>
+								</li>
+								<!-- 邮箱 -->
+								<!-- <li>
+									<a href="javascript:alert('后续后续~')">
+										<i class="fab fa-qq">
+										</i>
+									</a>
+								</li> -->
+								<!-- QQ -->
+								<li>
+									<a href="javascript: alert('后续后续~')">
+										<i class="fab fa-twitter">
+										</i>
+									</a>
+								</li>
+								<!-- twitter -->
+								<li><a href="javascript: alert('后续后续~')"><i class="fas fa-paw"></i></a></li> 
+								<!-- 百度 -->
+							</ul>
+						</div>
+					</div>
+					<!-- 首页内容结束 -->
+				</section>
+				<!-- 首页结束 -->
+				<section class="about-exp-section">
+					<!-- 关于开始 -->
+					<div class="main">
+						<!-- 关于内容 -->
+						<img src="https://file.hanyu.cool/site/home/img/skyfiles/bgt.jpg" class="bgt"
+						/>
+						<img src="https://file.hanyu.cool/photo/avatar/a0c739cbb9b36f5f762a2bb4edf12860.jpeg" class="ats"
+						/>
+						<div class="about">
+							<p>
+								<br>
+								>_ 一个爱在夏天喝啤酒的90后年轻人or丑大叔？
+								<br>
+							<br><br><br>
+								<div style="width:100%;text-align: center;">
+									<a href="https://hanyu.cool/about/" target="_blank" style="border: 1px solid;border-radius:2px; padding: 4px; gray;box-shadow: inset 2px 2px 5px #b1b4b6, inset -2px -2px 5px #ffffff;">
+										点击这里了解详细的 >_ 关于我
+									</a>
+								</div>
+								<br>
+							</p>
+						</div>
+						<!-- <div class="about" style="margin-top:20px;">
+						<p>这条路我才刚刚迈开了我的第一步
+						<br>路上的坎一定会非常多，但
+						<br>在我眼里
+						<br>没有什么问题是尝试不能解决的，
+						<br>即使前方的路看似绝境，也要有硬生生给自己开出一条路的勇气</p>
+						</div> -->
+					</div>
+					<!-- 关于内容结束 -->
+				</section>
+				<!-- 关于结束 -->
+				<section class="course-exp-section">
+					<!-- 历程开始 -->
+					<div class="main">
+						<!-- 历程内容 -->
+						<img src="https://file.hanyu.cool/site/home/img/skyfiles/bgt.jpg" class="bgt"
+						/>
+						<img src="https://file.hanyu.cool/photo/avatar/a0c739cbb9b36f5f762a2bb4edf12860.jpeg" class="ats"
+						/>
+						<div class="box">
+							<div id="boxs">
+								<div class="track-list">
+									<!-- 时间轴开始 -->
+									<ul>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tbl.svg">
+											</i>
+											<span class="time" style="color:#2ECC71">
+												2021-1-6
+											</span>
+											<span class="txt" style="color:#2ECC71">
+												我还在回忆......
+											</span>
+										</li>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tb.svg">
+											</i>
+											<span class="time">
+												2019-8-8
+											</span>
+											<span class="txt">
+												我还在回忆......
+											</span>
+										</li>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tb.svg">
+											</i>
+											<span class="time">
+												2009-3-8
+											</span>
+											<span class="txt">
+												我还在回忆......
+											</span>
+										</li>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tb.svg">
+											</i>
+											<span class="time">
+												2008-11-8
+											</span>
+											<span class="txt">
+												我还在回忆......
+											</span>
+										</li>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tb.svg">
+											</i>
+											<span class="time">
+												2003-2-6
+											</span>
+											<span class="txt">
+												我还在回忆......
+											</span>
+										</li>
+										<li>
+											<i class="node-icon">
+												<img src="https://file.hanyu.cool/site/home/img/skyfiles/tb.svg">
+											</i>
+											<span class="time">
+												1998-9-17
+											</span>
+											<span class="txt">
+												我还在回忆......
+											</span>
+										</li>
+									</ul>
+								</div>
+								<!-- 时间轴结束 -->
+							</div>
+						</div>
+						<div style="color:#aaa;text-align:center;font-size:12px">
+							注: 上下滑动查看历史进程
+						</div>
+					</div>
+					<!-- 历程内容结束 -->
+				</section>
+				<!-- 历程结束 -->
+				<section class="website-exp-section">
+					<!-- 站点开始 -->
+					<div class="main">
+						<!-- 站点内容开始 -->
+						<img src="https://file.hanyu.cool/site/home/img/skyfiles/bgt.jpg" class="bgt"
+						/>
+						<img src="https://file.hanyu.cool/photo/avatar/a0c739cbb9b36f5f762a2bb4edf12860.jpeg" class="ats"
+						/>
+						<a href="clear.html" target="_blank">
+							<div class="web">
+								点我变干净
+							</div>
+						</a>
+						<a href="mp.html" target="_blank">
+							<div class="web">
+								WeChat
+							</div>
+						</a>
+						<!-- 站点四 -->
+						<a href="https://github.com/okhanyu" target="_blank">
+							<div class="web">
+								Github
+							</div>
+						</a>
+						<!-- 站点三 -->
+						<a href="https://weibo.com/sohanyu" target="_blank">
+							<div class="web">
+								Weibo
+							</div>
+						</a>
+						<!-- 站点四 -->
+						<a href="./lifeblog" target="_blank">
+							<div class="web effect02">
+								Life Blog
+							</div>
+						</a>
+						<!-- 站点一 -->
+						<a href="./techblog" target="_blank">
+							<div class="web">
+								Tech Blog
+							</div>
+						</a>
+						<!-- 站点二 -->
+						<!-- <div class="web" onclick="alert('敬请期待')">敬请期待</div> -->
+						<!-- <div class="tips">所有站点均正常运行</div> -->
+					</div>
+					<!-- 站点内容结束 -->
+				</section>
+				<!-- 站点结束 -->
+			</div>
+			<!-- 内容结束 -->
+			<script>
+				var xhr = new XMLHttpRequest();
+				xhr.open('get', 'https://v1.hitokoto.cn?c=i');
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4) {
+						var data = JSON.parse(xhr.responseText);
+						var hitokoto = document.getElementById('hitokoto');
+						hitokoto.innerHTML = "";
+						//hitokoto.appendChild(document.createTextNode(data.hitokoto))
+						var typed = new Typed("#hitokoto", {
+							strings: [data.hitokoto],
+							typeSpeed: 80
+						});
+					}
+				}
+				xhr.send();
+			</script>
+		</div>
+		<!-- 主体结束 -->
+		<img src="https://file.hanyu.cool/site/home/img/skyfiles/China.svg" style="width:30px;right:0px;position:fixed;bottom:0px;"
+		/>
+		<!-- 右下角国旗 -->
+		<div class="footer"  >
+			<!-- 底部版权 -->
+			<small>
+				<span id="sitetime">
+				</span>
+				<!-- 运行时间 -->
+				<br>
+				<a href="./index.html" class="noline" style="font-size:9px">
+					[切换清爽版!]　
+				</a>
+				|　Copyright 韩西瓜
+				<a href="https://beian.miit.gov.cn" class="noline" style="font-size:9px">
+					　|　京ICP备18031874号
+				</a>
+			</small>
+		</div>
+		<!-- 版权结束 -->
+		<script src="https://file.hanyu.cool/site/home/js/skyfiles/index.js">
+		</script>
+		<!-- 核心插件 -->
+		<script src="https://file.hanyu.cool/site/home/js/skyfiles/all.js">
+		</script>
+		<!-- 图标库 -->
+		<script src="https://file.hanyu.cool/site/home/js/skyfiles/Sitetime.js">
+		</script>
+		<!-- 运行时间 -->
+		<script src="https://file.hanyu.cool/site/home/js/skyfiles/Mouse.js">
+		</script>
+		<!-- 点击烟花特效 -->
+	</body>
 
 </html>
