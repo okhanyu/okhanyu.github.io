@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="韩西瓜,一个年轻人,想全世界走走逛逛拍拍玩玩">
     <meta name="keywords" content="韩西瓜,博客,Developer,杂话铺">
-    <link rel="icon" href="https://file.hanyu.cool/site/home/img/favicon.png">
-    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/favicon.png">
+    <link rel="icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
+    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
     <title>
       韩西瓜的杂话铺！
     </title>
@@ -23,7 +23,7 @@
       .5s} .logo{width:160px;height:50px;background-color:black;border-radius:3px}
       .logo::before{content:"Hope!";position:relative;font-size:36px;line-height:50px;top:0;padding-left:10px;color:white}
       .logo::after{content:"";display:block;opacity:0;transition:opacity .5s;position:relative;width:calc(61px
-      * 1.5);height:calc(49px * 1.5);top:-115px;left:-4px;background-image:url('https://file.hanyu.cool/site/home/img/22.png');background-size:cover}
+      * 1.5);height:calc(49px * 1.5);top:-115px;left:-4px;background-image:url('https://file.hanyu.cool/site/home/img/clear/22.png');background-size:cover}
       .logo:hover::after{opacity:1} .desc{margin:15px 0;color:black;font-size:16px;line-height:20px}
       .nav{text-align:center;font-size:14px;text-align:left} .nav ul{list-style:none}
       .nav li{display:inline-block;margin-right:5px} .nav a{color:black;transition:color
@@ -50,14 +50,14 @@
       solid white;border-radius:10px;margin-top:calc(40vh - 130px);margin-left:auto;margin-right:auto}
       .qrCode p{display:block;width:360px;margin:20px auto;font-size:20px;color:white;text-align:center}
       .qrCode span{font-size:12px;line-height:20px;color:whitesmoke;text-align:center}
-      #maomao{position:fixed;bottom:40px;right:-5px;width:57px;height:70px;background-image:url(https://file.hanyu.cool/site/home/img/mao.svg);background-position:center;background-size:cover;background-repeat:no-repeat;transition:background
+      #maomao{position:fixed;bottom:40px;right:-5px;width:57px;height:70px;background-image:url(https://file.hanyu.cool/site/home/img/clear/mao.svg);background-position:center;background-size:cover;background-repeat:no-repeat;transition:background
       .3s} #maomao:hover{background-position:60px 50%} @media screen and (max-width:1199px){.main{margin-left:200px}
       .l-item{width:calc(25% - 40px)} }@media screen and (max-width:991px){.main{margin-left:150px}
       .l-item{width:calc(33.33% - 40px)} }@media screen and (max-width:767px){.main{margin-left:100px}
       .l-item{width:calc(50% - 40px)} }@media screen and (max-width:512px){.main{margin-left:50px}
       .l-item{width:calc(100% - 40px)} }
     </style>
-    <script src="https://file.hanyu.cool/site/home/js/qrcode.js">
+    <script src="https://file.hanyu.cool/site/home/js/clear/qrcode.js">
     </script>
   <script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js"></script>
     <script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw==" src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js"></script>
@@ -179,7 +179,7 @@
     </div>
     <div id="qrCode" class="qrCode" onclick="hideQr()">
       <section id="qrImg">
-        <img src="./src/qrcode.png" />
+        <img src="https://file.hanyu.cool/site/home/img/clear/qrcode.png" />
       </section>
       <p id="qrDesc">
         请扫码
@@ -305,7 +305,7 @@
       }
       $(function() {
         //getLinks('./links.json');
-        getLinks('https://file.hanyu.cool/site/home/json/links.json');
+        getLinks('https://file.hanyu.cool/site/home/json/clear/links.json');
         if (location.hash == '#link') {
           $('#link').removeClass('l-hidden');
           $('#l-back').removeClass('l-hidden');
