@@ -1,0 +1,26 @@
+[
+  {
+    "导航鸭 ♪（＾∀＾●）ﾉ": [
+      {
+        "name": "Bilibili",
+        "href": "https://www.bilibili.com/",
+        "desc": "哔哩哔哩 (゜-゜)つロ 干杯~",
+        "logo": "https://tva1.sinaimg.cn/crop.0.0.1024.1024.180/68318509jw8f3sh9uz4ukj20sg0sggnf.jpg"
+      },
+      {
+        "name": "javis",
+        "href": "https://www.javis.me/",
+        "desc": "查令十字街 84 号",
+        "logo": "https://www.javis.me/_direct/site_avatar.png"
+      }
+    ],
+    "胖友们 ✧(≖ ◡ ≖✿)": [
+      {
+        "name": "Jrotty",
+        "href": "https://qqdie.com/",
+        "desc": "轻技术,重生活,爱动漫,专注于Typecho的个人博客",
+        "logo": "https://thirdqq.qlogo.cn/g?b=sdk&k=0n5AZ9Ne4h3em8iboKu3sHg&s=100&t=1581909662 "
+      }
+    ]
+  }
+]

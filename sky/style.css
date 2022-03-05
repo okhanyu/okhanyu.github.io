@@ -1,14 +1,16 @@
 	@font-face {
-		font-family: "Comic-Sans-MS";
-		font-weight: normal;
-		font-style: normal;
-		src: url('https://file.hanyu.cool/site/home/font/Comic-Sans-MS.ttf') format('truetype');
-		/*src: url('https://cdn.jsdelivr.net/gh/deajax/FontFace-CDN/fonts/字体目录/字体名称.后缀') format('opentype');*/
-	}
+        font-family: "Comic-Sans-MS";
+        font-weight: normal;
+        font-style: normal;
+        src: url('https://file.hanyu.cool/site/home/font/Comic-Sans-MS.ttf') format('truetype');
+        /*src: url('https://cdn.jsdelivr.net/gh/deajax/FontFace-CDN/fonts/字体目录/字体名称.后缀') format('opentype');*/
+      }
+
 	* {
 		margin: 0;
 		padding: 0;
 		color:#4D5656;
+		font-family:"Comic-Sans-MS","幼圆","黑体",sans-serif;
 	}
 	a {
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -28,7 +30,6 @@
 	}
 	body {
 		background-color: #ecf0f3;
-		font-family:"Comic-Sans-MS","幼圆","黑体",sans-serif;
 		}
 	.container {
 		width: 300px;
