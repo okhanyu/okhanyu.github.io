@@ -1,26 +1,64 @@
 [
-  {
-    "导航鸭 ♪（＾∀＾●）ﾉ": [
-      {
-        "name": "Bilibili",
-        "href": "https://www.bilibili.com/",
-        "desc": "哔哩哔哩 (゜-゜)つロ 干杯~",
-        "logo": "https://tva1.sinaimg.cn/crop.0.0.1024.1024.180/68318509jw8f3sh9uz4ukj20sg0sggnf.jpg"
-      },
-      {
-        "name": "javis",
-        "href": "https://www.javis.me/",
-        "desc": "查令十字街 84 号",
-        "logo": "https://www.javis.me/_direct/site_avatar.png"
-      }
-    ],
-    "胖友们 ✧(≖ ◡ ≖✿)": [
-      {
-        "name": "Jrotty",
-        "href": "https://qqdie.com/",
-        "desc": "轻技术,重生活,爱动漫,专注于Typecho的个人博客",
-        "logo": "https://thirdqq.qlogo.cn/g?b=sdk&k=0n5AZ9Ne4h3em8iboKu3sHg&s=100&t=1581909662 "
-      }
-    ]
-  }
+    {
+        "导航鸭 ♪（＾∀＾●）ﾉ":[
+            {
+                "name":"About Me",
+                "href":"./about",
+                "desc":"关于西瓜我 (゜-゜) ~",
+                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+            },
+            {
+                "name":"公众号",
+                "href":"./mp.html",
+                "desc":"微信公众号 (゜-゜) ~ 韩西瓜",
+                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+            },
+            {
+                "name":"Github",
+                "href":"https://github.com/okhanyu",
+                "desc":"我的码 (゜-゜) ~ ",
+                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+            },
+            {
+                "name":"Life Blog",
+                "href":"./lifeblog",
+                "desc":"我的生活博客 (゜-゜) ~ ",
+                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+            },
+            {
+                "name":"Tech Blog",
+                "href":"./techblog",
+                "desc":"我的技术博客 (゜-゜) ~ ",
+                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+            }
+        ],
+        "胖友们 ✧(≖ ◡ ≖✿)":[
+            {
+                "name":"javis",
+                "href":"https://www.javis.me/",
+                "desc":"查令十字街84号",
+                "logo":"https://www.javis.me/_direct/site_avatar.png"
+            },
+             {
+                "name":"致郁系",
+                "href":"https://www.juroku.net/",
+                "desc":"致郁系",
+                "logo":"https://www.juroku.net/blog/wp-content/themes/life/images/berry.jpg"
+            },
+             {
+                "name":"猫鱼的小窝",
+                "href":"https://2cat.net/",
+                "desc":"猫鱼的小窝",
+               "logo":"https://2cat.net/wp-content/uploads/2021/01/YZSC.TAOBAO.COM-7-150x150.png"
+            },
+             {
+                "name":"刘训灼",
+                "href":" https://liuxunzhuo.tech/",
+                "desc":"刘训灼",
+               "logo":"https://picreso.oss-cn-beijing.aliyuncs.com/favicon.ico"
+            }
+           
+           
+        ]
+    }
 ]
