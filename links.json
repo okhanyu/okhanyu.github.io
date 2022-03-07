@@ -8,6 +8,12 @@
                 "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
             },
             {
+                "name":"Weibo",
+                "href":"https://weibo.com/sohanyu",
+                "desc":"我的微博碎碎念 (゜-゜) ~ ",
+                "logo":"https://weibo.com/favicon.ico"
+            },
+            {
                 "name":"公众号",
                 "href":"./mp.html",
                 "desc":"微信公众号 (゜-゜) ~ 韩西瓜",
@@ -18,12 +24,6 @@
                 "href":"https://github.com/okhanyu",
                 "desc":"我的码 (゜-゜) ~ ",
                 "logo":"https://github.githubassets.com/favicons/favicon.svg"
-            },
-            {
-                "name":"Weibo",
-                "href":"https://weibo.com/sohanyu",
-                "desc":"我的微博碎碎念 (゜-゜) ~ ",
-                "logo":"https://weibo.com/favicon.ico"
             },
             {
                 "name":"Life Blog",
