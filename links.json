@@ -11,25 +11,31 @@
                 "name":"公众号",
                 "href":"./mp.html",
                 "desc":"微信公众号 (゜-゜) ~ 韩西瓜",
-                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+                "logo":"https://bizaladdin-image.baidu.com/0/pic/1300198067_220251832_-1058348626.jpg"
             },
             {
                 "name":"Github",
                 "href":"https://github.com/okhanyu",
                 "desc":"我的码 (゜-゜) ~ ",
-                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+                "logo":"https://github.githubassets.com/favicons/favicon.svg"
+            },
+            {
+                "name":"Weibo",
+                "href":"https://weibo.com/sohanyu",
+                "desc":"我的微博碎碎念 (゜-゜) ~ ",
+                "logo":"https://weibo.com/favicon.ico"
             },
             {
                 "name":"Life Blog",
                 "href":"./lifeblog",
                 "desc":"我的生活博客 (゜-゜) ~ ",
-                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+                "logo":"http://file.hanyu.cool/site/life/static/v1/img/logo.png"
             },
             {
                 "name":"Tech Blog",
                 "href":"./techblog",
                 "desc":"我的技术博客 (゜-゜) ~ ",
-                "logo":"http://file.hanyu.cool/site/home/img/fav.jpeg"
+                "logo":"https://file.hanyu.cool/site/tech/static/v1/img/favicon.png"
             }
         ],
         "有趣站 ✧(≖ ◡ ≖✿)":[
