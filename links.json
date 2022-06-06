@@ -8,7 +8,7 @@
         "name": "resume",
         "href": "#",
         "desc": "简历简历（暂无） (゜-゜) ~ ",
-        "logo": ""
+        "logo": "https://img.zcool.cn/community/013e225caf3199a801208f8be99127.png?x-oss-process=image/auto-orient,1"
     }, {
         "name": "公众号",
         "href": "./mp.html",
@@ -29,7 +29,7 @@
         "name": "Photo Blog",
         "href": "#",
         "desc": "相册（暂无） (゜-゜) ~ ",
-        "logo": ""
+        "logo": "https://img.zcool.cn/community/01d6625e48c5b0a80120a895e5fac4.png?x-oss-process=image/auto-orient,1"
     }],
     "关于技术 (゜-゜)": [{
         "name": "Github",
@@ -45,7 +45,7 @@
         "name": "Tech Knowledge Base",
         "href": "https://xlmgpq4y5b.feishu.cn/wiki/wikcn6Os02K7WkjkJE3qsM9Q6vd",
         "desc": "（技术类知识库，刚刚建立没啥东西） (゜-゜) ~ ",
-        "logo": ""
+        "logo": "https://img.zcool.cn/community/01f5a85caf3199a801214168a4ecd8.png?x-oss-process=image/auto-orient,1"
     }],
     "啥啥都有啧啧啧 (゜-゜)": [{
         "name": "MyToolBox",
