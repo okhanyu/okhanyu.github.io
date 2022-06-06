@@ -187,7 +187,7 @@
                 l_item.attr("title", '✦ ' + link.name + '\n✧ ' + lid_text + '\n✧ ' + link.href);
                 l_item.bind('click',
                 function() {
-                  window.open(link.href + (link.noUtm === undefined ? '?utm_source=hanyu.cool': ''));
+                  window.open(link.href + (link.noUtm === undefined ? '': ''));
                 }).bind("contextmenu",
                 function() {
                   showQr(link.href + (link.noUtm === undefined ? '?qrCode=hanyu.cool': ''), link.name + '<br><span>' + lid_text + '</span>', lil_url);
