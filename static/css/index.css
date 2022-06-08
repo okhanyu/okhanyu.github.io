@@ -1,0 +1,321 @@
+ @font-face {
+     font-family: "Comic-Sans-MS";
+     font-weight: normal;
+     font-style: normal;
+     src: url('https://file.hanyu.cool/site/home/font/Comic-Sans-MS.ttf') format('truetype');
+    /*src: url('https://cdn.jsdelivr.net/gh/deajax/FontFace-CDN/fonts/字体目录/字体名称.后缀') format('opentype');
+    */
+}
+/**{
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif
+}
+ */
+ *{
+    margin:0;
+    padding:0;
+    font-family: "Comic-Sans-MS", 幼圆, 黑体, sans-serif;
+}
+ html{
+    height:100vh
+}
+ body{
+    font-size:1em
+}
+ .main{
+    margin-top:35vh;
+    margin-left:300px;
+    transition:margin .5s
+}
+ .logo{
+    width:160px;
+    height:50px;
+    background-color:black;
+    border-radius:3px
+}
+ .logo::before{
+    content:"Hope!";
+    position:relative;
+    font-size:36px;
+    line-height:50px;
+    top:0;
+    padding-left:10px;
+    color:white
+}
+ .logo::after{
+    content:"";
+    display:block;
+    opacity:0;
+    transition:opacity .5s;
+    position:relative;
+    width:calc(61px * 1.5);
+    height:calc(49px * 1.5);
+    top:-115px;
+    left:-4px;
+    background-image:url('https://file.hanyu.cool/site/home/img/clear/22.png');
+    background-size:cover
+}
+ .logo:hover::after{
+    opacity:1
+}
+ .desc{
+    margin:15px 0;
+    color:black;
+    font-size:16px;
+    line-height:20px
+}
+ .nav{
+    text-align:center;
+    font-size:14px;
+    text-align:left
+}
+ .nav ul{
+    list-style:none
+}
+ .nav li{
+    display:inline-block;
+    margin-right:5px
+}
+ .nav a{
+    color:black;
+    transition:color .5s
+}
+ .nav a:hover{
+    color:gray
+}
+ .footer{
+    width:100vw;
+    height:65px;
+    position:fixed;
+    bottom:0;
+    text-align:center;
+    color:#d1d1d1;
+    transition:color .5s
+}
+ .footer:hover{
+    color:black
+}
+ .icp{
+    font-size:10px;
+    line-height:100px
+}
+ .antiselect{
+    user-select:none;
+    -ms-user-select:none;
+    -moz-user-select:none;
+    -webkit-user-select:none
+}
+ .link{
+    position:fixed;
+    top:0;
+    left:0;
+    width:calc(100vw - 40px);
+    height:calc(100vh - 40px);
+    background-color:whitesmoke;
+    padding:20px;
+    overflow-y:scroll;
+    transition:opacity .5s,top .5s;
+    -webkit-overflow-scrolling:touch
+}
+ .l-back{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    -webkit-filter:blur(100px);
+    -moz-filter:blur(100px);
+    -o-filter:blur(100px);
+    -ms-filter:blur(100px);
+    filter:blur(100px);
+    opacity:.5;
+    transition:background .25s
+}
+ .l-hidden{
+    top:100vh;
+    opacity:0
+}
+ .l-close{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:40px;
+    height:40px;
+    z-index:9999;
+    filter:grayscale(100%);
+    transition:filter .3s
+}
+ .l-close:hover{
+    filter:grayscale(0%)
+}
+ .lc-1,.lc-2{
+    display:block;
+    position:absolute;
+    top:15px;
+    left:0px;
+    width:40px;
+    height:10px;
+    background-color:skyblue;
+    border-radius:3px;
+    transition:background .5s
+}
+ .lc-1{
+    transform:rotate(45deg)
+}
+ .lc-2{
+    transform:rotate(-45deg)
+}
+ .l-group{
+    width:100%
+}
+ .l-title{
+    margin:20px
+}
+ .l-box{
+    width:100%
+}
+ .l-box:before,.l-box:after{
+    content:'';
+    display:table
+}
+ .l-box:after{
+    clear:both
+}
+ .l-item{
+    position:relative;
+    float:left;
+    width:calc(20% - 40px);
+    height:64px;
+    padding:10px;
+    margin:10px;
+    border-radius:15px;
+    transition:background .5s
+}
+ .l-item:hover{
+    background-color:skyblue
+}
+ .li-logo{
+    display:inline-block;
+    float:left;
+    width:64px;
+    height:64px;
+    background-color:white;
+    background-size:cover;
+    background-position:center;
+    border-radius:32px;
+    transition:transform .5s,border-radius .5s
+}
+ .l-item:hover .li-logo{
+    transform:rotate(0deg);
+    border-radius:12px
+}
+ .l-item h2,.l-item span{
+    margin-left:5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+ .l-item h2{
+    display:inline-block;
+    float:left;
+    width:calc(100% - 70px);
+    height:38px;
+    line-height:38px;
+    font-size:22px;
+    font-weight:normal
+}
+ .l-item span{
+    display:inline-block;
+    float:left;
+    max-width:calc(100% - 70px)
+}
+ .l-icon{
+    padding-left:20px;
+    background-size:auto 90%;
+    background-repeat:no-repeat;
+    background-position:left
+}
+ .qrCode{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,.9)
+}
+ .qrCode #qrImg{
+    display:block;
+    width:260px;
+    height:260px;
+    background-color:white;
+    border:15px solid white;
+    border-radius:10px;
+    margin-top:calc(40vh - 130px);
+    margin-left:auto;
+    margin-right:auto
+}
+ .qrCode p{
+    display:block;
+    width:360px;
+    margin:20px auto;
+    font-size:20px;
+    color:white;
+    text-align:center
+}
+ .qrCode span{
+    font-size:12px;
+    line-height:20px;
+    color:whitesmoke;
+    text-align:center
+}
+ #maomao{
+    position:fixed;
+    bottom:40px;
+    right:-5px;
+    width:57px;
+    height:70px;
+    background-image:url(https://file.hanyu.cool/site/home/img/clear/mao.svg);
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    transition:background .3s
+}
+ #maomao:hover{
+    background-position:60px 50%
+}
+ @media screen and (max-width:1199px){
+    .main{
+        margin-left:200px
+    }
+     .l-item{
+        width:calc(25% - 40px)
+    }
+}
+@media screen and (max-width:991px){
+    .main{
+        margin-left:150px
+    }
+     .l-item{
+        width:calc(33.33% - 40px)
+    }
+}
+@media screen and (max-width:767px){
+    .main{
+        margin-left:100px
+    }
+     .l-item{
+        width:calc(50% - 40px)
+    }
+}
+@media screen and (max-width:512px){
+    .main{
+        margin-left:50px
+    }
+     .l-item{
+        width:calc(100% - 40px)
+    }
+}

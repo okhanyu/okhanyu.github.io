@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<!-- 原创意由siitake.cn设计 付费下载地址：https://blog.zezeshe.com/archives/siitake-cn.html-->
+<!-- 嗨，我是韩西瓜，这个主题的原创意由siitake.cn设计，付费下载地址：https://blog.zezeshe.com/archives/siitake-cn.html -->
 <html lang="zh">
+
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,109 +12,68 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="韩西瓜,一个年轻人,想全世界走走逛逛拍拍玩玩">
     <meta name="keywords" content="韩西瓜,博客,Developer,杂话铺">
-    <link rel="icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
-    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
-    <title>
-      韩西瓜的杂话铺！
-    </title>
-    <style>
-      @font-face { font-family: "Comic-Sans-MS"; font-weight: normal; font-style:
-      normal; src: url('https://file.hanyu.cool/site/home/font/Comic-Sans-MS.ttf')
-      format('truetype'); /*src: url('https://cdn.jsdelivr.net/gh/deajax/FontFace-CDN/fonts/字体目录/字体名称.后缀')
-      format('opentype');*/ } /**{margin:0;padding:0;font-family:Arial,sans-serif}
-      */ *{margin:0;padding:0;font-family: "Comic-Sans-MS", 幼圆, 黑体, sans-serif;}
-      html{height:100vh} body{font-size:1em} .main{margin-top:35vh;margin-left:300px;transition:margin
-      .5s} .logo{width:160px;height:50px;background-color:black;border-radius:3px}
-      .logo::before{content:"Hope!";position:relative;font-size:36px;line-height:50px;top:0;padding-left:10px;color:white}
-      .logo::after{content:"";display:block;opacity:0;transition:opacity .5s;position:relative;width:calc(61px
-      * 1.5);height:calc(49px * 1.5);top:-115px;left:-4px;background-image:url('https://file.hanyu.cool/site/home/img/clear/22.png');background-size:cover}
-      .logo:hover::after{opacity:1} .desc{margin:15px 0;color:black;font-size:16px;line-height:20px}
-      .nav{text-align:center;font-size:14px;text-align:left} .nav ul{list-style:none}
-      .nav li{display:inline-block;margin-right:5px} .nav a{color:black;transition:color
-      .5s} .nav a:hover{color:gray} .footer{width:100vw;height:65px;position:fixed;bottom:0;text-align:center;color:#d1d1d1;transition:color
-      .5s} .footer:hover{color:black} .icp{font-size:10px;line-height:100px}
-      .antiselect{user-select:none;-ms-user-select:none;-moz-user-select:none;-webkit-user-select:none}
-      .link{position:fixed;top:0;left:0;width:calc(100vw - 40px);height:calc(100vh
-      - 40px);background-color:whitesmoke;padding:20px;overflow-y:scroll;transition:opacity
-      .5s,top .5s;-webkit-overflow-scrolling:touch} .l-back{position:fixed;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center;-webkit-filter:blur(100px);-moz-filter:blur(100px);-o-filter:blur(100px);-ms-filter:blur(100px);filter:blur(100px);opacity:.5;transition:background
-      .25s} .l-hidden{top:100vh;opacity:0} .l-close{position:fixed;top:20px;right:20px;width:40px;height:40px;z-index:9999;filter:grayscale(100%);transition:filter
-      .3s} .l-close:hover{filter:grayscale(0%)} .lc-1,.lc-2{display:block;position:absolute;top:15px;left:0px;width:40px;height:10px;background-color:skyblue;border-radius:3px;transition:background
-      .5s} .lc-1{transform:rotate(45deg)} .lc-2{transform:rotate(-45deg)} .l-group{width:100%}
-      .l-title{margin:20px} .l-box{width:100%} .l-box:before,.l-box:after{content:'';display:table}
-      .l-box:after{clear:both} .l-item{position:relative;float:left;width:calc(20%
-      - 40px);height:64px;padding:10px;margin:10px;border-radius:15px;transition:background
-      .5s} .l-item:hover{background-color:skyblue} .li-logo{display:inline-block;float:left;width:64px;height:64px;background-color:white;background-size:cover;background-position:center;border-radius:32px;transition:transform
-      .5s,border-radius .5s} .l-item:hover .li-logo{transform:rotate(0deg);border-radius:12px}
-      .l-item h2,.l-item span{margin-left:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-      .l-item h2{display:inline-block;float:left;width:calc(100% - 70px);height:38px;line-height:38px;font-size:22px;font-weight:normal}
-      .l-item span{display:inline-block;float:left;max-width:calc(100% - 70px)}
-      .l-icon{padding-left:20px;background-size:auto 90%;background-repeat:no-repeat;background-position:left}
-      .qrCode{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,.9)}
-      .qrCode #qrImg{display:block;width:260px;height:260px;background-color:white;border:15px
-      solid white;border-radius:10px;margin-top:calc(40vh - 130px);margin-left:auto;margin-right:auto}
-      .qrCode p{display:block;width:360px;margin:20px auto;font-size:20px;color:white;text-align:center}
-      .qrCode span{font-size:12px;line-height:20px;color:whitesmoke;text-align:center}
-      #maomao{position:fixed;bottom:40px;right:-5px;width:57px;height:70px;background-image:url(https://file.hanyu.cool/site/home/img/clear/mao.svg);background-position:center;background-size:cover;background-repeat:no-repeat;transition:background
-      .3s} #maomao:hover{background-position:60px 50%} @media screen and (max-width:1199px){.main{margin-left:200px}
-      .l-item{width:calc(25% - 40px)} }@media screen and (max-width:991px){.main{margin-left:150px}
-      .l-item{width:calc(33.33% - 40px)} }@media screen and (max-width:767px){.main{margin-left:100px}
-      .l-item{width:calc(50% - 40px)} }@media screen and (max-width:512px){.main{margin-left:50px}
-      .l-item{width:calc(100% - 40px)} }
-    </style>
-    <script src="https://file.hanyu.cool/site/home/js/clear/qrcode.js">
+    <!-- <link rel="icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
+    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png"> -->
+    <link rel="apple-touch-icon" href="static/img/favicon.ico">
+    <link rel="icon" href="static/img/favicon.ico">
+    <title>韩西瓜的杂话铺！</title>
+    <link type="text/css" rel="stylesheet" href="static/css/index.css" />
+    <!-- <script src="https://file.hanyu.cool/site/home/js/clear/qrcode.js"> -->
+    <script src="static/js/qrcode.js">
     </script>
-    <script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-    src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js">
+    <script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js">
     </script>
-    <script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw=="
-    src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js">
+    <script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw==" src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js">
     </script>
-    <script crossorigin="anonymous" integrity="sha384-bQbRtfK3AQL8GarIDArubtO1ZuFFtqhPJoQqxqhK+zd8TmNqrIwPah2x1OzepD9i"
-    src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.js">
+    <script crossorigin="anonymous" integrity="sha384-bQbRtfK3AQL8GarIDArubtO1ZuFFtqhPJoQqxqhK+zd8TmNqrIwPah2x1OzepD9i" src="https://lib.baomitu.com/fastclick/1.0.6/fastclick.js">
     </script>
     <script type="text/javascript">
       if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded',
-        function() {
-          FastClick.attach(document.body);
-        },
-        false);
-      }
+              document.addEventListener('DOMContentLoaded',
+              function() {
+                FastClick.attach(document.body);
+              },
+              false);
+            }
     </script>
   </head>
+
   <body class="antiselect">
     <div class="main">
-      <div style="color:#dfdfdf;font-size:xx-small">
-        Welcome to 韩西瓜的杂话铺！
-      </div>
+      <div style="color:#dfdfdf;font-size:xx-small">Welcome to 韩西瓜的杂话铺！</div>
       <div class="logo">
       </div>
       <div class="desc">
         <p>
-          <span id="hitokoto">
-            load...
-          </span>
+          <span id="hitokoto">load...</span>
           <!-- 傻瓜才在年轻时不做傻事，羡慕别人有故事。 -->
         </p>
       </div>
       <ul class="nav">
         <li>
-          <a href="javascript:swLinks(1);">
-            Come on in, We’re open！
-          </a>
-        </li>　/　 <li><a href="javascript:window.location.reload();"> 咦？</a></li>
-      <!--<li><a target="_blank"href="./about">ABOUT</a></li>/<li><a target="_blank"href="./lifeblog">LIFE</a></li>/<li><a target="_blank"href="./techblog">TECH</a></li>/<li><a target="_blank"href="https://github.com/okhanyu">GITHUB</a></li><section style="margin: 15px 0px 0px 0px;"><li><a target="_blank"href="./mp.html">公众号!</a></li>/<li><a href="javascript:swLinks(1);">杂货铺</a></li>/<li><a href="./sky.html">换装</a></li>/<li><a href="javascript:window.location.reload();">换诗</a></li></SECTION>--><!--<li><a href="javascript:swLinks(1);">LET'S GO!</a></li>--><!--<section style="margin: 15px 0px 0px 0px;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">LIFE/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">TECH/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">GITHUB/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">公众号/</a></li><li><a style="text-decoration: none;"href="javascript:swLinks(1);">看看杂话铺!</a></li></section>--><!--<section style="margin: 10px 0;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">京ICP备18031874号</a></li></section>-->
+          <a href="javascript:swLinks(1);">Come on in, We’re open！</a>
+        </li>　/　
+        <li>
+          <a href="javascript:window.location.reload();">咦？</a>
+        </li>
+        <!--<li><a target="_blank"href="./about">ABOUT</a></li>/<li><a target="_blank"href="./lifeblog">LIFE</a></li>/<li><a target="_blank"href="./techblog">TECH</a></li>/<li><a target="_blank"href="https://github.com/okhanyu">GITHUB</a></li><section style="margin: 15px 0px 0px 0px;"><li><a target="_blank"href="./mp.html">公众号!</a></li>/<li><a href="javascript:swLinks(1);">杂货铺</a></li>/<li><a href="./sky.html">换装</a></li>/<li><a href="javascript:window.location.reload();">换诗</a></li></SECTION>-->
+        <!--<li><a href="javascript:swLinks(1);">LET'S GO!</a></li>-->
+        <!--<section style="margin: 15px 0px 0px 0px;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">LIFE/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">TECH/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">GITHUB/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">公众号/</a></li><li><a style="text-decoration: none;"href="javascript:swLinks(1);">看看杂话铺!</a></li></section>-->
+        <!--<section style="margin: 10px 0;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">京ICP备18031874号</a></li></section>-->
       </ul>
     </div>
-    <div class="footer" >  
-      <div class="icp" onmouseover="exWords('#icp', '京ICP备18031874号')" onmouseout="exWords('#icp', '京ICP备18031874号')" >  
-        <a href="./sky.html" style="text-decoration: none;color:#d1d1d1;font-size:xx-small" >「切换小精致风」　|　</a><a href="https://beian.miit.gov.cn" style="text-decoration: none;color:#d1d1d1;font-size:xx-small"><span id="icp">京ICP备18031874号</span></a>
+    <div class="footer">
+      <div class="icp" onmouseover="exWords('#icp', '京ICP备18031874号')" onmouseout="exWords('#icp', '京ICP备18031874号')">
+        <!-- <a href="./sky.html" style="text-decoration: none;color:#d1d1d1;font-size:xx-small">「切换小精致风」　|　</a> -->
+        <a href="https://beian.miit.gov.cn" style="text-decoration: none;color:#d1d1d1;font-size:xx-small">
+          <span id="icp">京ICP备18031874号</span>
+        </a>
         <!-- <p id="icp"></p> -->
       </div>
     </div>
     <div class="link l-hidden" id="link">
       <div class="l-back l-hidden" id="l-back">
-       <!--  111 -->
+        <!-- 111 -->
       </div>
       <div class="l-close" onclick="swLinks(0);">
         <span class="lc-1">
@@ -126,136 +86,11 @@
       <section id="qrImg">
         <img src="https://file.hanyu.cool/site/home/img/clear/qrcode.png" />
       </section>
-      <p id="qrDesc">
-        请扫码
-      </p>
+      <p id="qrDesc">请扫码</p>
     </div>
     <div id="maomao" onMouseOut="duoMaomao()">
     </div>
-    <script>
-      var xhr = new XMLHttpRequest();
-      xhr.open('get', 'https://v1.hitokoto.cn?c=i');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-          var data = JSON.parse(xhr.responseText);
-          var hitokoto = document.getElementById('hitokoto');
-          hitokoto.innerHTML = "";
-          //hitokoto.appendChild(document.createTextNode(data.hitokoto))
-          var typed = new Typed("#hitokoto", {
-            strings: [data.hitokoto],
-            typeSpeed: 80
-          });
-        }
-      }
-      xhr.send();
-
-      var plaaaay = function(id) {
-        //$('#' + id)[0].play();
-      }
-      var exWords = function(id, str) {
-        $(id).html(str);
-      }
-      var swLinks = function(st) {
-        if (st == 1) {
-          $('#link').removeClass('l-hidden');
-          $('#l-back').removeClass('l-hidden');
-          plaaaay('ruready');
-        } else if (st == 0) {
-          $('#link').addClass('l-hidden');
-          $('#l-back').addClass('l-hidden');
-        }
-      }
-      var getLinks = function(url) {
-        $.getJSON(url, {
-          t: Date.parse(new Date())
-        },
-        function(result) {
-          $.each(result,
-          function(i, obj) {
-            $.each(obj,
-            function(n, links) {
-              var l_group = $('<div class="l-group"></div>');
-              var l_title = $('<div class="l-title"><h1>' + n + '</h1></div>');
-              l_group.append(l_title);
-              var l_box = $('<div class="l-box"></div>');
-              //links.sort(function(){ return 0.5 - Math.random() }); // random
-              $.each(links,
-              function(j, link) {
-                var lil_url = link.logo != null ? link.logo: './src/loading.svg';
-                var lid_text = link.desc != null ? link.desc: '暂无描述 ┑(￣Д ￣)┍';
-                var l_item = $('<div class="l-item"></div>');
-                l_item.attr("title", '✦ ' + link.name + '\n✧ ' + lid_text + '\n✧ ' + link.href);
-                l_item.bind('click',
-                function() {
-                  window.open(link.href + (link.noUtm === undefined ? '': ''));
-                }).bind("contextmenu",
-                function() {
-                  showQr(link.href + (link.noUtm === undefined ? '?qrCode=hanyu.cool': ''), link.name + '<br><span>' + lid_text + '</span>', lil_url);
-                  return false;
-                });
-                var li_logo = $('<div class="li-logo"></div>');
-                li_logo.css('background-image', 'url(' + lil_url + ')');
-                l_item.append(li_logo);
-                var li_name = $('<h2>' + link.name + '</h2>');
-                l_item.append(li_name);
-                var li_desc = $('<span>' + lid_text + '</span>');
-                l_item.append(li_desc);
-                l_item.bind('mouseover',
-                function() {
-                  $('.l-back').css('background-image', 'url(' + lil_url + ')');
-                });
-                l_box.append(l_item);
-              });
-              l_group.append(l_box);
-              $('#link').append(l_group);
-            });
-          });
-        });
-      }
-      var randomNum = function(minNum, maxNum) {
-        switch (arguments.length) {
-        case 1:
-          return parseInt(Math.random() * minNum + 1, 10);
-          break;
-        case 2:
-          return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-          break;
-        default:
-          return 0;
-          break;
-        }
-      }
-      var showQr = function(url, txt, logo) {
-        var qrnode = new AraleQRCode({
-          render: 'canvas',
-          correctLevel: 2,
-          text: url,
-          size: 260,
-          background: '#fff',
-          foreground: '#000',
-          pdground: '#f33',
-          image: logo,
-          imageSize: 32
-        });
-        $('#qrImg').html(qrnode);
-        $('#qrCode').css('display', 'block');
-        $('#qrDesc').html(txt);
-      }
-      var hideQr = function(url) {
-        $('#qrCode').css('display', 'none');
-      }
-      var duoMaomao = function() {
-        var maomao = $('#maomao');
-        maomao.css('bottom', randomNum(5, 80) + 'vh');
-      }
-      $(function() {
-        //getLinks('./links.json');
-        getLinks('https://file.hanyu.cool/site/home/json/clear/links.json');
-        if (location.hash == '#link') {
-          $('#link').removeClass('l-hidden');
-          $('#l-back').removeClass('l-hidden');
-        }
-      });
+    <script type="text/javascript" src="static/js/index.js">
     </script>
   </body>
 
