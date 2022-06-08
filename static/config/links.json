@@ -11,7 +11,7 @@
         "logo": "https://img.zcool.cn/community/013e225caf3199a801208f8be99127.png?x-oss-process=image/auto-orient,1"
     }, {
         "name": "公众号",
-        "href": "./mp.html",
+        "href": "page/mp.html",
         "desc": "公众号 (゜-゜) ~ 韩西瓜",
         "logo": "https://bizaladdin-image.baidu.com/0/pic/1300198067_220251832_-1058348626.jpg"
     }],
@@ -22,7 +22,7 @@
         "logo": "https://weibo.com/favicon.ico"
     }, {
         "name": "Life Blog",
-        "href": "./lifeblog",
+        "href": "site/life",
         "desc": "我的生活博客 (゜-゜) ~ ",
         "logo": "http://file.hanyu.cool/site/life/static/v1/img/logo.png"
     }, {
@@ -38,7 +38,7 @@
         "logo": "https://github.githubassets.com/favicons/favicon.svg"
     },{
         "name": "Tech Blog",
-        "href": "./techblog",
+        "href": "site/tech",
         "desc": "我的技术博客 (゜-゜) ~ ",
         "logo": "https://file.hanyu.cool/site/tech/static/v1/img/favicon.png"
     }, {
