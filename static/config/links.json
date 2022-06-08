@@ -22,7 +22,7 @@
         "logo": "https://weibo.com/favicon.ico"
     }, {
         "name": "Life Blog",
-        "href": "site/life",
+        "href": "https://okhanyu.github.io/lifeblog/",
         "desc": "我的生活博客 (゜-゜) ~ ",
         "logo": "http://file.hanyu.cool/site/life/static/v1/img/logo.png"
     }, {
@@ -38,7 +38,7 @@
         "logo": "https://github.githubassets.com/favicons/favicon.svg"
     },{
         "name": "Tech Blog",
-        "href": "site/tech",
+        "href": "https://okhanyu.github.io/techblog/",
         "desc": "我的技术博客 (゜-゜) ~ ",
         "logo": "https://file.hanyu.cool/site/tech/static/v1/img/favicon.png"
     }, {

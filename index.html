@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<!-- 嗨，我是韩西瓜，这个主题的原创意由siitake.cn设计，付费下载地址：https://blog.zezeshe.com/archives/siitake-cn.html -->
+<!-- 嗨，我是韩西瓜，这个主题的原创意由siitake.cn设计 -->
 <html lang="zh">
 
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="referrer" content="never">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"> -->
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="韩西瓜,一个年轻人,想全世界走走逛逛拍拍玩玩">
     <meta name="keywords" content="韩西瓜,博客,Developer,杂话铺">
-    <!-- <link rel="icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png">
-    <link rel="apple-touch-icon" href="https://file.hanyu.cool/site/home/img/clear/favicon.png"> -->
     <link rel="apple-touch-icon" href="static/img/favicon.ico">
     <link rel="icon" href="static/img/favicon.ico">
     <title>韩西瓜的杂话铺！</title>
     <link type="text/css" rel="stylesheet" href="static/css/index.css" />
     <!-- <script src="https://file.hanyu.cool/site/home/js/clear/qrcode.js"> -->
-    <script src="static/js/qrcode.js">
-    </script>
+
     <script crossorigin="anonymous" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js">
     </script>
     <script crossorigin="anonymous" integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw==" src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js">
@@ -29,14 +26,15 @@
     </script>
     <script type="text/javascript">
       if ('addEventListener' in document) {
-              document.addEventListener('DOMContentLoaded',
-              function() {
-                FastClick.attach(document.body);
-              },
-              false);
-            }
+                    document.addEventListener('DOMContentLoaded',
+                    function() {
+                      FastClick.attach(document.body);
+                    },
+                    false);
+                  }
     </script>
   </head>
+
 
   <body class="antiselect">
     <div class="main">
@@ -45,23 +43,20 @@
       </div>
       <div class="desc">
         <p>
-          <span id="hitokoto">load...</span>
+          <span id="hitokoto" style="font-size: small;">load...</span>
           <!-- 傻瓜才在年轻时不做傻事，羡慕别人有故事。 -->
         </p>
       </div>
       <ul class="nav">
         <li>
-          <a href="javascript:swLinks(1);">Come on in, We’re open！</a>
+          <a href="javascript:swLinks(1);">Find me ? </a>
         </li>　/　
         <li>
-          <a href="javascript:window.location.reload();">咦？</a>
+          <a href="javascript:window.location.reload();">Biu ~ </a>
         </li>
-        <!--<li><a target="_blank"href="./about">ABOUT</a></li>/<li><a target="_blank"href="./lifeblog">LIFE</a></li>/<li><a target="_blank"href="./techblog">TECH</a></li>/<li><a target="_blank"href="https://github.com/okhanyu">GITHUB</a></li><section style="margin: 15px 0px 0px 0px;"><li><a target="_blank"href="./mp.html">公众号!</a></li>/<li><a href="javascript:swLinks(1);">杂货铺</a></li>/<li><a href="./sky.html">换装</a></li>/<li><a href="javascript:window.location.reload();">换诗</a></li></SECTION>-->
-        <!--<li><a href="javascript:swLinks(1);">LET'S GO!</a></li>-->
-        <!--<section style="margin: 15px 0px 0px 0px;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">LIFE/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">TECH/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">GITHUB/</a></li><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">公众号/</a></li><li><a style="text-decoration: none;"href="javascript:swLinks(1);">看看杂话铺!</a></li></section>-->
-        <!--<section style="margin: 10px 0;"><li><a style="text-decoration: none;"target="_blank"href="http://beian.miit.gov.cn">京ICP备18031874号</a></li></section>-->
       </ul>
     </div>
+
     <div class="footer">
       <div class="icp" onmouseover="exWords('#icp', '京ICP备18031874号')" onmouseout="exWords('#icp', '京ICP备18031874号')">
         <!-- <a href="./sky.html" style="text-decoration: none;color:#d1d1d1;font-size:xx-small">「切换小精致风」　|　</a> -->
@@ -71,25 +66,38 @@
         <!-- <p id="icp"></p> -->
       </div>
     </div>
+
+    <div class="l-back l-hidden" id="l-back"></div>
     <div class="link l-hidden" id="link">
-      <div class="l-back l-hidden" id="l-back">
-        <!-- 111 -->
+      <div class="l-search-form">
+        <input type="text" id="search" name="search" placeholder="搜索本站" />
       </div>
       <div class="l-close" onclick="swLinks(0);">
-        <span class="lc-1">
-        </span>
-        <span class="lc-2">
-        </span>
+        <span class="lc-1"></span>
+        <span class="lc-2"></span>
+      </div>
+      <div class="l-search" id="l-search" onclick="showSearch()">
+        <span class="ls-1"></span>
+        <span class="ls-2"></span>
       </div>
     </div>
     <div id="qrCode" class="qrCode" onclick="hideQr()">
       <section id="qrImg">
         <img src="https://file.hanyu.cool/site/home/img/clear/qrcode.png" />
       </section>
-      <p id="qrDesc">请扫码</p>
+      <p id="qrDesc" title="请扫码"></p>
     </div>
-    <div id="maomao" onMouseOut="duoMaomao()">
+    <div style="display: none;">
+      <!-- 没错！就是你！准备好了吗？ ///// 【泠鸢】交织together【单人版】 ///// https://www.bilibili.com/video/av15770997 -->
+      <audio id="ruready" src="static/audio/are_you_ready.ogg" preload="auto">Your browser does not support the audio element.</audio>
+      <!-- 喵~ ///// 点击领取你的猫娘女友！总有一款适合你！~ ///// https://www.bilibili.com/video/av55305494 -->
+      <audio id="miao" src="static/audio/miao_cocoa.ogg" preload="auto">Your browser does not support the audio element.</audio>
     </div>
+    <div id="maomao" onMouseOut="duoMaomao()"></div>
+
+
+    <script src="static/js/qrcode.js">
+    </script>
     <script type="text/javascript" src="static/js/index.js">
     </script>
   </body>
