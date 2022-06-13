@@ -1,7 +1,7 @@
 [{
     "是我是我 (゜-゜) ": [{
         "name": "About Me",
-        "href": "/about/index.html",
+        "href": "/about/",
         "desc": "关于我 (゜-゜) ~",
         "logo": "static/img/favicon.ico"
     }, {
