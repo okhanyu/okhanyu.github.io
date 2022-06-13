@@ -1,19 +1,19 @@
 [{
     "是我是我 (゜-゜) ": [{
         "name": "About Me",
-        "href": "page/about.html",
+        "href": "/about/index.html",
         "desc": "关于我 (゜-゜) ~",
         "logo": "static/img/favicon.ico"
-    }, {
-        "name": "resume",
-        "href": "#",
-        "desc": "简历简历（暂无） (゜-゜) ~ ",
-        "logo": "https://img.zcool.cn/community/013e225caf3199a801208f8be99127.png?x-oss-process=image/auto-orient,1"
     }, {
         "name": "公众号",
         "href": "page/mp.html",
         "desc": "公众号 (゜-゜) ~ 韩西瓜",
         "logo": "https://bizaladdin-image.baidu.com/0/pic/1300198067_220251832_-1058348626.jpg"
+    }, {
+        "name": "resume",
+        "href": "#",
+        "desc": "简历简历（暂无） (゜-゜) ~ ",
+        "logo": "https://img.zcool.cn/community/013e225caf3199a801208f8be99127.png?x-oss-process=image/auto-orient,1"
     }],
     "关于生活 (゜-゜)": [{
         "name": "Weibo",
