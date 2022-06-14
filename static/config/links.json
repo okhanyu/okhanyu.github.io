@@ -1,7 +1,7 @@
 [{
     "是我是我 (゜-゜) ": [{
         "name": "About Me",
-        "href": "/about/",
+        "href": "about/",
         "desc": "关于我 (゜-゜) ~",
         "logo": "static/img/favicon.ico"
     }, {
@@ -27,7 +27,7 @@
         "logo": "http://file.hanyu.cool/site/life/static/v1/img/logo.png"
     }, {
         "name": "Photo Blog",
-        "href": "#",
+        "href": "photo/",
         "desc": "相册（暂无） (゜-゜) ~ ",
         "logo": "https://img.zcool.cn/community/01c6e75caf3199a801208f8b80afdf.png?x-oss-process=image/auto-orient,1"
     }],
