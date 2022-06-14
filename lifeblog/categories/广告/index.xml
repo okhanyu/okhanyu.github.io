@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>广告 on Hanyu FM</title>
+    <link>https://hanyu.cool/lifeblog/categories/%E5%B9%BF%E5%91%8A/</link>
+    <description>Recent content in 广告 on Hanyu FM</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 02 Aug 2020 22:40:49 +0800</lastBuildDate><atom:link href="https://hanyu.cool/lifeblog/categories/%E5%B9%BF%E5%91%8A/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>广告1</title>
+      <link>https://hanyu.cool/lifeblog/ad/ad-1/</link>
+      <pubDate>Sun, 02 Aug 2020 22:40:49 +0800</pubDate>
+      
+      <guid>https://hanyu.cool/lifeblog/ad/ad-1/</guid>
+      <description>asdad</description>
+    </item>
+    
+    <item>
+      <title>广告边栏</title>
+      <link>https://hanyu.cool/lifeblog/posts/side/side-item-img/</link>
+      <pubDate>Sun, 02 Aug 2020 22:40:49 +0800</pubDate>
+      
+      <guid>https://hanyu.cool/lifeblog/posts/side/side-item-img/</guid>
+      <description>asd</description>
+    </item>
+    
+    <item>
+      <title>广告边栏1</title>
+      <link>https://hanyu.cool/lifeblog/posts/side/side-item-article-1/</link>
+      <pubDate>Sun, 02 Aug 2020 22:40:49 +0800</pubDate>
+      
+      <guid>https://hanyu.cool/lifeblog/posts/side/side-item-article-1/</guid>
+      <description>asd</description>
+    </item>
+    
+    <item>
+      <title>广告边栏2</title>
+      <link>https://hanyu.cool/lifeblog/posts/side/side-item-article-2/</link>
+      <pubDate>Sun, 02 Aug 2020 22:40:49 +0800</pubDate>
+      
+      <guid>https://hanyu.cool/lifeblog/posts/side/side-item-article-2/</guid>
+      <description>asd</description>
+    </item>
+    
+    <item>
+      <title>广告边栏3</title>
+      <link>https://hanyu.cool/lifeblog/posts/side/side-item-article-3/</link>
+      <pubDate>Sun, 02 Aug 2020 22:40:49 +0800</pubDate>
+      
+      <guid>https://hanyu.cool/lifeblog/posts/side/side-item-article-3/</guid>
+      <description>asd</description>
+    </item>
+    
+  </channel>
+</rss>

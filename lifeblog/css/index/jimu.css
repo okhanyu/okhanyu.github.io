@@ -1,0 +1,676 @@
+/*
+            /$$
+    /$$    /$$$$
+   | $$   |_  $$    /$$$$$$$
+ /$$$$$$$$  | $$   /$$_____/
+|__  $$__/  | $$  |  $$$$$$
+   | $$     | $$   \____  $$
+   |__/    /$$$$$$ /$$$$$$$/
+          |______/|_______/
+================================
+        Keep calm and get rich.
+                    Is the best.
+
+  	@Author: Dami
+  	@Date:   2019-03-18 17:47:07
+ * @Last Modified by: suxing
+ * @Last Modified time: 2019-08-13 11:23:35
+*/
+
+
+/*
+ SimpleBar style
+*/
+
+
+[data-simplebar] {
+    position: relative;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    flex-wrap: wrap;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    -webkit-box-align: start;
+    align-items: flex-start;
+}
+
+.simplebar-wrapper {
+    overflow: hidden;
+    width: inherit;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+}
+
+.simplebar-mask {
+    direction: inherit;
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto !important;
+    height: auto !important;
+    z-index: 0;
+}
+
+.simplebar-offset {
+    direction: inherit !important;
+    box-sizing: inherit !important;
+    resize: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.simplebar-content-wrapper {
+    direction: inherit;
+    box-sizing: border-box !important;
+    position: relative;
+    display: block;
+    height: 100%;
+    /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
+    width: auto;
+    visibility: visible;
+    overflow: auto;
+    /* Scroll on this element otherwise element can't have a padding applied properly */
+    max-width: 100%;
+    /* Not required for horizontal scroll to trigger */
+    max-height: 100%;
+    /* Needed for vertical scroll to trigger */
+}
+
+.simplebar-content:before,
+.simplebar-content:after {
+    content: " ";
+    display: table;
+}
+
+.simplebar-placeholder {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.simplebar-height-auto-observer-wrapper {
+    box-sizing: inherit !important;
+    height: 100%;
+    width: inherit;
+    max-width: 1px;
+    position: relative;
+    float: left;
+    max-height: 1px;
+    overflow: hidden;
+    z-index: -1;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-box-flex: inherit;
+    flex-grow: inherit;
+    flex-shrink: 0;
+    flex-basis: 0;
+}
+
+.simplebar-height-auto-observer {
+    box-sizing: inherit;
+    display: block;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1000%;
+    width: 1000%;
+    min-height: 1px;
+    min-width: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.simplebar-track {
+    z-index: 1;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+[data-simplebar].simplebar-dragging .simplebar-track {
+    pointer-events: all;
+}
+
+.simplebar-scrollbar {
+    position: absolute;
+    right: 2px;
+    width: 7px;
+    min-height: 10px;
+}
+
+.simplebar-scrollbar:before {
+    position: absolute;
+    content: "";
+    background: black;
+    border-radius: 7px;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+}
+
+.simplebar-track .simplebar-scrollbar.simplebar-visible:before {
+
+    /* When hovered, remove all transitions from drag handle */
+    opacity: 0.5;
+    -webkit-transition: opacity 0s linear;
+    transition: opacity 0s linear;
+}
+
+.simplebar-track.simplebar-vertical {
+    top: 0;
+    width: 11px;
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+    top: 2px;
+    bottom: 2px;
+}
+
+.simplebar-track.simplebar-horizontal {
+    left: 0;
+    height: 11px;
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
+    height: 100%;
+    left: 2px;
+    right: 2px;
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+    right: auto;
+    left: 0;
+    top: 2px;
+    height: 7px;
+    min-height: 0;
+    min-width: 10px;
+    width: auto;
+}
+
+/* Rtl support */
+[data-simplebar-direction="rtl"] .simplebar-track.simplebar-vertical {
+    right: auto;
+    left: 0;
+}
+
+.hs-dummy-scrollbar-size {
+    direction: rtl;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    height: 500px;
+    width: 500px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+/*--------------------------------------------------------------
+    POPUP CSS
+--------------------------------------------------------------*/
+.nice-tips,
+.nice-tips-overlay {
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+.nice-tips {
+    position: fixed;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    pointer-events: none
+}
+
+.nice-tips-open {
+    z-index: 1031;
+}
+
+.nice-tips-overlay {
+    position: absolute;
+    background: rgba(120, 129, 147, .22);
+    opacity: 0;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s
+}
+
+.nice-tips-open .nice-tips-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+    .nice-tips-open .nice-tips-overlay {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+
+}
+
+
+/*--------------------------------------------------------------
+    tips close btn
+--------------------------------------------------------------*/
+.nice-tips-btn-close {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    cursor: pointer;
+    /* -webkit-transform: translateY(150%); */
+    /* transform: translateY(150%); */
+    text-align: center;
+}
+
+.nice-tips-btn-close .svg-white {
+    display: inline-block;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCI+PGRlZnM+PHN0eWxlLz48L2RlZnM+PHBhdGggZD0iTTUxMiAwQzIyOS4yIDAgMCAyMjkuMTk5OTk5IDAgNTEyYzAgMjgyLjggMjI5LjIgNTEyIDUxMiA1MTIgMjgyLjgwMDAwMSAwIDUxMi0yMjkuMiA1MTItNTEyQzEwMjQgMjI5LjE5OTk5OSA3OTQuODAwMDAxIDAgNTEyIDB6bTIxMy40NjA1MjIgNzI1Ljk3NTY1OWMtNi4wNzcyNDkgNi4wNzcyNDgtMTQuMDY0NDg4IDkuMTE1ODcyLTIyLjA1MTcyNyA5LjExNTg3Mi03Ljk4NzI0MiAwLTE2LjA2MTI5OC0zLjAzODYyNC0yMi4xMzg1NDgtOS4yMDI2OUw1MTIgNTU2LjI3MTMyMyAzNDIuNzI5NzUyIDcyNS44ODg4NDFjLTYuMDc3MjQ4IDYuMTY0MDY2LTE0LjE1MTMwNiA5LjIwMjY5LTIyLjEzODU0NiA5LjIwMjY5LTcuOTg3MjQgMC0xNS45NzQ0NzktMy4wMzg2MjQtMjIuMDUxNzI3LTkuMTE1ODcyLTEyLjI0MTMxMy0xMi4xNTQ0OTYtMTIuMjQxMzEzLTMxLjk0ODk2LS4wODY4MTgtNDQuMTkwMjczTDQ2Ny44OTY1NDYgNTExLjk5NDIzIDI5OC40NTI2NjEgMzQyLjIwMzA3NGMtMTIuMTU0NDk1LTEyLjI0MTMxMi0xMi4xNTQ0OTUtMzIuMDM1Nzc2LjA4NjgxOC00NC4xOTAyNzEgMTIuMjQxMzEzLTEyLjE1NDQ5NSAzMi4wMzU3NzctMTIuMTU0NDk1IDQ0LjE5MDI3My4wODY4MTdMNTEyIDQ2Ny43MTcxNDFsMTY5LjI3MDI0Ny0xNjkuNzA0MzM4YzEyLjE1NDQ5NS0xMi4yNDEzMTMgMzEuOTQ4OTU5LTEyLjI0MTMxMyA0NC4xOTAyNzUtLjA4NjgxOCAxMi4yNDEzMTMgMTIuMTU0NDk1IDEyLjI0MTMxMyAzMS45NDg5NTkuMDg2ODE4IDQ0LjE5MDI3Mkw1NTYuMTAzNDU0IDUxMS45OTQyMyA3MjUuNTQ3MzQgNjgxLjc4NTM4NmMxMi4xNTQ0OTUgMTIuMjQxMzEzIDEyLjE1NDQ5NSAzMi4wMzU3NzctLjA4NjgxOCA0NC4xOTAyNzN6IiBmaWxsPSIjZmZmIi8+PC9zdmc+");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+}
+
+.nice-tips-btn-close .svg-dark {
+    display: none;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCI+PGRlZnM+PHN0eWxlLz48L2RlZnM+PHBhdGggZD0iTTUxMiAwQzIyOS4yIDAgMCAyMjkuMTk5OTk5IDAgNTEyYzAgMjgyLjggMjI5LjIgNTEyIDUxMiA1MTIgMjgyLjgwMDAwMSAwIDUxMi0yMjkuMiA1MTItNTEyQzEwMjQgMjI5LjE5OTk5OSA3OTQuODAwMDAxIDAgNTEyIDB6bTIxMy40NjA1MjIgNzI1Ljk3NTY1OWMtNi4wNzcyNDkgNi4wNzcyNDgtMTQuMDY0NDg4IDkuMTE1ODcyLTIyLjA1MTcyNyA5LjExNTg3Mi03Ljk4NzI0MiAwLTE2LjA2MTI5OC0zLjAzODYyNC0yMi4xMzg1NDgtOS4yMDI2OUw1MTIgNTU2LjI3MTMyMyAzNDIuNzI5NzUyIDcyNS44ODg4NDFjLTYuMDc3MjQ4IDYuMTY0MDY2LTE0LjE1MTMwNiA5LjIwMjY5LTIyLjEzODU0NiA5LjIwMjY5LTcuOTg3MjQgMC0xNS45NzQ0NzktMy4wMzg2MjQtMjIuMDUxNzI3LTkuMTE1ODcyLTEyLjI0MTMxMy0xMi4xNTQ0OTYtMTIuMjQxMzEzLTMxLjk0ODk2LS4wODY4MTgtNDQuMTkwMjczTDQ2Ny44OTY1NDYgNTExLjk5NDIzIDI5OC40NTI2NjEgMzQyLjIwMzA3NGMtMTIuMTU0NDk1LTEyLjI0MTMxMi0xMi4xNTQ0OTUtMzIuMDM1Nzc2LjA4NjgxOC00NC4xOTAyNzEgMTIuMjQxMzEzLTEyLjE1NDQ5NSAzMi4wMzU3NzctMTIuMTU0NDk1IDQ0LjE5MDI3My4wODY4MTdMNTEyIDQ2Ny43MTcxNDFsMTY5LjI3MDI0Ny0xNjkuNzA0MzM4YzEyLjE1NDQ5NS0xMi4yNDEzMTMgMzEuOTQ4OTU5LTEyLjI0MTMxMyA0NC4xOTAyNzUtLjA4NjgxOCAxMi4yNDEzMTMgMTIuMTU0NDk1IDEyLjI0MTMxMyAzMS45NDg5NTkuMDg2ODE4IDQ0LjE5MDI3Mkw1NTYuMTAzNDU0IDUxMS45OTQyMyA3MjUuNTQ3MzQgNjgxLjc4NTM4NmMxMi4xNTQ0OTUgMTIuMjQxMzEzIDEyLjE1NDQ5NSAzMi4wMzU3NzctLjA4NjgxOCA0NC4xOTAyNzN6Ii8+PC9zdmc+");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+}
+
+@media (max-width:767.98px) {
+    .nice-tips-scroll .nice-tips-btn-close {}
+
+    .nice-tips-xl .nice-tips-btn-close {
+        /* -webkit-transform: translateY(-250%); */
+        /* transform: translateY(-250%); */
+        bottom: auto;
+        left: auto;
+        top: 10px;
+        right: 10px;
+        width: auto;
+    }
+
+    .nice-tips-cover .nice-tips-btn-close {
+        bottom: auto;
+        left: auto;
+        top: 15px;
+        right: 15px;
+        width: auto;
+    }
+
+    .nice-tips-xl .nice-tips-btn-close .svg-white,
+    .nice-tips-cover .nice-tips-btn-close .svg-white {
+        width: 25px;
+        height: 25px;
+    }
+
+}
+
+@media (min-width:768px) {
+    .nice-tips-scroll .nice-tips-btn-close {}
+}
+
+
+/*--------------------------------------------------------------
+    tips body
+--------------------------------------------------------------*/
+.nice-tips-body {
+    position: relative;
+    opacity: 0;
+    max-width: 400px;
+    width: 100%;
+}
+
+@media (max-width: 575.98px) {
+    .nice-tips-body {
+        max-width: 93.3333%;
+    }
+}
+
+.nice-tips-open .nice-tips-body {
+    pointer-events: auto;
+}
+
+.nice-tips-xl .nice-tips-body {
+    width: 100%;
+    max-width: 790px;
+}
+
+.nice-tips-scroll .nice-tips-body {
+    width: 100%;
+    max-width: 790px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    max-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+}
+
+.nice-tips-lg .nice-tips-body {
+    width: 100%;
+    max-width: 790px;
+}
+
+.nice-tips-md .nice-tips-body {
+    max-width: 540px;
+    width: 100%;
+}
+
+.nice-tips-sm .nice-tips-body {
+    max-width: 300px;
+    width: auto;
+}
+
+.nice-tips-nopd .nice-tips-body {
+    max-width: 340px;
+}
+
+@media (min-width:768px) and (max-width:991.98px) {
+
+    .nice-tips-scroll .nice-tips-body,
+    .nice-tips-xl .nice-tips-body {
+        max-width: 670px;
+    }
+
+}
+
+@media (max-width:767.98px) {
+    .nice-tips-nopd .nice-tips-body {
+        max-width: 75%;
+    }
+
+    .nice-tips-scroll .nice-tips-body,
+    .nice-tips-xl .nice-tips-body {
+        height: 100vh;
+    }
+
+    .nice-tips-md .nice-tips-body {
+        padding: 1rem;
+    }
+
+}
+
+/*--------------------------------------------------------------
+    tips body animation
+--------------------------------------------------------------*/
+
+.nice-tips.nice-tips-open .nice-tips-body,
+.nice-tips.nice-tips-close .nice-tips-body {
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards
+}
+
+.nice-tips.nice-tips-open .nice-tips-body {
+    -webkit-animation-name: tips-open;
+    animation-name: tips-open
+}
+
+.nice-tips.nice-tips-close .nice-tips-body {
+    -webkit-animation-name: tips-close;
+    animation-name: tips-close
+}
+
+@-webkit-keyframes tips-open {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50px, 0)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0)
+    }
+
+}
+
+@keyframes tips-open {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50px, 0);
+        transform: translate3d(0, 50px, 0)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+}
+
+@-webkit-keyframes tips-close {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0)
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50px, 0)
+    }
+
+}
+
+@keyframes tips-close {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50px, 0);
+        transform: translate3d(0, 50px, 0)
+    }
+
+}
+
+/*--------------------------------------------------------------
+    tips content
+--------------------------------------------------------------*/
+.nice-tips-content {
+    background: #fff;
+    padding: 1.25rem;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #f4f5f9;
+    box-shadow: 0 10px 50px -5px rgba(6, 39, 67, 0.12);
+}
+
+.nice-tips-xl .nice-tips-content {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.nice-tips-scroll .nice-tips-content {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.nice-tips-lg .nice-tips-content {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.nice-tips-sm .nice-tips-content {
+    padding: 2rem;
+    padding: 1.75rem 2.5rem;
+}
+
+.nice-tips-nopd .nice-tips-content {
+    padding: 0;
+    border: 0;
+}
+
+@media (max-width:767.98px) {
+
+    .nice-tips-scroll .nice-tips-body .nice-tips-content,
+    .nice-tips-xl .nice-tips-body .nice-tips-content {
+        box-shadow: none;
+        border-radius: 0;
+        height: 100vh;
+    }
+
+    .nice-tips-xl .nice-tips-btn-close .svg-white {
+        width:25px;
+        height:25px;
+    }
+
+    .nice-tips-xl .nice-tips-btn-close .svg-dark {
+        display: none;
+        width:25px;
+        height:25px;
+    }
+}
+
+/*--------------------------------------------------------------
+    tips svg color
+--------------------------------------------------------------*/
+
+.nice-tips-content .text-success .svg-success {
+    display: inline-block;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCI+PGRlZnM+PHN0eWxlLz48L2RlZnM+PHBhdGggZD0iTTUxMiA2NS45ODMzODlDMjY2LjA4MDM2NiA2NS45ODMzODkgNjUuOTgzMzg5IDI2Ni4wNzg2NDUgNjUuOTgzMzg5IDUxMmMwIDI0NS45NTIzMTggMjAwLjA2NDI5MiA0NDYuMDE2NjExIDQ0Ni4wMTY2MTEgNDQ2LjAxNjYxMVM5NTguMDE2NjExIDc1Ny45NTIzMTggOTU4LjAxNjYxMSA1MTJjMC0yNDUuOTE5NjM0LTIwMC4wNjQyOTMtNDQ2LjAxNjYxMS00NDYuMDE2NjExLTQ0Ni4wMTY2MTF6bTIxNS4yMzEyODYgMzcyLjQ0ODg2NUw0NzEuMDA3NjYgNjk3LjQzOTE2MWMtLjA2MzY0Ny4wNjM2NDctLjE5MjY2Mi4wOTYzMzEtLjI1NjMxLjE5MjY2Mi0uMDk2MzMxLjA2MzY0Ny0uMDk2MzMxLjE5MjY2Mi0uMTkyNjYyLjI1NjMxLTIuMDQ4NzU3IDEuOTgzMzg5LTQuNTc1NzI5IDMuMTk5NTctNi45NDQ0NDMgNC41NDQ3NjUtMS4xODM0OTcuNjcyNTk4LTIuMTQzMzY4IDEuNjk2MTE2LTMuMzkyMjMyIDIuMTc2MDUyLTMuODM5NDg0IDEuNTM2MTM4LTcuOTA0MzE0IDIuMzM2MDMtMTEuOTY3NDI0IDIuMzM2MDMtNC4wOTU3OTQgMC04LjIyNDI3MS0uNzk5ODkyLTEyLjA5NjQzOS0yLjM5OTY3Ny0xLjI3OTgyOC0uNTQzNTgzLTIuMzAzMzQ2LTEuNjMyNDY5LTMuNTE5NTI3LTIuMzAzMzQ2LTIuMzY4NzE0LTEuMzQzNDc1LTQuODMyMDM5LTIuNTI4NjkyLTYuODgwNzk2LTQuNTQ0NzY1LS4wNjM2NDctLjA2MzY0Ny0uMDk2MzMxLS4xOTI2NjItLjE1OTk3OC0uMjU2MzEtLjA2MzY0Ny0uMDk2MzMxLS4xOTI2NjItLjA5NjMzMS0uMjU2MzEtLjE5MjY2MkwyOTkuMzI0OTI4IDU2Ny43NDQ3NjZjLTEyLjMyMDA2NS0xMi42NzI3MDUtMTIuMDMyNzkxLTMyLjkyODA0Ny42Mzk5MTQtNDUuMjQ4MTEyIDEyLjY3MjcwNS0xMi4yODczODEgMzIuODk1MzY0LTEyLjA2Mzc1NSA0NS4yNDgxMTIuNjM5OTE0bDEwMy4yNjM1NCAxMDYuMTEyMTg5IDIzMy4yNzk2MTMtMjM1LjgzOTI2OWMxMi40MTYzOTYtMTIuNTc2Mzc0IDMyLjcwNDQyMS0xMi43MDM2NjkgNDUuMjQ4MTEyLS4yNTYzMSAxMi41MTYxNjggMTIuNDQ3MzYgMTIuNjQzNDYzIDMyLjcwMjcwMi4yMjcwNjcgNDUuMjc5MDc2eiIgZmlsbD0iIzI4YTc0NSIvPjwvc3ZnPg==");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 72px;
+    height: 72px;
+}
+
+.nice-tips-content .text-danger .svg-error {
+    display: inline-block;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCI+PGRlZnM+PHN0eWxlLz48L2RlZnM+PHBhdGggZD0iTTUxMiA2NS45ODMzODlDMjY2LjA0NzY4MiA2NS45ODMzODkgNjUuOTgzMzg5IDI2Ni4wNDc2ODEgNjUuOTgzMzg5IDUxMlMyNjYuMDQ3NjgyIDk1OC4wMTY2MTEgNTEyIDk1OC4wMTY2MTEgOTU4LjAxNjYxMSA3NTcuOTUyMzE4IDk1OC4wMTY2MTEgNTEyIDc1Ny45NTIzMTggNjUuOTgzMzg5IDUxMiA2NS45ODMzODl6bTMyLjAwMDg2IDY3MC4wMTc0NzFjMCAxNy42OTU2ODYtMTQuMzAzNDU0IDMyLjAwMDg2LTMyLjAwMDg2IDMyLjAwMDg2cy0zMi4wMDA4Ni0xNC4zMDM0NTQtMzIuMDAwODYtMzIuMDAwODZWNDQ4YzAtMTcuNjk1Njg2IDE0LjMwMzQ1NC0zMi4wMDA4NiAzMi4wMDA4Ni0zMi4wMDA4NiAxNy42OTU2ODYgMCAzMi4wMDA4NiAxNC4zMDM0NTQgMzIuMDAwODYgMzIuMDAwODZ2Mjg4LjAwMDg2em0tMzIuMDAwODYtMzg0Yy0yNi40OTYyMjQgMC00OC4wMDA0My0yMS41MzY4OS00OC4wMDA0My00OC4wMDA0M0M0NjMuOTk5NTcgMjc3LjQ3MzI0MyA0ODUuNTAzNzc2IDI1NiA1MTIgMjU2czQ4LjAwMDQzIDIxLjQ3MTUyMyA0OC4wMDA0MyA0OC4wMDA0M2MwIDI2LjQ2MzU0LTIxLjUwNDIwNiA0OC4wMDA0My00OC4wMDA0MyA0OC4wMDA0M3oiIGZpbGw9IiNmZmMxMDciLz48L3N2Zz4=");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 72px;
+    height: 72px;
+}
+
+/*
+   post cover style
+*/
+.nice-tips-cover .nice-tips-overlay {
+    background: rgb(120, 129, 147);
+}
+
+.tips-content-cover {
+    max-width: 340px;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: .22rem;
+}
+
+.cover-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: .22rem .22rem 0 0;
+    padding: 0;
+}
+
+.cover-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-filter: blur(10px);
+    filter: blur(20px);
+    z-index: -1;
+}
+
+.cover-overlay:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .11;
+}
+
+.cover-share {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #f4f6f9;
+}
+
+.cover-share a {
+    color: #8a92a9;
+    padding: .25rem;
+    margin: .25rem;
+    font-size: 1.125rem;
+}
+
+.cover-share a:hover {
+    color: #062743;
+}
+
+.cover-text {
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    z-index: 44;
+    cursor: pointer;
+    -webkit-transform: translateY(-36px);
+    transform: translateY(-36px);
+    text-align: center;
+    color: #fff;
+    font-size: .875rem;
+}

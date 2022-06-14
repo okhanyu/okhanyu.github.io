@@ -1,0 +1,54 @@
+[{
+    "是我是我 (゜-゜) ": [{
+        "name": "About Me",
+        "href": "about/",
+        "desc": "关于我 (゜-゜) ~",
+        "logo": "/home/static/img/favicon.ico"
+    }, {
+        "name": "公众号",
+        "href": "/home/page/mp.html",
+        "desc": "公众号 (゜-゜) ~ 韩西瓜",
+        "logo": "https://bizaladdin-image.baidu.com/0/pic/1300198067_220251832_-1058348626.jpg"
+    },{
+        "name": "Weibo",
+        "href": "https://weibo.com/sohanyu",
+        "desc": "我的微博 (゜-゜) ~ ",
+        "logo": "https://weibo.com/favicon.ico"
+    }, {
+        "name": "Life Blog",
+        "href": "/lifeblog/",
+        "desc": "我的生活博客 (゜-゜) ~ ",
+        "logo": "http://file.hanyu.cool/site/life/static/v1/img/logo.png"
+    },{
+        "name": "Tech Blog",
+        "href": "/techblog/",
+        "desc": "我的技术博客 (゜-゜) ~ ",
+        "logo": "https://file.hanyu.cool/site/tech/static/v1/img/favicon.png"
+    }, {
+        "name": "Photo Blog",
+        "href": "photo/",
+        "desc": "相册 (゜-゜) ~ ",
+        "logo": "https://img.zcool.cn/community/01c6e75caf3199a801208f8b80afdf.png?x-oss-process=image/auto-orient,1"
+    },{
+        "name": "Github",
+        "href": "https://github.com/okhanyu",
+        "desc": "我的码 (゜-゜) ~ ",
+        "logo": "https://github.githubassets.com/favicons/favicon.svg"
+    }],
+    "啥啥都有啧啧啧 (゜-゜)": [{
+        "name": "MyToolBox",
+        "href": "#",
+        "desc": "奇奇怪怪的工具导航hahhha ~",
+        "logo": "https://www.javis.me/service/avatar/8894d2f45a953774517755546e266fe5"
+    }, {
+        "name": "Tech Knowledge Base",
+        "href": "https://xlmgpq4y5b.feishu.cn/wiki/space/7041446272695287811?ccm_open_type=lark_wiki_spaceLink",
+        "desc": "（技术Wiki，刚建立没啥东西） (゜-゜) ~ ",
+        "logo": "https://img.zcool.cn/community/01d6625e48c5b0a80120a895e5fac4.png?x-oss-process=image/auto-orient,1"
+    },{
+        "name": "面经分享",
+        "href": "https://docs.qq.com/sheet/DUFF5UXRHa0NkQ0Fu",
+        "desc": "祝你成功hiahia ~",
+        "logo": "https://img.zcool.cn/community/01f5a85caf3199a801214168a4ecd8.png?x-oss-process=image/auto-orient,1"
+    }]
+}]
