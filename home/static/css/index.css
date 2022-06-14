@@ -2,7 +2,7 @@
      font-family: "Comic-Sans-MS";
      font-weight: normal;
      font-style: normal;
-     src: url('/static/font/Comic-Sans-MS.ttf') format('truetype');
+     src: url('/home/static/font/Comic-Sans-MS.ttf') format('truetype');
     /*src: url('https://cdn.jsdelivr.net/gh/deajax/FontFace-CDN/fonts/字体目录/字体名称.后缀') format('opentype');
      */
 }
@@ -50,7 +50,7 @@
      height:calc(49px * 1.5);
      top:-115px;
      left:-4px;
-     background-image:url('/static/img/22.png');
+     background-image:url('/home/static/img/22.png');
      background-size:cover 
 }
  .logo:hover::after {
@@ -329,7 +329,7 @@
      right: -5px;
      width: 57px;
      height: 70px;
-     background-image: url(/static/img/mao.svg);
+     background-image: url(/home/static/img/mao.svg);
      background-position: center;
      background-size: cover;
      background-repeat: no-repeat;

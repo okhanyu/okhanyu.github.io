@@ -62,7 +62,7 @@ var getLinks = function ( url, keywords = false ) {
             var beSearchStr = link.name + link.href + link.desc;
             isShow = ( beSearchStr.search( keywords ) >= 0 );
           }
-          var lil_url = link.logo != null ? link.logo : 'static/img/loading.svg';
+          var lil_url = link.logo != null ? link.logo : '/home/static/img/loading.svg';
           var lid_text = link.desc != null ? link.desc : '暂无描述 ┑(￣Д ￣)┍';
           var l_item = $( '<div class="l-item"></div>' );
           l_item.attr( "title", '✦ ' + link.name + '\n✧ ' + lid_text + '\n✧ ' + link.href );
@@ -176,10 +176,10 @@ var doSearch = function () {
     .val();
   $( '.l-group' )
     .detach();
-  getLinks( 'static/config/links.json', keywords );
+  getLinks( '/home/static/config/links.json', keywords );
 }
 $( function () {
-  getLinks( 'static/config/links.json' );
+  getLinks( '/home/static/config/links.json' );
   if ( location.hash == '#link' || location.hash == '#search' ) {
     swLinks( 1, false );
     if ( location.hash == '#search' ) {
