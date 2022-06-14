@@ -41,9 +41,9 @@ var getLinks = function(url, keywords = false) {
                     html += ' </div>';
                     html += ' </div > ';
                     html += ' <div class = "flex-grow-1 overflow-hidden" > ';
-                    html += ' <p class = "mb-1" > ' + link.desc + ' < /p>';
+                    html += ' <p class = "mb-1" > ' + link.desc + ' </p>';
                     html += ' <h5 class="mb-3"> ' + link.name + ' </h5 > ';
-                    html += ' <p class = "text-truncate mb-0" > <span class = "text-success me-2" > 0.02 % <i class = "ri-arrow-right-up-line align-bottom ms-1" > </i></span > From previous < /p>';
+                    //html += ' <p class = "text-truncate mb-0" > <span class = "text-success me-2" >  <i class = "ri-arrow-right-up-line align-bottom ms-1" > </i></span > </p>';
                     html += ' </div > ';
                     html += ' </div>';
                     html += ' </div > ';
