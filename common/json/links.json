@@ -1,0 +1,51 @@
+[{
+    "本瓜 (゜-゜)": [{
+        "name": "About Me",
+        "href": "/about/",
+        "desc": "关于韩西瓜",
+        "logo": "/common/img/me.png"
+    }, {
+        "name": "公众号",
+        "href": "/wechat/",
+        "desc": "韩西瓜微信公众号",
+        "logo": "/common/img/wechat.png"
+    }],
+    "生活 (゜-゜)": [{
+        "name": "Life Blog",
+        "href": "/lifeblog/",
+        "desc": "韩西瓜还没开始写的生活博客",
+        "logo": "/common/img/life.png"
+    }, {
+        "name": "Photo Blog",
+        "href": "photoblog/",
+        "desc": "韩西瓜还未启用的相册",
+        "logo": "/common/img/photo.png"
+    },{
+        "name": "Sina Weibo",
+        "href": "https://weibo.com/sohanyu",
+        "desc": "韩西瓜的新浪微博",
+        "logo": "/common/img/weibo.png"
+    }],
+    "技术 (゜-゜)": [{
+        "name": "Tech Blog",
+        "href": "/techblog/",
+        "desc": "韩西瓜的技术博客",
+        "logo": "/common/img/tech.png"
+    },{
+        "name": "Github",
+        "href": "https://github.com/okhanyu",
+        "desc": "韩西瓜年久失修的代码",
+        "logo": "https://github.githubassets.com/favicons/favicon.svg"
+    }],
+    "思考 (゜-゜)": [{
+        "name": "Feishu Knowledge",
+        "href": "https://xlmgpq4y5b.feishu.cn/wiki/wikcnmoVkJnKGJMGeXslpZDcGnf",
+        "desc": "韩西瓜的飞书知识库",
+        "logo": "/common/img/zhishi.png"
+    },{
+        "name": "面经分享",
+        "href": "https://docs.qq.com/sheet/DUFF5UXRHa0NkQ0Fu",
+        "desc": "祝你成功hiahia ~",
+        "logo": "/common/img/mianshi.png"
+    }]
+}]
