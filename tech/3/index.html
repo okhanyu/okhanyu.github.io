@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" >
+     <head>
+        
+    <meta charset="utf-8" />
+    <meta name="referrer" content="strict-origin" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
+    <meta name="author" content="Damon" />
+	
+	
+	
+	<title>高并发短链系统设计 ｜ Hahaha!</title>
+	
+    
+    
+    <meta name="description" content="原则与底线：不说废话、不凑字数、不标题党。 注：本文均为韩宇的胡思乱写，你随便抄 博客 https://hanyu.life 背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。 比如我发微博内" />
+    
+
+    
+    
+    <meta name="keywords" content="小韩, damon" />
+    
+
+	
+    
+
+ <link rel="shortcut icon" type="image/x-icon" href="https://files.hanyu.life/resource/img/icon/favicon.ico">
+ <link rel="icon" type="image/x-icon" href="https://files.hanyu.life/resource/img/icon/favicon.ico">
+ <link rel="apple-touch-icon" href="https://files.hanyu.life/resource/img/icon/favicon.png">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://hanyu.life/blog/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/animate.css/4.1.1/animate.min.css" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://hanyu.life/blog/css/zozo.css" />
+	
+    <link rel="stylesheet" type="application/javascript" media="screen" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js" />
+    
+    
+    
+    <style type="text/css">
+        a:hover{
+            color: gray!important;
+        }
+    </style>
+
+  
+
+
+       <link rel="stylesheet" type="text/css" media="screen" href="https://hanyu.life/blog/css/detail.css" />
+
+    </head>
+    <body>
+        <div class="main animate__animated animate__fadeInDown">
+            <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            <li>
+                  <a href="/blog/" style="font-weight: bold !important;">首页</a> 
+            </li>
+            
+            <li>
+                  <a href="/blog/memos/" style="font-weight: bold !important;">闪念</a> 
+            </li>
+            
+            <li>
+                  <a href="/blog/about" style="font-weight: bold !important;">关于</a> 
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        
+        
+            <a id="menu_icon"> 
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+        </a>
+    </div>
+</div> 
+            <div class="header animated fadeInDown" style="padding: 50px 0 100px 0;">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                <a href="https://hanyu.life/blog/">
+                    <span>Yu</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title" style="font-size: 12px;">     
+                  <span id="hitokoto">
+                  </span>
+                  
+                 记录日常、分享思考、偶尔胡闹</p>
+            <div class="my_socials">
+               
+                
+
+
+                <a href="https://weibo.com/sohanyu" title="微博" target="_blank" style="margin-left:10px">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg>
+                </a>
+
+                 
+
+            <a href="https://github.com/sohanyu" title="Github" target="_blank"  style="margin-left:10px">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 496 512">
+                      <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+                    </svg>
+                </a>
+                
+                <a href="/blog/index.xml" type="application/xml" title="RSS" target="_blank" style="margin-left:10px">
+                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512">
+                      <path d="M192 32c0-17.7 14.3-32 32-32C383.1 0 512 128.9 512 288c0 17.7-14.3 32-32 32s-32-14.3-32-32C448 164.3 347.7 64 224 64c-17.7 0-32-14.3-32-32zM60.6 220.6L164.7 324.7l28.4-28.4c-.7-2.6-1.1-5.4-1.1-8.3c0-17.7 14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32c-2.9 0-5.6-.4-8.3-1.1l-28.4 28.4L291.4 451.4c14.5 14.5 11.8 38.8-7.3 46.3C260.5 506.9 234.9 512 208 512C93.1 512 0 418.9 0 304c0-26.9 5.1-52.5 14.4-76.1c7.5-19 31.8-21.8 46.3-7.3zM224 96c106 0 192 86 192 192c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-70.7-57.3-128-128-128c-17.7 0-32-14.3-32-32s14.3-32 32-32z"
+                      />
+                    </svg>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="content">
+                <div class="post_page">
+                    <div class="post animate__animated animate__fadeInDown">
+                       
+                        <div class="post_title post_detail_title">
+                            <h2><a href='/blog/tech/3/'>高并发短链系统设计</a></h2>
+                           
+                            <span class="date">2023.05.04</span>
+                           
+                        </div>
+
+                        
+<aside style="line-height: 1.2rem;font-size: 0.8rem;border-bottom: 1px dashed gray;">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#博客">博客</a></li>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li><a href="#什么是短链">什么是短链</a></li>
+        <li><a href="#短链的作用">短链的作用</a></li>
+      </ul>
+    </li>
+    <li><a href="#原理与实现">原理与实现</a>
+      <ul>
+        <li><a href="#核心原理">核心原理</a></li>
+        <li><a href="#实现过程">实现过程</a></li>
+      </ul>
+    </li>
+    <li><a href="#高并发优化">高并发优化</a>
+      <ul>
+        <li><a href="#数据库索引">数据库索引</a></li>
+        <li><a href="#布隆过滤器">布隆过滤器</a></li>
+        <li><a href="#多级缓存">多级缓存</a></li>
+        <li><a href="#前置发号器">前置发号器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+
+
+
+                        
+                        <div>
+                              
+
+                        </div>
+                       
+                        <div class="post_content markdown"><p><strong>原则与底线：不说废话、不凑字数、不标题党。</strong></p>
+<blockquote>
+<p>注：本文均为韩宇的胡思乱写，你随便抄</p>
+</blockquote>
+<h2 id="博客">博客</h2>
+<p><em><strong><a href="https://hanyu.life">https://hanyu.life</a></strong></em></p>
+<h2 id="背景">背景</h2>
+<h3 id="什么是短链">什么是短链</h3>
+<p>一个长的网址链接，转换为一个短的网址链接。<br>
+比如我发微博内容带有 <a href="https://blog.hanyu.cool/about/">https://blog.hanyu.cool/about/</a> 链接时，链接会自动转换成 <a href="https://t.cn/A6NlWmYi">https://t.cn/A6NlWmYi</a> 这样的短网址。</p>
+<p>微博的短网址域名为：t.cn，腾讯的短网址域名为 url.cn，阅读本文后，就可以自己实现一个高性能短链服务。</p>
+<h3 id="短链的作用">短链的作用</h3>
+<ul>
+<li>缩减无意义的地址长度，多出空间给实际内容（当前微博限制5000个字）</li>
+<li>对URL进行流控、点击统计，来源识别等，方便进行数据分析</li>
+<li>防止直接暴露参数等信息，防止某些平台对参数中的关键词屏蔽</li>
+<li>方便对URL进行封禁，相同URL通过生成转换之后，最终地址是相同的</li>
+</ul>
+<h2 id="原理与实现">原理与实现</h2>
+<h3 id="核心原理">核心原理</h3>
+<ul>
+<li>生成&amp;转换</li>
+<li>存储</li>
+<li>映射</li>
+</ul>
+<h3 id="实现过程">实现过程</h3>
+<!--![图一](img/1.png)-->
+
+
+
+<div class="fancybox">
+    <a data-fancybox="gallery" href="https://files.hanyu.life/pictures/blog/tech/4/img/1.png?imageMogr2/rquality/50" data-caption="">
+    
+        <img src="https://files.hanyu.life/pictures/blog/tech/4/img/1.png?imageView2/1/q/25" />
+         
+    </a>
+</div>
+<ul>
+<li>用户先访问短网址，短网址将自动请求至短链服务器</li>
+<li>短链服务器收到请求后，在映射中通过短网址查找原始长链</li>
+<li>服务端将原始长链以302或301状态码返回给用户</li>
+<li>用户浏览器收到后重定向到原始长链</li>
+</ul>
+<p>生成短链主要有两种方式，哈希和ID生成器。</p>
+<h4 id="哈希">哈希</h4>
+<h5 id="哈希算法">哈希算法</h5>
+<p>哈希算法可以将一个不管多长的字符串，转化成一个长度固定的哈希值，所以可以利用哈希算法，来生成短网址。<br>
+常用的哈希算法如MD5、SHA、MurMurHash、CRC32等。<br>
+短链不需要考虑反向解密难度，只需要考虑计算速度快、冲突概率小即可。<br>
+目前应用比较广泛非加密算法是2008 年被发明的MurmurHash，据资料显示，现在已经广泛应用到 Redis、MemCache、Cassandra、HBase、Lucene等软件中，MurmurHash算法具体实现可自行去了解，此处不展开（因为我懂得不多）。<br>
+MurmurHash 计算可选长度128位、32位等，位数多碰撞的概率就小，如果短链系统用的人不多，可以选择32位，这样生成的短链更短。<br>
+短链服务端接收到生成的请求后，可以把长链做 MurmurHash 计算，可以得到的一个哈希值，将哈希值与短链域名拼接，即可得到完整短链，如：    t.cn/111111111</p>
+<h5 id="进制转换">进制转换</h5>
+<p>如上所示，MurmurHash计算后得到的结果并不算短，我们可以优化一下，常用的方式是将10进制转换成62进制。 <br>
+10进制转换62进制的逻辑就是，一直循环用62取余然后倒序：</p>
+<!--![图二](img/2.png)-->
+
+
+
+<div class="fancybox">
+    <a data-fancybox="gallery" href="https://files.hanyu.life/pictures/blog/tech/4/img/2.png?imageMogr2/rquality/50" data-caption="">
+    
+        <img src="https://files.hanyu.life/pictures/blog/tech/4/img/2.png?imageView2/1/q/25" />
+         
+    </a>
+</div>
+<p>最终 t.cn/111111111 用62进制表示的短链就是 t.cn/7WD4h 。<br>
+假设生成6位字符的短链： <br>
+10进制 最大只能生成 10 ^ 6 - 1 = 999999个 <br>
+16进制 最大只能生成 16 ^ 6 - 1 = 16777215个 <br>
+62进制 最大竟能生成 62 ^ 6 - 1 = 56800235583个 <br>
+A-Z a-z 0-9 刚好等于62位。</p>
+<blockquote>
+<p>如果使用128进制，网址会更短，但之所以不使用128进制，是因为可能会出现大量的不常用字符比如 #%&amp; 等，不利于记忆和传播。</p>
+</blockquote>
+<h5 id="哈希冲突">哈希冲突</h5>
+<p>即使概率非常小，但哈希算法也可能会发生哈希冲突，也就是两个不同的原始长网址哈希后得到了相同的短网址，短链服务将无法判断当前的短网址对应的原始网址是哪个。</p>
+<p>通常我们都会使用数据库如配合缓存来存储长短网址的映射关系，过程如下：</p>
+<ul>
+<li>通过哈希算法将接收到的原始长网址进行转换，得到短串</li>
+<li>使用短串去数据库或缓存中查找
+<ul>
+<li>如果不存在，则说明长短网址之间没有冲突，则将短网址返回给用户，同时将长短网址的映射关系入库</li>
+<li>如果存在，则说明有冲突，但未必是哈希冲突，我们先将这个冲突的短网址对应的长网址从数据库中取出，和本次请求的长网址进行对比。
+<ul>
+<li>如果两个原始长网址相同，直接将短链返回给用户即可；</li>
+<li>如果两个原始长网址不同，则说明发生了哈希冲突，我们可以将本次请求的原始长网址后面拼接随机串，再次进行哈希即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="id生成器">ID生成器</h4>
+<p>除了通过哈希的方式，我们还可以通过各类ID生成器来进行短链生成。</p>
+<h5 id="id生成">ID生成</h5>
+<p>包括但不限于：</p>
+<ul>
+<li>数据库自增</li>
+<li>程序计数器自增</li>
+<li>中间件如Redis自增、MongoDB主键生成等</li>
+<li>snowflake、UUID、GUID</li>
+</ul>
+<p>例如通过数据库自增ID拿到一个新的ID，然后将ID进行62进制转换，形成短链，将短链和原始网址映射关系存入库中，当然，如果不怕暴露信息的情况下，ID也可以不进行哈希。</p>
+<h5 id="二义性">二义性</h5>
+<p>使用ID生成器生成可能会存在二义性，也就是说一个原始长网址，经过两次生成得到的短网址不一样，解决思路如下:</p>
+<ul>
+<li>第一种解决方式是[不处理]，因为使用短链的人，只关心短链是否能正确跳转至原始网址，所以原始长网址生成的短链不一致可以不进行处理</li>
+<li>第二种解决方式是拿原始长网址去数据库中查找，如果存在，取出对应的短链返回给用户即可，但要注意数据库中的长短网址都需要加索引，给原始长网址加索引也会导致插入性能下降，占用空间更多。</li>
+</ul>
+<h2 id="高并发优化">高并发优化</h2>
+<p>为了应对高并发的生成和访问，我们需要对之前的短链系统做一定的优化。</p>
+<h3 id="数据库索引">数据库索引</h3>
+<p>以生成的短链作为数据库唯一索引，这样在生成短链后准备存入映射关系时，不必从数据库先进行查找判重，而是直接进行数据库的插入，如果捕获了唯一索引异常，说明有冲突，再进行二次哈希即可。 <br>
+这样在生成短链时，减少了一次SQL查询操作，同时也能利用到索引高效访问。</p>
+<h3 id="布隆过滤器">布隆过滤器</h3>
+<p>布隆过滤器的原理是使用位图和多次哈希计算判断数据是否存在。不存储数据本身，而是只标识某数据的“存在性”。</p>
+<p>场景1：对于之前我们使用哈希的方式进行短链生成，可以把已经生成的短网址，构建成布隆过滤器，长度是 10 亿的布隆过滤器，也只需要 125MB 左右的内存空间。<br>
+有新的短链要生成的时候，我们使用该短链去布隆过滤器里查找，<strong>如果不存在，那就一定不存在</strong>，我们直接将新生成的长短网址映射关系存储即可。</p>
+<p>场景2：对于使用ID生成器的二义性问题，我们也可以通过布隆过滤器解决。<br>
+我们将接之前都已经存储好的长链构建成布隆过滤器，后续接收到生成短链的请求时，先拿原始网址去布隆过滤器里查找</p>
+<ul>
+<li>如果<strong>不存在，那就一定不存在</strong>，我们就可以使用这个原始长地址进行短链转换并存储。</li>
+<li>如果存在，可能会误判，我们还要用长地址去数据库中查找判重，再进行后续处理。</li>
+</ul>
+<h3 id="多级缓存">多级缓存</h3>
+<p>我们可以将长短网址的映射关系存入本地缓存如Guava作为一级缓存，同时存入Redis作为二级缓存。<br>
+同时还可以采用LRU缓存过期淘汰，减少无畏的内存消耗。<br>
+无论是生成时还是访问时，都可以先从一二级缓存中进行查找，大大提高效率。</p>
+<p><strong>并且，Guava和Redis都有布隆过滤器(Bloom Filter)的实现，如果使用布隆过滤器，没有特殊必要的话不必自己造轮子。</strong></p>
+<h3 id="前置发号器">前置发号器</h3>
+<p>我们可以采用类似大禹治水的分治、分流思想。</p>
+<p>将ID生成器服务上层放置多个发号器（服务+队列），生成器在启动时，批量预生成一批短链给各个发号器，比如给每个发号器预生成3000个短链，当发号器内数量少于200时，主动向生成器取一批号。<br>
+这样就提高了发号的并发能力，同时生成器也的大量计算操作也不受高并发请求线程的影响。</p>
+<!--![图三](img/3.png)-->
+
+
+
+<div class="fancybox">
+    <a data-fancybox="gallery" href="https://files.hanyu.life/pictures/blog/tech/4/img/3.png?imageMogr2/rquality/50" data-caption="">
+    
+        <img src="https://files.hanyu.life/pictures/blog/tech/4/img/3.png?imageView2/1/q/25" />
+         
+    </a>
+</div>
+<hr>
+<blockquote>
+<p>注：布隆过滤器<br>
+布隆过滤器是一种概率型数据结构，它的特点是高效的插入和查询，能确定某个字符串一定存在或者可能存在。布隆过滤器不存储具体数据，所以占用空间小，查询结果存在<strong>误差</strong>，但误差可控，同时不支持删除操作。布隆过滤器为了节约内存，是使用的位图。<br>
+（1）一个巨大的数据文件，需要知道是否存在某个key，如果把整个文件读取进行查找，这个效率就比较低。那么可以添加一个布隆过滤器，插入数据时对key做标识，查询key是否存在时直接查询布隆过滤器。<br>
+（2）一个数据库查询，想要查询数据库中是否存在key，可以添加一个布隆过滤器，查询key时直接查询布隆过滤器，不需要IO操作，大大提升查询效率。</p>
+<p>一个元素加入位图时，通过k个hash函数将元素映射到位图的k个点，并把它们置1；当检索时，再通过k个hash函数运算检查位图的k个点是否都为1；如果有不为1的点，那么认为该key不存在；如果全部为1，则可能存在。<br>
+只要有一个槽位为0，则key一定不存在；如果key映射的所有槽位都为1，不能说明一定存在，只能说明可能存在。<br>
+常见使用场景：  爬虫去重、解决缓存穿透、反垃圾邮件等。</p>
+</blockquote>
+<blockquote>
+<p>注：snowflake<br>
+Twitter开源的分布式ID生成算法，保证大规模生成唯一的 ID 号。<br>
+优点是：高性能，低延迟；独立的应用；按时间有序。<br>
+缺点是：需要独立的开发和部署。要求机器时钟同步（到秒级即可），需要解决时钟回拨问题，如果某台机器的系统时钟回拨，有可能造成 ID 冲突，或 ID 乱序。<br>
+41 位的时间序列（精确到毫秒，41 位的长度可以使用 69 年）；<br>
+10 位的机器标识（10 位的长度最多支持部署 1024 个节点）；<br>
+12 位的计数顺序号（12 位的计数顺序号支持每个节点每毫秒产生 4096 个 ID 序号）最高位是符号位，始终为 0。</p>
+</blockquote>
+<blockquote>
+<p>注：301和302状态码 <br>
+301重定向（301 Move Permanently），指页面永久性转移，表示为资源或页面永久性地转移到了另一个位置。301是HTTP协议中的一种状态码，当用户或搜索引擎向服务器发出浏览请求时，服务器返回的HTTP数据流中头信息（header）中包含状态码 301 ，表示该资源已经永久改变了位置。<br>
+301重定向是一种非常重要的&quot;自动转向“技术，网址重定向最为可行的一种方法。<br>
+301重定向是页面永久性转移，搜索引擎在抓取新内容的同时也将旧的网址替换成重定向之后的网址；<br>
+302重定向是页面暂时性转移，搜索引擎会抓取新的内容而保存旧的网址并认为新的网址只是暂时的。</p>
+</blockquote>
+</div>
+                        <div class="post_footer">
+                            
+                            <div class="meta">
+                                <div class="info">
+                                    <span class="field tags">
+                                              
+                                        <span>#</span>
+                                        <a href="https://hanyu.life/blog/tags/%E6%9E%B6%E6%9E%84/">架构</a>
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                     
+                    
+                     <div class="doc_comments">
+    <div class="comments_block_title">发表评论</div>
+    <div id="vcomments"></div>
+</div>
+<link rel="stylesheet" href="https://hanyu.life/blog/css/comments.css" />
+
+
+
+<link href="https://api.hanyu.life/api/artalk/dist/Artalk.css" rel="stylesheet">
+
+<script src="https://api.hanyu.life/api/artalk/dist/Artalk.js"></script>
+
+<div id="Comments"></div>
+<script>
+Artalk.init({
+  el:        '#Comments',                
+  pageKey:   '',                  
+  pageTitle: '',  
+  server:    'https:\/\/api.hanyu.life\/api\/artalk\/',  
+  site:      'hahaha.cc',             
+})
+</script>
+
+
+
+
+
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+        <a id="back_to_top" href="#" class="back_to_top">
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+        <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+        />
+    </svg>
+</a>
+
+<footer class="footer">
+    <div class="powered_by">
+        <div  style="margin-bottom:3px">
+            <a>
+                
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+
+               
+                
+                
+                
+                
+               
+
+               26 篇 41839 字
+
+            </a>
+        </div>
+        <div>
+         <a></a>  
+           
+        </div>
+    </div>
+    
+   
+     <div class="powered_by">
+          <a  style="margin-right: 0;padding: 0;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502051850"  target="_blank">
+            <img width="8px" src="/blog/img/ba.png">
+            <span>
+              京公网安备11010502051850号</span> · 
+          </a>
+          <a  style="margin-left: 0;padding: 0;" href="https://beian.miit.gov.cn/"  target="_blank"><span id="icp">京ICP备18031874号-7号
+            </span>
+          </a>
+    </div>
+         
+
+</footer>
+ 
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js"></script>
+<script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js"></script>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
+
+
+<script src="https://hanyu.life/blog/js/zozo.js"></script>
+<script src="https://hanyu.life/blog/js/common.js"></script>
+
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+
+
+        <script src="https://hanyu.life/blog/js/single.js"></script>
+    </body>
+</html>     

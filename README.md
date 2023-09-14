@@ -1,1 +1,0 @@
-# okhanyu.github.io
