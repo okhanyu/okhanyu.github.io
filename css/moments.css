@@ -150,7 +150,7 @@
 }
  .post .post_footer {
      padding: 10px 0px 5px 0px;
-     border-bottom: 0px;
+      border: 0;
 }
  .post .post_footer .meta{
      height: auto;
