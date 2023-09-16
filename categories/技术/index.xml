@@ -2,44 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技术 on Hahaha!</title>
-    <link>https://hanyu.life/categories/%E6%8A%80%E6%9C%AF/</link>
+    <link>https://neixin.net/categories/%E6%8A%80%E6%9C%AF/</link>
     <description>Recent content in 技术 on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate><atom:link href="https://hanyu.life/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate><atom:link href="https://neixin.net/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>高并发短链系统设计</title>
-      <link>https://hanyu.life/tech/3/</link>
+      <link>https://neixin.net/tech/3/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
       
-      <guid>https://hanyu.life/tech/3/</guid>
+      <guid>https://neixin.net/tech/3/</guid>
       <description>原则与底线：不说废话、不凑字数、不标题党。 注：本文均为韩宇的胡思乱写，你随便抄 博客 https://hanyu.life 背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。 比如我发微博内</description>
     </item>
     
     <item>
       <title>大厂面试复盘</title>
-      <link>https://hanyu.life/growing/1/</link>
+      <link>https://neixin.net/growing/1/</link>
       <pubDate>Fri, 25 Feb 2022 00:19:49 +0800</pubDate>
       
-      <guid>https://hanyu.life/growing/1/</guid>
+      <guid>https://neixin.net/growing/1/</guid>
       <description>面试题： 2021年末面试题(一些不好言说的原因，需要申请权限) 背景 哈喽，我是Damon，现在是2022了，年前11月上旬到12月上旬一直在面试，年后很多很</description>
     </item>
     
     <item>
       <title>浅尝MySQL索引</title>
-      <link>https://hanyu.life/tech/2/</link>
+      <link>https://neixin.net/tech/2/</link>
       <pubDate>Wed, 09 Feb 2022 17:28:32 +0800</pubDate>
       
-      <guid>https://hanyu.life/tech/2/</guid>
+      <guid>https://neixin.net/tech/2/</guid>
       <description>写在前面的废话 Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。 这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿到了</description>
     </item>
     
     <item>
       <title>分布式锁之电商防超卖的N&#43;1个坑</title>
-      <link>https://hanyu.life/tech/1/</link>
+      <link>https://neixin.net/tech/1/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
       
-      <guid>https://hanyu.life/tech/1/</guid>
+      <guid>https://neixin.net/tech/1/</guid>
       <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境 一般</description>
     </item>
     

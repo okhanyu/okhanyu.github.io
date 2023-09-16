@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>架构 on Hahaha!</title>
-    <link>https://hanyu.life/tags/%E6%9E%B6%E6%9E%84/</link>
+    <link>https://neixin.net/tags/%E6%9E%B6%E6%9E%84/</link>
     <description>Recent content in 架构 on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate><atom:link href="https://hanyu.life/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate><atom:link href="https://neixin.net/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>高并发短链系统设计</title>
-      <link>https://hanyu.life/tech/3/</link>
+      <link>https://neixin.net/tech/3/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
       
-      <guid>https://hanyu.life/tech/3/</guid>
+      <guid>https://neixin.net/tech/3/</guid>
       <description>原则与底线：不说废话、不凑字数、不标题党。 注：本文均为韩宇的胡思乱写，你随便抄 博客 https://hanyu.life 背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。 比如我发微博内</description>
     </item>
     

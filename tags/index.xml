@@ -2,89 +2,89 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Hahaha!</title>
-    <link>https://hanyu.life/tags/</link>
+    <link>https://neixin.net/tags/</link>
     <description>Recent content in Tags on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 12 Sep 2023 16:07:52 +0800</lastBuildDate><atom:link href="https://hanyu.life/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Sep 2023 16:07:52 +0800</lastBuildDate><atom:link href="https://neixin.net/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>感受</title>
-      <link>https://hanyu.life/tags/%E6%84%9F%E5%8F%97/</link>
+      <link>https://neixin.net/tags/%E6%84%9F%E5%8F%97/</link>
       <pubDate>Tue, 12 Sep 2023 16:07:52 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E6%84%9F%E5%8F%97/</guid>
+      <guid>https://neixin.net/tags/%E6%84%9F%E5%8F%97/</guid>
       <description></description>
     </item>
     
     <item>
       <title>架构</title>
-      <link>https://hanyu.life/tags/%E6%9E%B6%E6%9E%84/</link>
+      <link>https://neixin.net/tags/%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E6%9E%B6%E6%9E%84/</guid>
+      <guid>https://neixin.net/tags/%E6%9E%B6%E6%9E%84/</guid>
       <description></description>
     </item>
     
     <item>
       <title>思考</title>
-      <link>https://hanyu.life/tags/%E6%80%9D%E8%80%83/</link>
+      <link>https://neixin.net/tags/%E6%80%9D%E8%80%83/</link>
       <pubDate>Mon, 24 Apr 2023 22:34:22 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E6%80%9D%E8%80%83/</guid>
+      <guid>https://neixin.net/tags/%E6%80%9D%E8%80%83/</guid>
       <description></description>
     </item>
     
     <item>
       <title>工具</title>
-      <link>https://hanyu.life/tags/%E5%B7%A5%E5%85%B7/</link>
+      <link>https://neixin.net/tags/%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Mon, 24 Apr 2023 13:01:22 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E5%B7%A5%E5%85%B7/</guid>
+      <guid>https://neixin.net/tags/%E5%B7%A5%E5%85%B7/</guid>
       <description></description>
     </item>
     
     <item>
       <title>碎片</title>
-      <link>https://hanyu.life/tags/%E7%A2%8E%E7%89%87/</link>
+      <link>https://neixin.net/tags/%E7%A2%8E%E7%89%87/</link>
       <pubDate>Thu, 13 Apr 2023 18:00:01 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E7%A2%8E%E7%89%87/</guid>
+      <guid>https://neixin.net/tags/%E7%A2%8E%E7%89%87/</guid>
       <description></description>
     </item>
     
     <item>
       <title>日常</title>
-      <link>https://hanyu.life/tags/%E6%97%A5%E5%B8%B8/</link>
+      <link>https://neixin.net/tags/%E6%97%A5%E5%B8%B8/</link>
       <pubDate>Thu, 13 Apr 2023 17:42:49 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E6%97%A5%E5%B8%B8/</guid>
+      <guid>https://neixin.net/tags/%E6%97%A5%E5%B8%B8/</guid>
       <description></description>
     </item>
     
     <item>
       <title>面试</title>
-      <link>https://hanyu.life/tags/%E9%9D%A2%E8%AF%95/</link>
+      <link>https://neixin.net/tags/%E9%9D%A2%E8%AF%95/</link>
       <pubDate>Fri, 25 Feb 2022 00:19:49 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/%E9%9D%A2%E8%AF%95/</guid>
+      <guid>https://neixin.net/tags/%E9%9D%A2%E8%AF%95/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MySQL</title>
-      <link>https://hanyu.life/tags/mysql/</link>
+      <link>https://neixin.net/tags/mysql/</link>
       <pubDate>Wed, 09 Feb 2022 17:28:32 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/mysql/</guid>
+      <guid>https://neixin.net/tags/mysql/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Redis</title>
-      <link>https://hanyu.life/tags/redis/</link>
+      <link>https://neixin.net/tags/redis/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
       
-      <guid>https://hanyu.life/tags/redis/</guid>
+      <guid>https://neixin.net/tags/redis/</guid>
       <description></description>
     </item>
     
