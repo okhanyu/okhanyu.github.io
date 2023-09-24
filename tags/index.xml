@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 24 Sep 2023 23:58:50 +0800</lastBuildDate><atom:link href="https://neixin.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Sep 2023 05:32:10 +0800</lastBuildDate><atom:link href="https://neixin.net/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>月记</title>
+      <link>https://neixin.net/tags/%E6%9C%88%E8%AE%B0/</link>
+      <pubDate>Mon, 25 Sep 2023 05:32:10 +0800</pubDate>
+      
+      <guid>https://neixin.net/tags/%E6%9C%88%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>游记</title>
       <link>https://neixin.net/tags/%E6%B8%B8%E8%AE%B0/</link>
@@ -85,15 +94,6 @@
       <pubDate>Wed, 09 Feb 2022 17:28:32 +0800</pubDate>
       
       <guid>https://neixin.net/tags/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Redis</title>
-      <link>https://neixin.net/tags/redis/</link>
-      <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
-      
-      <guid>https://neixin.net/tags/redis/</guid>
       <description></description>
     </item>
     
