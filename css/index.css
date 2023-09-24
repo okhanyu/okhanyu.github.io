@@ -17,9 +17,6 @@
     border: 0;
 }
 
- a:hover{
-     color: gray!important;
-}
  .momentsa{
      border-radius: 5px;
      margin: 0px 2px 0px 2px;
@@ -104,10 +101,6 @@ blockquote::before {
     /* margin-left: 10px;*/
 }
 
-
-a:hover {
-    color: gray !important;
-}
 
 button svg {
     fill: #d5d5d5;

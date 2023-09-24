@@ -70,7 +70,7 @@ const app = createApp({
     },
     mounted: function() {
         // common.initOther();
-        common.size = 2;
+        common.size = 1;
         var that = this;
         getData(common.server + api,function(res){
             callbak(res,that,that.items);
