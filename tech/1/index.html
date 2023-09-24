@@ -207,7 +207,7 @@
 <div class="fancybox">
     <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/1/img/oversold.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/1/img/oversold.png?imageMogr2/rquality/50" style="max-width: 600px" />
+        <img src="https://files.neixin.net/pictures/blog/tech/1/img/oversold.png?imageMogr2/rquality/50" style="max-width: 98%" />
          
     </a>
 </div>
@@ -219,7 +219,7 @@
 <div class="fancybox">
     <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/1/img/java_lock.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/1/img/java_lock.png?imageMogr2/rquality/50" style="max-width: 600px" />
+        <img src="https://files.neixin.net/pictures/blog/tech/1/img/java_lock.png?imageMogr2/rquality/50" style="max-width: 98%" />
          
     </a>
 </div>
@@ -234,9 +234,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">stock</span> <span class="o">=</span> <span class="n">stockMapper</span><span class="o">.</span><span class="na">getStock</span><span class="o">(</span><span class="n">stockRequestDTO</span><span class="o">.</span><span class="na">getGoodsId</span><span class="o">());</span>
 </span></span><span class="line"><span class="cl">        <span class="n">reentrantLock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">stock</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">?</span> 
-</span></span><span class="line"><span class="cl">                    <span class="n">stockMapper</span><span class="o">.</span><span class="na">updateStock</span><span class="o">(</span><span class="n">stockRequestDTO</span><span class="o">.</span><span class="na">getGoodsId</span><span class="o">(),</span> <span class="o">--</span><span class="n">stock</span><span class="o">)</span> <span class="o">:</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">stock</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">stockMapper</span><span class="o">.</span><span class="na">updateStock</span><span class="o">(</span><span class="n">stockRequestDTO</span><span class="o">.</span><span class="na">getGoodsId</span><span class="o">(),</span> <span class="o">--</span><span class="n">stock</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="kc">true</span> <span class="o">:</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// 异常日志打印及处理...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
@@ -278,7 +278,7 @@
   <div class="fancybox">
       <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/1/img/db_lock.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
       
-          <img src="https://files.neixin.net/pictures/blog/tech/1/img/db_lock.png?imageMogr2/rquality/50" style="max-width: 600px" />
+          <img src="https://files.neixin.net/pictures/blog/tech/1/img/db_lock.png?imageMogr2/rquality/50" style="max-width: 98%" />
            
       </a>
   </div>
@@ -322,16 +322,16 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 </span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">redisLock</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">redisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">((</span><span class="n">stockLockKey</span><span class="o">,</span><span class="n">1</span><span class="o">,</span><span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">redisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">((</span><span class="n">stockLockKey</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                <span class="n">Object</span> <span class="n">stock</span> <span class="o">=</span> <span class="n">redisTemplate</span>
 </span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">stockKeyPrefix</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="n">stockRequestDTO</span><span class="o">.</span><span class="na">getGoodsId</span><span class="o">()));</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 库存异常
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 扣减库存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">stock</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">stock</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 更新数据库、缓存等...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                <span class="o">}</span>
@@ -358,7 +358,7 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 方式一：省略其他代码......
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">boolean</span> <span class="n">redisLock</span> <span class="o">=</span> <span class="n">redisTemplate</span>
 </span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span><span class="kc">true</span><span class="o">,</span><span class="n">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span><span class="kc">true</span><span class="o">,</span><span class="mi">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="c1">// 方式二：使用Lua脚本进行加锁保证原子性（伪代码）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">static</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
@@ -374,7 +374,7 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">keys</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl">        <span class="n">keys</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">keys</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">keys</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">30</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">keys</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">30</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">(</span><span class="kt">long</span><span class="o">)</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">DefaultRedisScript</span><span class="o">(</span><span class="n">LUA_SCRIPT</span><span class="o">),</span> <span class="n">keys</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span></code></pre></div><blockquote>
@@ -410,31 +410,31 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Boolean</span> <span class="nf">stockHandle</span><span class="o">(</span><span class="n">StockRequestDTO</span> <span class="n">stockRequestDTO</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 省略日志打印...校验...前置处理等...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">String</span> <span class="n">nonceStr</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ScheduledExecutorService</span> <span class="n">scheduledExecutorService</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ScheduledExecutorService</span> <span class="n">scheduledExecutorService</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">//竞争锁
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">boolean</span> <span class="n">redisLock</span> <span class="o">=</span> <span class="n">redisTemplate</span>
 </span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">setIfAbsent</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">redisLock</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 开启守护线程定时对锁续命
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">scheduledExecutorService</span><span class="o">.</span><span class="na">scheduleWithFixedDelay</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="o">(</span><span class="n">redisTemplate</span><span class="o">.</span><span class="na">hasKey</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span> <span class="n">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="n">stockLockKey</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">                <span class="o">},</span> <span class="n">15</span><span class="o">,</span> <span class="n">15</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">},</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                <span class="c1">// 获取库存
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">String</span> <span class="n">stockKey</span> <span class="o">=</span>  <span class="n">stockKeyPrefix</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="n">stockRequestDTO</span><span class="o">.</span><span class="na">getGoodsId</span><span class="o">());</span>
 </span></span><span class="line"><span class="cl">                <span class="n">Object</span> <span class="n">stock</span> <span class="o">=</span> <span class="n">redisTemplate</span>
 </span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
 </span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">stockKey</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 库存异常
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 扣减库存
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">()</span>
-</span></span><span class="line"><span class="cl">                            <span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">stockKey</span><span class="o">,</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">stockKey</span><span class="o">,</span><span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// 更新数据库等...
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                <span class="o">}</span>
@@ -478,7 +478,7 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
   <div class="fancybox">
       <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/1/img/redisson.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
       
-          <img src="https://files.neixin.net/pictures/blog/tech/1/img/redisson.png?imageMogr2/rquality/50" style="max-width: 600px" />
+          <img src="https://files.neixin.net/pictures/blog/tech/1/img/redisson.png?imageMogr2/rquality/50" style="max-width: 98%" />
            
       </a>
   </div>
@@ -488,7 +488,7 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 </span></span><span class="line"><span class="cl"><span class="n">config</span><span class="o">.</span><span class="na">useClusterServers</span><span class="o">().</span><span class="na">addNodeAddress</span><span class="o">(</span>
 </span></span><span class="line"><span class="cl">        <span class="s">&#34;redis://ip1:port1&#34;</span><span class="o">,</span><span class="s">&#34;redis://ip2:port2&#34;</span><span class="o">,</span> <span class="s">&#34;redis://ip3:port3&#34;</span><span class="o">,</span>
 </span></span><span class="line"><span class="cl">        <span class="s">&#34;redis://ip4:port4&#34;</span><span class="o">,</span><span class="s">&#34;redis://ip5:port5&#34;</span><span class="o">,</span> <span class="s">&#34;redis://ip6:port6&#34;</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;a123456&#34;</span><span class="o">).</span><span class="na">setScanInterval</span><span class="o">(</span><span class="n">5000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;a123456&#34;</span><span class="o">).</span><span class="na">setScanInterval</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 构造RedissonClient
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">RedissonClient</span> <span class="n">redissonClient</span> <span class="o">=</span> <span class="n">Redisson</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 设置锁定资源名称
@@ -529,15 +529,15 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
 </li>
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Config</span> <span class="n">config1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Config</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">config1</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip1:port1&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">config1</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip1:port1&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">RedissonClient</span> <span class="n">redissonClient1</span> <span class="o">=</span> <span class="n">Redisson</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Config</span> <span class="n">config2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Config</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">config2</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip2:port2&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">config2</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip2:port2&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">RedissonClient</span> <span class="n">redissonClient2</span> <span class="o">=</span> <span class="n">Redisson</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config2</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Config</span> <span class="n">config3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Config</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">config3</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip3:port3&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">config3</span><span class="o">.</span><span class="na">useSingleServer</span><span class="o">().</span><span class="na">setAddress</span><span class="o">(</span><span class="s">&#34;redis://ip3:port3&#34;</span><span class="o">).</span><span class="na">setPassword</span><span class="o">(</span><span class="s">&#34;...&#34;</span><span class="o">).</span><span class="na">setDatabase</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl"><span class="n">RedissonClient</span> <span class="n">redissonClient3</span> <span class="o">=</span> <span class="n">Redisson</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">config3</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
@@ -571,7 +571,7 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
   <div class="fancybox">
       <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/1/img/mysql_t.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
       
-          <img src="https://files.neixin.net/pictures/blog/tech/1/img/mysql_t.png?imageMogr2/rquality/50" style="max-width: 600px" />
+          <img src="https://files.neixin.net/pictures/blog/tech/1/img/mysql_t.png?imageMogr2/rquality/50" style="max-width: 98%" />
            
       </a>
   </div>
@@ -604,8 +604,8 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl">  <span class="c1">// 省略其他代码
 </span></span></span><span class="line"><span class="cl"><span class="c1">// Redis原子扣减库存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">Long</span> <span class="n">stock</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">decrement</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">){</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">Long</span> <span class="n">stock</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">().</span><span class="na">decrement</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">stock</span> <span class="o">||</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">stock</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">){</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// 库存异常
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -716,7 +716,7 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
                 
                
 
-               28 篇 44193 字
+               28 篇 44286 字
 
             </a>
         </div>
