@@ -89,99 +89,57 @@
        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
                  <style type="text/css">
      
+            .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between;
+                 flex-direction: row;
+                 align-items: stretch;
+            }
 
-            .imgshow {
+            .flex-group a,.flex-group p a{
                  flex-basis: 100%;
-                 margin-bottom: 3px;
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
+
+            .flex-group2 a, .flex-group2 p a {
+                 flex-basis: calc(100%/2 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p > a:nth-child(n+1){
-                 flex-basis: 49%;
-                 margin-bottom: 5px;
+           
+            .flex-group3 a, .flex-group3 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(1)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 100%;
-                     margin-bottom: 3px;
-                }
+            .flex-group4 a, .flex-group4 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(2)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 49%;
-                     margin-bottom: 3px;
-                }
+            .flex-group5 a, .flex-group5 p a  {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(3)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
+            .flex-group6 a, .flex-group6 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(4)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 49%;
-                     margin-bottom: 3px;
-                }
+            .flex-group7 a, .flex-group7 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(6)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
+            .flex-group8 a, .flex-group8 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(8)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 24%;
-                     margin-bottom: 3px;
-                }
+            .flex-group9 a, .flex-group9 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(9)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
-            }
+
+
+          
+             
+
             .post_content a img{
                  max-height: 900px;
             }
@@ -286,7 +244,8 @@
 
                         </div>
                        
-                        <div class="post_content markdown">
+                        <div class="post_content markdown"><div class="flex-group1">  
+
 
 
 
@@ -296,6 +255,7 @@
          
     </a>
 
+</div>    
 <p>嘿！戴着蒙面巾的我，真酷。</p>
 <p>9月了，凉快了。<br>
 15号，有个好哥们说想骑行，之后他不断在抖音里转发我各种骑行视频，抖音的算法嗅探能力不比缉毒犬差，就更猛烈的给我推送相关视频，这让我有些担心，原因是系统给我推送的清一色都是好看的女孩骑车🚴🏻，每次一刷到就停不下来，时间长了，会不会不再给我推<del>美女</del>猛男健身、美<del>女</del>景旅行的视频了？</p>
@@ -436,6 +396,7 @@
 <br> 
 <hr> 
 <p>有个朋友骑摩托上瘾，非要骑他的小踏板，我大概能明白那种“我欲乘风归去”，但还是没忍住对他说了一句：草！<del>傻↓</del> 牛逼，这就是那辆伴随他那天穿行于雷雨之中的小摩托！</p>
+<div class="flex-group2">  
 <p>
 
 
@@ -456,9 +417,11 @@
          
     </a>
 </p>
+</div>  
 <p>我这位骑摩托的朋友是真的又悲惨又搞笑，去程和回程都是暴雨，我甚至觉得天公是盯着他决定何时下雨的，他的摩托车一启动，雨点开始下落，比萧敬腾还准。   <br>
 不过，中途我们在百里画廊骑行的期间，天气非常晴朗非常凉爽，哈哈哈。</p>
 <p><strong>从北京出发去百里画廊的路上，配上雨天，很有感觉：</strong></p>
+<div class="flex-group9">  
 <p>
 
 
@@ -503,16 +466,6 @@
 
 
 
-    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_123115.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
-    
-        <img src="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_123115.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
-         
-    </a>
-
-
-
-
-
     <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_132907.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
         <img src="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_132907.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
@@ -523,9 +476,9 @@
 
 
 
-    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/WechatIMG49.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_123115.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/life/22/WechatIMG49.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+        <img src="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_123115.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
 
@@ -536,6 +489,16 @@
     <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_133357.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
         <img src="https://files.neixin.net/pictures/blog/life/22/IMG_20230917_133357.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/WechatIMG49.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.neixin.net/pictures/blog/life/22/WechatIMG49.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
 
@@ -557,7 +520,9 @@
         <video src="https://files.neixin.net/pictures/blog/life/22/VID_20230917_133031.mov" controls="controls" style="max-width: 100%;height: 100%;object-fit: cover;"  preload="none"></video>
     </a>
 </p>
+</div>  
 <p><strong>还没开始运动，就要填肚子：</strong></p>
+<div class="flex-group1">   
 
 
 
@@ -568,7 +533,9 @@
          
     </a>
 
+</div>  
 <p><strong>租车点：</strong></p>
+<div class="flex-group1">    
 
 
 
@@ -579,7 +546,9 @@
          
     </a>
 
+</div>  
 <p><strong>我们的骑行路线是先骑林间小路：</strong></p>
+<div class="flex-group9">   
 <p>
 
 
@@ -708,9 +677,9 @@
 
 
 
-    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_2175.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/mmexport1695019579544.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/life/22/IMG_2175.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+        <img src="https://files.neixin.net/pictures/blog/life/22/mmexport1695019579544.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
 
@@ -718,9 +687,9 @@
 
 
 
-    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/mmexport1695019579544.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/22/IMG_2175.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/life/22/mmexport1695019579544.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+        <img src="https://files.neixin.net/pictures/blog/life/22/IMG_2175.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
 
@@ -754,7 +723,9 @@
          
     </a>
 </p>
+</div>  
 <p><strong>回程的路上暴雨闪电，视频拍不出暴雨的感觉，实际雨下的已经完全看不清路：</strong></p>
+<div class="flex-group2">   
 <p>
 
 
@@ -771,6 +742,7 @@
         <video src="https://files.neixin.net/pictures/blog/life/22/IMG_2316.mov" controls="controls" style="max-width: 100%;height: 100%;object-fit: cover;"  preload="none"></video>
     </a>
 </p>
+</div>  
 <br>  
 哇🤩！又是快乐的一天！  </div>
                         <div class="post_footer">

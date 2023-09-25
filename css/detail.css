@@ -2,16 +2,18 @@
                 display:none !important;
             }
 .content img {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+/*                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
                 border-radius: 5px;
                 width:100%;
+                    border: 1px solid black;
             } 
 
             .content video {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+/*                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);*/
                 border-radius: 5px;
                 width:100%;
-            } 
+                    border: 1px solid black;
+            }  
 
 
       

@@ -89,99 +89,57 @@
        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
                  <style type="text/css">
      
+            .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between;
+                 flex-direction: row;
+                 align-items: stretch;
+            }
 
-            .imgshow {
+            .flex-group a,.flex-group p a{
                  flex-basis: 100%;
-                 margin-bottom: 3px;
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
+
+            .flex-group2 a, .flex-group2 p a {
+                 flex-basis: calc(100%/2 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p > a:nth-child(n+1){
-                 flex-basis: 49%;
-                 margin-bottom: 5px;
+           
+            .flex-group3 a, .flex-group3 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(1)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 100%;
-                     margin-bottom: 3px;
-                }
+            .flex-group4 a, .flex-group4 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(2)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 49%;
-                     margin-bottom: 3px;
-                }
+            .flex-group5 a, .flex-group5 p a  {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(3)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
+            .flex-group6 a, .flex-group6 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(4)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 49%;
-                     margin-bottom: 3px;
-                }
+            .flex-group7 a, .flex-group7 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(6)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
+            .flex-group8 a, .flex-group8 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(8)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 24%;
-                     margin-bottom: 3px;
-                }
+            .flex-group9 a, .flex-group9 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
             }
-            .post_content p:has(> a.imgshow:nth-child(9)) {
-                 display: flex;
-                 flex-wrap: wrap;
-                 justify-content: space-between;
-                 flex-direction: row;
-                 align-items: stretch;
-                 .imgshow {
-                     flex-basis: 33%;
-                     margin-bottom: 3px;
-                }
-            }
+
+
+          
+             
+
             .post_content a img{
                  max-height: 900px;
             }
@@ -286,7 +244,8 @@
 
                         </div>
                        
-                        <div class="post_content markdown">
+                        <div class="post_content markdown"><div class="flex-group1">    
+
 
 
 
@@ -296,6 +255,7 @@
          
     </a>
 
+</div>  
 <h4 id="自信第一层">自信第一层</h4>
 <p>最近发现了一些奇怪的自信，比如此刻，楼下的主干路上传来劣质音箱和麦克发出的歌声，从《爱就一个字》唱到《江南》再到《慢慢喜欢你》，张信哲、林俊杰、莫文蔚如果听到，必然是要流泪的。</p>
 <p>当我写下这句话的时候，我已经忘记了她具体还唱了哪些，因为着实刺耳，连耗费几万块安装的断桥铝三层隔音玻璃窗户，也无法阻挡这噪声的穿透力。我尽可能关闭耳朵，让自己别把注意力放在猜歌名上，事与愿违，最后没忍住，打开了微信的摇一摇，想摇出她唱的最难听的一首歌到底叫什么名字。</p>
