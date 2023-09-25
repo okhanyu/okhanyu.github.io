@@ -87,7 +87,47 @@
 
 
        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
+    <style type="text/css">
+     
+          .post_content p:has(> a.imgshow:nth-child(1)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 100%;
+                 margin-bottom: 3px;
+            }
+        }
 
+         .post_content p:has(> a.imgshow:nth-child(2)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 49%;
+                 margin-bottom: 3px;
+            }
+        }
+        
+        .post_content p:has(> a.imgshow:nth-child(3)) {
+            display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 33%;
+                 margin-bottom: 3px;
+            }
+        }
+
+
+
+    </style>
     </head>
     <body>
         <div class="main animate__animated animate__fadeInDown">
@@ -190,13 +230,13 @@
                         <div class="post_content markdown">
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/202308242056/1.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/life/202308242056/1.jpg?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/life/202308242056/1.jpg?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/life/202308242056/1.jpg?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <h4 id="自信第一层">自信第一层</h4>
 <p>最近发现了一些奇怪的自信，比如此刻，楼下的主干路上传来劣质音箱和麦克发出的歌声，从《爱就一个字》唱到《江南》再到《慢慢喜欢你》，张信哲、林俊杰、莫文蔚如果听到，必然是要流泪的。</p>
 <p>当我写下这句话的时候，我已经忘记了她具体还唱了哪些，因为着实刺耳，连耗费几万块安装的断桥铝三层隔音玻璃窗户，也无法阻挡这噪声的穿透力。我尽可能关闭耳朵，让自己别把注意力放在猜歌名上，事与愿违，最后没忍住，打开了微信的摇一摇，想摇出她唱的最难听的一首歌到底叫什么名字。</p>

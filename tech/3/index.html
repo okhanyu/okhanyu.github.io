@@ -87,7 +87,47 @@
 
 
        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
+    <style type="text/css">
+     
+          .post_content p:has(> a.imgshow:nth-child(1)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 100%;
+                 margin-bottom: 3px;
+            }
+        }
 
+         .post_content p:has(> a.imgshow:nth-child(2)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 49%;
+                 margin-bottom: 3px;
+            }
+        }
+        
+        .post_content p:has(> a.imgshow:nth-child(3)) {
+            display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 33%;
+                 margin-bottom: 3px;
+            }
+        }
+
+
+
+    </style>
     </head>
     <body>
         <div class="main animate__animated animate__fadeInDown">
@@ -245,13 +285,13 @@
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/1.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/1.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/4/img/1.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/4/img/1.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <ul>
 <li>用户先访问短网址，短网址将自动请求至短链服务器</li>
 <li>短链服务器收到请求后，在映射中通过短网址查找原始长链</li>
@@ -274,13 +314,13 @@ MurmurHash 计算可选长度128位、32位等，位数多碰撞的概率就小�
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/2.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/2.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/4/img/2.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/4/img/2.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <p>最终 t.cn/111111111 用62进制表示的短链就是 t.cn/7WD4h 。<br>
 假设生成6位字符的短链： <br>
 10进制 最大只能生成 10 ^ 6 - 1 = 999999个 <br>
@@ -352,13 +392,13 @@ A-Z a-z 0-9 刚好等于62位。</p>
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/3.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/4/img/3.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/4/img/3.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/4/img/3.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <hr>
 <blockquote>
 <p>注：布隆过滤器<br>

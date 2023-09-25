@@ -87,7 +87,47 @@
 
 
        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
+    <style type="text/css">
+     
+          .post_content p:has(> a.imgshow:nth-child(1)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 100%;
+                 margin-bottom: 3px;
+            }
+        }
 
+         .post_content p:has(> a.imgshow:nth-child(2)) {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 49%;
+                 margin-bottom: 3px;
+            }
+        }
+        
+        .post_content p:has(> a.imgshow:nth-child(3)) {
+            display: flex;
+             flex-wrap: wrap;
+             justify-content: space-between;
+             flex-direction: row;
+             align-items: stretch;
+             .imgshow {
+                 flex-basis: 33%;
+                 margin-bottom: 3px;
+            }
+        }
+
+
+
+    </style>
     </head>
     <body>
         <div class="main animate__animated animate__fadeInDown">
@@ -252,13 +292,13 @@
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <blockquote>
 <p>注：<br>
 如果使用MyISAM存储引擎，数据库文件类型就包括.frm (表结构描述)、.MYD (表数据)、.MYI (索引)<br>
@@ -270,26 +310,26 @@
 <p>
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div><br>
+<br>
 如上图可知，MySQL的索引其实是属于引擎层的数据结构。<br>
 MySQL支持的索引类型是和引擎息息相关的：</p>
 <!--![MySQL引擎和索引](img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png)-->
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <h2 id="索引类型的比较">索引类型的比较</h2>
 <p>现在MySQL默认的存储引擎使用的是InnoDB，也是大多数公司的选择，而InnoDB的索引数据结构就是B+tree.每一个索引在InnoDB里面对应一棵B+树。</p>
 <h3 id="btree和b-treeb-tree读b树不读b减树">B+tree和B-tree(B-tree读B树不读B减树)</h3>
@@ -306,24 +346,24 @@ MySQL支持的索引类型是和引擎息息相关的：</p>
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <!--![二级索引B+tree索引结构图](img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png)-->
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <h2 id="数据页是什么">数据页是什么</h2>
 <p>在 InnoDB 存储引擎中，所有的数据都被逻辑地存放在表空间中，表空间（tablespace）是存储引擎中最高的存储逻辑单位，在表空间的下面又包括段（segment）、区（extent）、页（page），这部分非本文的重点内容，后续单开一篇来讲。<br>
 <strong>页（Pages）是mysql中磁盘和内存交换的基本单位，也是mysql管理存储空间的基本单位。</strong></p>
@@ -331,13 +371,13 @@ MySQL支持的索引类型是和引擎息息相关的：</p>
 <p>
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 Buffer Pool 中存的就是一页一页的数据。再比如，当我们要查询的数据不在 Buffer Pool 中时，InnoDB 会将记录所在的页整个加载到 Buffer Pool 中去；同样的，当我们修改数据时，都需要将数据所在的数据页从磁盘读入到Buffer Pool中，然后在Buffer Pool中对其进行操作，操作完成后将 Buffer Pool 中的脏页刷入磁盘时，也是按照页为单位刷入磁盘的。同一个数据库实例的所有表空间都有相同的页大小，默认情况下，表空间中的页大小都为 16KB，当然也可以通过改变源码中的页大小参数重新编译进行修改，不同的页大小最终也会导致区大小的不同。</p>
 <p>当插入一行数据时，会将该数据页加载到Buffer Pool中，然后从空闲区域中拿出一部分空间分配给数据行区域，当空闲区域耗尽时，表示该数据页已经满了。</p>
 <p>这里多提一句，表空间其实就是一个磁盘文件，它们通常以表名.idb的格式存储，数据页都是放在表空间里的，但是因为数据页太多，所以，MySQL又引入了数据区(extent)的概念。</p>
@@ -365,13 +405,13 @@ MySQL使用页的概念，能很好的利用的文件系统的 <strong>局部性
 
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <h3 id="物理角度">物理角度</h3>
 <p><strong>聚簇索引:</strong>
 聚簇索引（clustered index）不是单独的一种索引类型，而是一种数据存储方式，这种存储方式是依靠B+树来实现的。根据表的主键构造一棵B+树且B+树叶子节点存放的都是表的行记录数据时，称该主键索引为聚簇索引。简单说就是，聚簇索引也可理解为将数据存储与索引放到了一块，找到索引也就找到了数据。<br>
@@ -436,13 +476,13 @@ MySQL使用页的概念，能很好的利用的文件系统的 <strong>局部性
 <p>
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 <strong>在文章的最下面会详细解释最左前缀原则的实际案例。</strong></p>
 <h2 id="索引下推">索引下推</h2>
 <p>假设有这样一张表：</p>
@@ -450,13 +490,13 @@ MySQL使用页的概念，能很好的利用的文件系统的 <strong>局部性
 <p>
 
 
-<div class="fancybox">
-    <a data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
     
-        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageMogr2/rquality/50" style="max-width: 100%" />
+        <img src="https://files.neixin.net/pictures/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
          
     </a>
-</div>
+
 有如下查询：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;韩%&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><p>根据前面说的“最左前缀原则”，该语句在搜索索引树的时候，只能匹配到名字第一个字是“韩”的记录，接下来是怎么处理的呢？当然就是从这条记录开始，逐个回表，到主键索引上找出相应的记录，再比对age字段的值是否符合条件。<br>
