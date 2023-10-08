@@ -6,7 +6,96 @@
     <description>Recent content on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Sep 2023 05:32:10 +0800</lastBuildDate><atom:link href="https://neixin.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate><atom:link href="https://neixin.net/index.xml" rel="self" type="application/rss+xml" />
+      
+      
+    <item>
+      <title>为什么小白更该使用静态博客 </title>
+      <link>https://neixin.net/life/24/</link>
+      <pubDate>Sun, 08 Oct 2023 16:40:00 +0800</pubDate>
+      
+      <guid>https://neixin.net/life/24/</guid>
+      <description>&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;最近群里小伙伴的云服务器持续被探测扫描，数据库间歇性瘫痪。&lt;/p&gt;
+&lt;p&gt;其实这对于有技术能力的人来说，可以去排查问题所在，但对于不懂技术的博主们来说，排查问题几乎是摸不着头脑的。&lt;/p&gt;
+&lt;p&gt;我在群里给他的建议是，使用静态博客。 &lt;br&gt;
+其实我很少在公开场合去推荐别人使用什么类型的博客系统。&lt;br&gt;
+因为个体需求差异很大，我作为一个研发工程师，很容易想当然的，把一些对于别人很复杂的动作当成很简单的样子。&lt;/p&gt;
+&lt;h2 id=&#34;名词&#34;&gt;名词&lt;/h2&gt;
+&lt;p&gt;我先用极其简陋的描述，形容静态和动态两种博客的区别。&lt;/p&gt;
+&lt;h3 id=&#34;静态&#34;&gt;静态&lt;/h3&gt;
+&lt;p&gt;静态，其实应该叫静态生成器，它本质上是一个工具，可以想象成一个电饭煲把生米变成熟米，米熟了之后和电饭煲就没有任何关系了。&lt;br&gt;
+或者理解成，美图工具把照片P完，这工具和照片就没关系了，下次再需要P图就再使用。&lt;/p&gt;
+&lt;p&gt;静态博客文件最终就是一堆html文件，你甚至可以用记事本打开直接编辑完保存即可。&lt;br&gt;
+把这堆html文件放到支持展示的地方即可访问，通用性、稳定性、兼容性几乎无可比拟。&lt;/p&gt;
+&lt;p&gt;静态博客生成器如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hugo&lt;/li&gt;
+&lt;li&gt;hexo&lt;/li&gt;
+&lt;li&gt;vuepress&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;动态&#34;&gt;动态&lt;/h3&gt;
+&lt;p&gt;动态应该叫做动态博客程序，这是一个持续运行的容器和程序，可以想象成汽车，你想使用就要一直启动，只要你熄火，那么车就无法行进了，所以要一直保持启动状态。&lt;/p&gt;
+&lt;p&gt;动态博客运行时需要服务器、数据库、缓存、博客程序本身等等，乍一看只是简单几部分，实则细究无穷。&lt;/p&gt;
+&lt;p&gt;动态博客程序如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;wordpress&lt;/li&gt;
+&lt;li&gt;typecho&lt;/li&gt;
+&lt;li&gt;ghost&lt;/li&gt;
+&lt;li&gt;halo&lt;/li&gt;
+&lt;li&gt;farbox&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;想了解更多更细节的，可以去自行查阅。&lt;/p&gt;
+&lt;h2 id=&#34;简述&#34;&gt;简述&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;人们很容易在显而易见的问题上把问题搞反。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;什么人适合静态博客&#34;&gt;什么人适合静态博客&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;完全不懂技术&lt;/li&gt;
+&lt;li&gt;只懂得一点技术&lt;/li&gt;
+&lt;li&gt;不愿意折腾&lt;/li&gt;
+&lt;li&gt;对内容丢失无法容忍&lt;/li&gt;
+&lt;li&gt;没钱&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;什么人适合动态博客&#34;&gt;什么人适合动态博客&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;爱折腾&lt;/li&gt;
+&lt;li&gt;精通技术（包括但不限于服务器、数据库、缓存、网络、排查能力）&lt;/li&gt;
+&lt;li&gt;有钱&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上是不是和你的理解正好相反。&lt;/p&gt;
+&lt;h3 id=&#34;为什么&#34;&gt;为什么？&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;一个博客程序，在运行期间，是有无数种变数的，如：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务器端口是否开放、防火墙是否放行、cpu是否被其他程序打满100%、内存是否被打爆、网络是否通畅、连接数是否正常、硬盘读写是否正常&lt;/li&gt;
+&lt;li&gt;博客程序本身是否有Bug、插件是否有漏洞、评论是否有漏洞、机器是否缺少博客程序的运行环境&lt;/li&gt;
+&lt;li&gt;数据库是否Hang住、是否发生死锁、吞吐是否异常、特殊字符编码是否支持&lt;/li&gt;
+&lt;li&gt;缓存是否击穿、穿透、雪崩&lt;/li&gt;
+&lt;li&gt;Nginx是否配置正确、证书是否自动续期&lt;/li&gt;
+&lt;li&gt;机器、博客程序、类宝塔面板等常用程序是否被探测扫描&lt;/li&gt;
+&lt;li&gt;被DDOS或CC时你是否能进入机器备份数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这一系列的问题，都是你在每一天、每一刻，将面对的变数。&lt;br&gt;
+然而随便拿出几项，如果你没有技术能力，都是极其难掌控和处理的，最终的结果就是站进入黑洞、数据丢失、被挂恶意程序、被劫持等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;我们反观静态博客，如Hugo：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;电脑下载或安装Hugo、安装Git（如果不用hugo甚至不需要），比安装微信复杂一点点&lt;/li&gt;
+&lt;li&gt;打开你电脑中几乎一定存在的终端工具，执行几个命令&lt;/li&gt;
+&lt;li&gt;将你写的markdown内容生成转换为html文件&lt;/li&gt;
+&lt;li&gt;将这些html文件上传到cos、oss、github、服务器上的nginx都可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那些你洋洋洒洒写下的markdown文件就在你面前，你的安全感十足。&lt;br&gt;
+运行期间，除了ddos和cc攻击外，你不需要担心任何机器、程序、数据库、缓存等等问题，这些问题都交给了极其专业的基础设施提供者，你只需要安心写你的东西，然后敲打几个命令，内容就被安全无误的上传到安全地带，你的安全感百足。&lt;/p&gt;
+&lt;h2 id=&#34;结论&#34;&gt;结论&lt;/h2&gt;
+&lt;p&gt;动态，代表着运行时无穷无尽的变化与未知，任何一个节点出现问题，都可能起那一发而动全身，机器与机器、线路与线路、程序与程序、库与库、表与表之间的关联关系错综复杂，相互协作。 &lt;br&gt;
+技术小白是缺少对于变化、异常情况的掌控能力的，而这种变化又是可能在任何时候发生的，你也不想每时每刻都担心对嘛。&lt;/p&gt;
+&lt;p&gt;静态，代表着，第一次会复杂一点，但在后续你的使用、博客的运行时，将稳如泰山。 &lt;br&gt;
+所以，我更推荐技术小白使用静态，就像你第一次学骑车🚴🏻，刚起步会有点难度，但骑了几次后，你甚至从未再忧虑过该怎么起步、怎么前进、怎么保持平衡。&lt;/p&gt;
+&lt;p&gt;以上，个人拙见，不喜&lt;strong&gt;可&lt;/strong&gt;喷，拜拜👋🏻。&lt;/p&gt;
+</description>
+    </item>
+      
+      
+    
       
       
     <item>
@@ -1157,10 +1246,6 @@
 &lt;/blockquote&gt;
 </description>
     </item>
-      
-      
-    
-      
       
       
     

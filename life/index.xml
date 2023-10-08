@@ -6,7 +6,16 @@
     <description>Recent content in life on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 25 Sep 2023 05:32:10 +0800</lastBuildDate><atom:link href="https://neixin.net/life/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate><atom:link href="https://neixin.net/life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为什么小白更该使用静态博客</title>
+      <link>https://neixin.net/life/24/</link>
+      <pubDate>Sun, 08 Oct 2023 16:40:00 +0800</pubDate>
+      
+      <guid>https://neixin.net/life/24/</guid>
+      <description>背景 最近群里小伙伴的云服务器持续被探测扫描，数据库间歇性瘫痪。 其实这对于有技术能力的人来说，可以去排查问题所在，但对于不懂技术的博主们来说，排查问题几乎是</description>
+    </item>
+    
     <item>
       <title>月记 #202309 | 三种运动、落日、苏打水和家乡</title>
       <link>https://neixin.net/life/23/</link>
@@ -86,15 +95,6 @@
       
       <guid>https://neixin.net/life/0-15/</guid>
       <description>昨天的一篇文章，引来的许多评论，大家都是客观而又真诚的，我非常感动于大家的思考与成熟。 我本来发文是抱着中立态度，不对这件事本身做评论以及定论的，只是想通过</description>
-    </item>
-    
-    <item>
-      <title>怒斥XX主义极端患者上</title>
-      <link>https://neixin.net/life/0-14/</link>
-      <pubDate>Tue, 13 Jun 2023 15:20:00 +0800</pubDate>
-      
-      <guid>https://neixin.net/life/0-14/</guid>
-      <description>我非常担心本篇文章的任何一个字会对读者造成误导，所以，在此二次编辑说明： 我本人对这个事件无法理清对错，也不想理清对错 以下文字，绝对不含有任何倾向性，如果你</description>
     </item>
     
   </channel>
