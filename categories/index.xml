@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Hahaha!</title>
-    <link>https://neixin.net/categories/</link>
+    <link>https://hahaha.cc/categories/</link>
     <description>Recent content in Categories on Hahaha!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate><atom:link href="https://neixin.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate><atom:link href="https://hahaha.cc/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>生活</title>
-      <link>https://neixin.net/categories/%E7%94%9F%E6%B4%BB/</link>
+      <link>https://hahaha.cc/categories/%E7%94%9F%E6%B4%BB/</link>
       <pubDate>Sun, 08 Oct 2023 16:40:00 +0800</pubDate>
       
-      <guid>https://neixin.net/categories/%E7%94%9F%E6%B4%BB/</guid>
+      <guid>https://hahaha.cc/categories/%E7%94%9F%E6%B4%BB/</guid>
       <description></description>
     </item>
     
     <item>
       <title>技术</title>
-      <link>https://neixin.net/categories/%E6%8A%80%E6%9C%AF/</link>
+      <link>https://hahaha.cc/categories/%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
       
-      <guid>https://neixin.net/categories/%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://hahaha.cc/categories/%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     
     <item>
       <title>职场</title>
-      <link>https://neixin.net/categories/%E8%81%8C%E5%9C%BA/</link>
+      <link>https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/</link>
       <pubDate>Fri, 25 Feb 2022 00:19:49 +0800</pubDate>
       
-      <guid>https://neixin.net/categories/%E8%81%8C%E5%9C%BA/</guid>
+      <guid>https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/</guid>
       <description></description>
     </item>
     
