@@ -3,7 +3,7 @@ var common = (function (){
 
      // 路由部分
     // const baseUri = "http://127.0.0.1:9999/blog/api/";
-    const server= "https://say.hanyu.life";
+    const server= "https://api.hahaha.cc";
 
     // 初始页码
     var page = 0;
