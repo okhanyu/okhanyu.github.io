@@ -1,4 +1,4 @@
-var api = "/api/v1/memo";
+var api = "/api/memos/api/v1/memo";
 
 // 获取内容后回调
 var callbak = function(response, apps, owner) {
