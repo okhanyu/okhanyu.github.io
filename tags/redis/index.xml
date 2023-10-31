@@ -6,15 +6,14 @@
     <description>Recent content in Redis on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 23 Mar 2021 22:40:49 +0800</lastBuildDate><atom:link href="https://hahaha.cc/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 22:40:49 +0800</lastBuildDate>
+    <atom:link href="https://hahaha.cc/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>分布式锁之电商防超卖的N&#43;1个坑</title>
       <link>https://hahaha.cc/tech/1/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
-      
       <guid>https://hahaha.cc/tech/1/</guid>
       <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境 一般</description>
     </item>
-    
   </channel>
 </rss>

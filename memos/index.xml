@@ -5,6 +5,7 @@
     <link>https://hahaha.cc/memos/</link>
     <description>Recent content in Memos on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="https://hahaha.cc/memos/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <atom:link href="https://hahaha.cc/memos/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
