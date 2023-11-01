@@ -613,9 +613,20 @@ hr {
 .markdown strong,
 .markdown b,
 .markdown em {
-  padding: 1px 2px;
+/*  padding: 1px 2px;
   background-color: #fcfcf0;
-  font-weight: normal;
+  font-weight: normal;*/
+  margin: 0 -.4em;
+
+padding: 0 .4em;
+
+border-radius: .8em .3em;
+
+background: 0 0;
+
+background-image: linear-gradient( to right,rgba(255,225,0,.1),rgba(255,225,0,.7) 4%,rgba(255,225,0,.3) );
+
+-webkit-box-decoration-break: clone;
 }
 
 .markdown .fancybox {
