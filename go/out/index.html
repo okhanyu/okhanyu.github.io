@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>即将访问新页面</title>
+    <script type="text/javascript">
+      function getParam(name) {
+          var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");　　 
+          var r = location.search.substr(1).match(reg);　　
+          if (r != null) return decodeURI(decodeURI(r[2]));
+      };
+      function init() {
+        var url = getParam("url");
+        var link = document.getElementById("jump");
+        link.href = url;
+        link.text = url;
+        //link.click();
+      }
+
+      window.onload=function(){init()};
+      
+    </script>
+  </head>
+  <body>
+    <br> 
+    点击前往：<a id="jump" target="_blank"></a>
+  </body>
+</html>
