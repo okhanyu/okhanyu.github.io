@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>思考 on 好事发生</title>
-    <link>https://hahaha.cc/blog/tags/%E6%80%9D%E8%80%83/</link>
+    <link>https://hahaha.cc/tags/%E6%80%9D%E8%80%83/</link>
     <description>Recent content in 思考 on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate>
-    <atom:link href="https://hahaha.cc/blog/tags/%E6%80%9D%E8%80%83/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hahaha.cc/tags/%E6%80%9D%E8%80%83/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>为什么小白更该使用静态博客</title>
-      <link>https://hahaha.cc/blog/other/1/</link>
+      <link>https://hahaha.cc/other/1/</link>
       <pubDate>Sun, 08 Oct 2023 16:40:00 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/other/1/</guid>
+      <guid>https://hahaha.cc/other/1/</guid>
       <description>经过后续的讨论，我发现我的思考不够全面，仅以此文给做选择的人一点思路（＾∀＾）。 背景 我是很抗拒写各种折腾类、教程类的文字的。 但最近群里小伙伴的云服务器持续</description>
     </item>
     <item>
       <title>第一次做减法</title>
-      <link>https://hahaha.cc/blog/life/0-11/</link>
+      <link>https://hahaha.cc/life/0-11/</link>
       <pubDate>Mon, 24 Apr 2023 22:34:22 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/life/0-11/</guid>
+      <guid>https://hahaha.cc/life/0-11/</guid>
       <description>偶然间看到一篇博文 《博客上做过的减法》 然后开始反思，我的博客是否也有多余的功能呢？ 随后下掉了评论、访问量、以及多余字体。 如果评论系统存在，我写文字就会顾及</description>
     </item>
     <item>
       <title>读《削弱焦虑的存在感》</title>
-      <link>https://hahaha.cc/blog/life/0-9/</link>
+      <link>https://hahaha.cc/life/0-9/</link>
       <pubDate>Thu, 13 Apr 2023 16:22:20 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/life/0-9/</guid>
+      <guid>https://hahaha.cc/life/0-9/</guid>
       <description>《削弱焦虑的存在感》 中提到了任务管理。 国外有人在过去的12年里用txt做任务管理译文 | 过去 12 年里，我的生产力工具只是一个 .txt 文件 - 少数派 虽然我最近确实陷入了</description>
     </item>
     <item>
       <title>朋友的审视</title>
-      <link>https://hahaha.cc/blog/life/0-8/</link>
+      <link>https://hahaha.cc/life/0-8/</link>
       <pubDate>Fri, 07 Apr 2023 20:26:10 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/life/0-8/</guid>
+      <guid>https://hahaha.cc/life/0-8/</guid>
       <description>昨天和朋友一起去打毛球，回来的路上他开车送我，聊到了对我的看法。 他说，他本来想和我聊聊AI相关的，毕竟最近我一直在接入chatGPT，但想想算了。 我很疑惑</description>
     </item>
     <item>
       <title>换位思考</title>
-      <link>https://hahaha.cc/blog/life/0-7/</link>
+      <link>https://hahaha.cc/life/0-7/</link>
       <pubDate>Fri, 07 Apr 2023 18:17:30 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/life/0-7/</guid>
+      <guid>https://hahaha.cc/life/0-7/</guid>
       <description>最近经常听到一些朋友和我诉苦，我脑海中总是条件反射的出现“你应该换位思考”这七个字。 然而在不久之前，我对“总要换位思考”是不以为然的。 我们经常会遇到很多无</description>
     </item>
   </channel>

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on 好事发生</title>
-    <link>https://hahaha.cc/blog/tags/%E5%B7%A5%E5%85%B7/</link>
+    <link>https://hahaha.cc/tags/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Mon, 24 Apr 2023 13:01:22 +0800</lastBuildDate>
-    <atom:link href="https://hahaha.cc/blog/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hahaha.cc/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>自用效率工具梳理</title>
-      <link>https://hahaha.cc/blog/life/0-5/</link>
+      <link>https://hahaha.cc/life/0-5/</link>
       <pubDate>Mon, 24 Apr 2023 13:01:22 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/life/0-5/</guid>
+      <guid>https://hahaha.cc/life/0-5/</guid>
       <description>最近被工具困扰，不断的在做选择。 以下是我结合了易用性、self-host、云数据安全性、速度、价格等各方面的维度，最终给自己选定的工具集。 思维导图工具： x</description>
     </item>
   </channel>

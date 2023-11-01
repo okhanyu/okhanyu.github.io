@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>other on 好事发生</title>
-    <link>https://hahaha.cc/blog/other/</link>
+    <link>https://hahaha.cc/other/</link>
     <description>Recent content in other on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 08 Oct 2023 16:40:00 +0800</lastBuildDate>
-    <atom:link href="https://hahaha.cc/blog/other/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hahaha.cc/other/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>为什么小白更该使用静态博客</title>
-      <link>https://hahaha.cc/blog/other/1/</link>
+      <link>https://hahaha.cc/other/1/</link>
       <pubDate>Sun, 08 Oct 2023 16:40:00 +0800</pubDate>
-      <guid>https://hahaha.cc/blog/other/1/</guid>
+      <guid>https://hahaha.cc/other/1/</guid>
       <description>经过后续的讨论，我发现我的思考不够全面，仅以此文给做选择的人一点思路（＾∀＾）。 背景 我是很抗拒写各种折腾类、教程类的文字的。 但最近群里小伙伴的云服务器持续</description>
     </item>
   </channel>
