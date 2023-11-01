@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tech on 好事发生</title>
-    <link>https://hahaha.cc/tech/</link>
+    <link>https://hahaha.cc/blog/tech/</link>
     <description>Recent content in tech on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate>
-    <atom:link href="https://hahaha.cc/tech/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hahaha.cc/blog/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>高并发短链系统设计</title>
-      <link>https://hahaha.cc/tech/3/</link>
+      <link>https://hahaha.cc/blog/tech/3/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
-      <guid>https://hahaha.cc/tech/3/</guid>
+      <guid>https://hahaha.cc/blog/tech/3/</guid>
       <description>原则与底线：不说废话、不凑字数、不标题党。 注：本文均为韩宇的胡思乱写，你随便抄 博客 https://hanyu.life 背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。 比如我发微博内</description>
     </item>
     <item>
       <title>浅尝MySQL索引</title>
-      <link>https://hahaha.cc/tech/2/</link>
+      <link>https://hahaha.cc/blog/tech/2/</link>
       <pubDate>Wed, 09 Feb 2022 17:28:32 +0800</pubDate>
-      <guid>https://hahaha.cc/tech/2/</guid>
+      <guid>https://hahaha.cc/blog/tech/2/</guid>
       <description>写在前面的废话 Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。 这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿到了</description>
     </item>
     <item>
       <title>分布式锁之电商防超卖的N&#43;1个坑</title>
-      <link>https://hahaha.cc/tech/1/</link>
+      <link>https://hahaha.cc/blog/tech/1/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
-      <guid>https://hahaha.cc/tech/1/</guid>
+      <guid>https://hahaha.cc/blog/tech/1/</guid>
       <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境 一般</description>
     </item>
   </channel>

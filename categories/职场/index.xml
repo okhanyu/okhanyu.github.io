@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>职场 on 好事发生</title>
-    <link>https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/</link>
+    <link>https://hahaha.cc/blog/categories/%E8%81%8C%E5%9C%BA/</link>
     <description>Recent content in 职场 on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 25 Feb 2022 00:19:49 +0800</lastBuildDate>
-    <atom:link href="https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hahaha.cc/blog/categories/%E8%81%8C%E5%9C%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>大厂面试复盘</title>
-      <link>https://hahaha.cc/growing/1/</link>
+      <link>https://hahaha.cc/blog/growing/1/</link>
       <pubDate>Fri, 25 Feb 2022 00:19:49 +0800</pubDate>
-      <guid>https://hahaha.cc/growing/1/</guid>
+      <guid>https://hahaha.cc/blog/growing/1/</guid>
       <description>面试题： 2021年末面试题(一些不好言说的原因，需要申请权限) 背景 哈喽，我是Damon，现在是2022了，年前11月上旬到12月上旬一直在面试，年后很多很</description>
     </item>
   </channel>
