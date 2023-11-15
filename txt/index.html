@@ -1,0 +1,105 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js">
+    </script>
+  </head>
+  <body>
+    <pre id="app" style="word-wrap: break-word;white-space: pre-wrap;display: block;font-family: monospace;margin: 1em 0px;">
+      <div>MICRO BLOG.TXT</div>
+      <div>==============</div>
+      <div>SUPER SIMPLE !</div>
+      <br>
+      <br>
+      <br>
+      <div v-for="item,index in items">
+        <template  v-if="item.content != '' ">
+          <div>
+            {{ format(item.createdTs) }} | {{ items.length - index }}
+          </div>
+          <div>=======================</div>
+          <br>
+          <div v-html="item.content">
+          </div>
+          <br>
+          <br>
+        </template>
+      </div>
+      <br>
+      <br>
+      <div>--------------------</div>
+      <div>MADE BY HAND BY @韩宇</div>
+    </pre>
+    <script type="text/javascript">
+      const app = Vue.createApp({
+        data() {
+          return {
+            items: []
+          }
+        },
+        methods: {
+          format(times) {
+            return format(times);
+          }
+        },
+        mounted() {
+          that = this;
+          //请求的网址
+          var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit=10&offset=0&creatorId=1';
+          //发起get请求
+          var promise = fetch(url).then(function(response) {
+            //response.status表示响应的http状态码
+            if (response.status === 200) {
+              //json是返回的response提供的一个方法,会把返回的json字符串反序列化成对象,也被包装成一个Promise了
+              return response.json();
+            } else {
+              return {}
+            }
+          });
+
+          promise = promise.then(function(data) {
+            //响应的内容
+            console.log(data);
+            that.items.push(...data);
+
+          }).
+          catch(function(err) {
+            console.log(err);
+          })
+        }
+      })
+
+      app.mount('#app');
+
+
+      function format(timestamp){
+        // 创建 Date 对象
+        var date = new Date(timestamp*1000);
+
+        // 获取各种时间组件
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1; // 月份从 0 开始，所以需要加 1
+        var day = date.getDate();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+
+        // 格式化时间
+        var formattedTime = year + '-' + addLeadingZero(month) + '-' + addLeadingZero(day) + ' ' + addLeadingZero(hours) + ':' + addLeadingZero(minutes) + ':' + addLeadingZero(seconds);
+
+        // 输出结果
+        console.log(formattedTime);
+
+        return formattedTime;
+      }
+
+      // 在个位数前添加前导零
+      function addLeadingZero(number) {
+        return number < 10 ? '0' + number : number;
+      }
+    </script>
+  </body>
+
+</html>
