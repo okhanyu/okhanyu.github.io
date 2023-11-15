@@ -27,27 +27,61 @@
           <br>
         </template>
       </div>
+      <button @click="next()" v-show="btn">NEXT</button>
       <br>
       <br>
       <div>--------------------</div>
       <div>MADE BY HAND BY @韩宇</div>
     </pre>
     <script type="text/javascript">
+
+      var offset = 0;
+      var limit = 10;
       const app = Vue.createApp({
         data() {
           return {
-            items: []
+            items: [],
+            btn: true
           }
         },
         methods: {
           format(times) {
             return format(times);
+          },
+          next(){
+              offset += limit;
+              that = this;
+              //请求的网址
+              var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
+              //发起get请求
+              var promise = fetch(url).then(function(response) {
+                //response.status表示响应的http状态码
+                if (response.status === 200) {
+                  //json是返回的response提供的一个方法,会把返回的json字符串反序列化成对象,也被包装成一个Promise了
+                  return response.json();
+                } else {
+                  return {}
+                }
+              });
+
+              promise = promise.then(function(data) {
+                //响应的内容
+                console.log(data);
+                if (data == null || data.length == 0){
+                    that.btn = false;
+                };
+                that.items.push(...data);
+
+              }).
+              catch(function(err) {
+                console.log(err);
+              })
           }
         },
         mounted() {
           that = this;
           //请求的网址
-          var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit=10&offset=0&creatorId=1';
+          var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
           //发起get请求
           var promise = fetch(url).then(function(response) {
             //response.status表示响应的http状态码
@@ -90,7 +124,7 @@
         var formattedTime = year + '-' + addLeadingZero(month) + '-' + addLeadingZero(day) + ' ' + addLeadingZero(hours) + ':' + addLeadingZero(minutes) + ':' + addLeadingZero(seconds);
 
         // 输出结果
-        console.log(formattedTime);
+        // console.log(formattedTime);
 
         return formattedTime;
       }
