@@ -177,10 +177,10 @@
                             </p>
                             <div class="thoughtsbox">
                                 <template v-for="resource in item.resourceList">
-                                     <a v-if="resource.type.substr(0,5) == 'image'" :href="resource.externalLink.split('?')[0]+'?imageMogr2/rquality/50'"  rel="group" data-fancybox="group" :data-caption="" :class="item.resourceList.length == 1 ? 'single-momentsa fancybox' :'momentsa fancybox'">
+                                    <a v-if="resource.type.substr(0,5) == 'image'" :href="resource.externalLink"  rel="group" data-fancybox="group" :data-caption="" :class="item.resourceList.length == 1 ? 'single-momentsa fancybox' :'momentsa fancybox'">
                                         <img  class="momentsimg" :src="resource.externalLink.split('?')[0]+'?q=15'" style="border:1px solid black" loading="lazy">
-                                        
                                     </a>
+                                    
                                     <a v-if="resource.type.substr(0,5) == 'video'"  :href="resource.externalLink.split('?')[0]"  rel="group" data-fancybox="group" :data-caption="" :class="item.resourceList.length == 1 ? 'single-momentsa fancybox' :'momentsa fancybox'">
                                         <video preload="meta"  controls="controls" :poster="resource.poster" :src="resource.externalLink.split('?')[0]" class="momentsimg"  style="border:1px solid black" loading="lazy">
                                         </video>
