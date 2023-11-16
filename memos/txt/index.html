@@ -7,22 +7,24 @@
     <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js" type="application/javascript"></script>
   </head>
   <body>
-    <pre id="app" style="word-wrap: break-word;white-space: pre-wrap;display: block;font-family: monospace;margin: 1em 0px;">
+    <pre id="app" style="word-wrap: break-word;white-space: pre-wrap;display: block;font-family: monospace;margin: auto;text-align: center;max-width: 700px;">
       <div>MICRO BLOG.TXT</div>
       <div>==============</div>
-      <div>SUPER SIMPLE STYLE!</div>
+      <div>SIMPLE STYLE!</div>
       <br>
       <br>
       <br>
       <div v-for="item,index in items">
         <template  v-if="item.content != '' ">
           <div>
-            {{ format(item.createdTs) }} | {{ items.length - index }}
+            {{ format(item.createdTs) }} 
+            <!-- | {{ items.length - index }} -->
           </div>
-          <div>=======================</div>
+          <div>~~~~~~~~~~~~~~~~~~~</div>
           <br>
           <div v-html="item.content">
           </div>
+          <br>
           <br>
           <br>
         </template>
@@ -30,7 +32,8 @@
       <button @click="next()" v-show="btn" style="background: transparent;">MORE</button>
       <br>
       <br>
-      <div>--------------------</div>
+      <br>
+      <div>=====================</div>
       <div>MADE BY HAND BY @韩宇</div>
     </pre>
     <script type="text/javascript">
