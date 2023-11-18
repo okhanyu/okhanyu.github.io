@@ -1,22 +1,29 @@
 ﻿<!doctype html>
 <html lang="en">
   <head>
-    <title>MICROBLOG.TXT</title>
+    <title>來去冰島變成冰</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
     <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E😂%3C/text%3E%3C/svg%3E">
 
     <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js" type="application/javascript"></script>
     <style type="text/css">
-        pre {
+
+      *{
+        font: 12px Verdana;
+        color: #999999;
+      }
+
+      pre {
           margin: 1em;
-/*          text-align:center;*/
-/*          margin: auto;*/
-/*          margin-top: 1em;*/
-/*          margin-bottom: 1em;*/
-/*          max-width: 740px;*/
-        }
-        @media screen and (min-width:120px) and (max-width:450px) {
+          max-width: 650px;
+          background: #ffffff url() fixed;
+          padding: 0 20px;
+          overflow: hidden;
+          text-align: left;
+      }
+
+      @media screen and (min-width:120px) and (max-width:450px) {
           pre {
             text-align:left;
             margin: 1em 0.5em;
@@ -25,20 +32,20 @@
     </style>
   </head>
   <body>
+    <div class="center" align="center">
     <pre id="app" style="word-wrap: break-word;white-space: pre-wrap;display: block;font-family: monospace;">
-      <div>MICRO BLOG.TXT</div>
-      <div>==============</div>
-      <div>SIMPLE STYLE!</div>
+      <div>來去冰島變成冰</div>
+      <div>----------------</div>
       <br>
       <br>
       <br>
       <div v-for="item,index in items">
         <template  v-if="item.content != '' ">
           <div>
-            {{ format(item.createdTs) }} 
+            <font color="#ffb6c1" style="color:rgb(255, 182, 193);">❤&nbsp;</font><nobr>{{ format(item.createdTs) }}</nobr> 
             <!-- | {{ items.length - index }} -->
           </div>
-          <div>~~~~~~~~~~~~~~~~~~~</div>
+          <!-- <div>~~~~~~~~~~~~~~~~~~~</div> -->
           <br>
           <div v-html="item.content">
           </div>
@@ -47,13 +54,12 @@
           <br>
         </template>
       </div>
-      <button @click="next()" v-show="btn" style="background: transparent;">MORE</button>
+      <a @click="next()" v-show="btn" style="background: transparent;color: #ffb6c1;text-decoration: underline;cursor: pointer;">MORE</a>
       <br>
       <br>
       <br>
-      <div>=====================</div>
-      <div>MADE BY HAND BY @韩宇</div>
     </pre>
+  </div>
     <script type="text/javascript">
 
       var offset = 0;
