@@ -64,7 +64,7 @@
     <script type="text/javascript">
 
       var offset = 0;
-      var limit = 30;
+      var limit = 20;
       const app = Vue.createApp({
         data() {
           return {
@@ -79,7 +79,7 @@
           next(){
               offset += limit;
               that = this;
-              var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
+              var url = 'https://s.hahaha.cc/api/memosdiary/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
               var promise = fetch(url).then(function(response) {
                 if (response.status === 200) {
                   return response.json();
@@ -104,7 +104,7 @@
         },
         mounted() {
           that = this;
-          var url = 'https://s.hahaha.cc/api/memostxt/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
+          var url = 'https://s.hahaha.cc/api/memosdiary/api/v1/memo?limit='+limit+'&offset='+offset+'&creatorId=1';
           var promise = fetch(url).then(function(response) {
             if (response.status === 200) {
               return response.json();
