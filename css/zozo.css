@@ -297,7 +297,8 @@ hr {
 .post .post_footer .meta {
   max-width: 100%;
   height: 25px;
-  color: #bbbbbb;
+/*  color: #bbbbbb;*/
+  color: #c2c1c1;
 }
 
 .post .post_footer .meta .info {
