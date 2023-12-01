@@ -114,25 +114,25 @@
                             <div v-for="pic in obj.resourceList" class="pic-group-in">
                                 <template v-if="pic.type.indexOf('image') != -1">
                                     <a v-if="pic.externalLink == '' " class="fancybox" rel="group" :href="preAndSuf.localImgPrefix + pic.id"
-                                    :data-fancybox="'group'+obj.id" :data-caption="obj.content">
+                                    :data-fancybox="'group'+obj.id" data-caption="">
                                         <img :src="preAndSuf.localImgPrefix + pic.id + preAndSuf.localImgSuffix" :class="imgClassHanle(obj)"
                                         />
                                     </a>
                                     <a v-else class="fancybox" rel="group" :href="pic.externalLink" :data-fancybox="'group'+obj.id"
-                                    :data-caption="obj.content">
+                                    data-caption="">
                                         <img :src="pic.externalLink + preAndSuf.remoteImgSuffix" :class="imgClassHanle(obj)"
                                         />
                                     </a>
                                 </template>
                                 <template v-if="pic.type.indexOf('video') != -1">
                                     <a v-if="pic.externalLink == ''" class="fancybox" rel="group" :href="preAndSuf.localImgPrefix + pic.id"
-                                   :data-fancybox="'group'+obj.id" :data-caption="obj.content">
+                                   :data-fancybox="'group'+obj.id" data-caption="">
                                         <video preload="none" controls="controls" :poster="pic.poster" :src="preAndSuf.localImgPrefix + pic.id"
                                         :class="imgClassHanle(obj)">
                                         </video>
                                     </a>
                                     <a v-else class="fancybox" rel="group" :href="pic.externalLink" :data-fancybox="'group'+obj.id"
-                                    :data-caption="obj.content">
+                                    data-caption="">
                                         <video preload="none" controls="controls" :src="pic.externalLink"
                                         :class="imgClassHanle(obj)">
                                         </video>
