@@ -90,6 +90,14 @@
   
 
          <link rel="stylesheet" type="text/css" media="screen" href="/css/moments.css" />
+          <style>
+                    #bbb .spantxt{
+                        font-size: 0.8rem;color: #ebb3b5;
+                    }
+                    #bbb .spantxt:hover{
+                        color: #ee777b;
+                    }
+                </style>
     </head>
     <body>
         <div class="main animate__animated animate__fadeInDown">
@@ -178,7 +186,10 @@
     </div>
 </div>
             <div class="content" id="app">
+               
                 
+                    <button id="bbb" style="border-radius: 5px; box-shadow: rgba(242, 242, 242, 0.5) 4px 4px 6px; border: 1px solid rgb(244 244 244); height: 30px; cursor: pointer; background: 0px 0px;"><a href="../moments/"><span class="spantxt">点我变美观 👈🏻</span></a></button>
+
                     <div v-for="item in items" class="post animated fadeInDown" style="background: 0px 0px;border-bottom: 1px dashed #ebf2ed;">
    
                     <div class="list">

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="referrer" content="strict-origin">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>
+            Moments
+        </title>
+        <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.ico"
+        />
+        <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+        <link rel="apple-touch-icon" href="./assets/img/favicon.png">
+        <link href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css"
+        type="text/css" rel="stylesheet" />
+        <!-- <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/style.css"
+        media="print" onload="this.media='all'"> -->
+        <!-- <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"
+        type="text/css" rel="stylesheet" /> -->
+        <link rel="stylesheet" href="./assets/css/style.css">
+    </head>
+    <body style="overflow: auto;" id="top">
+        <div id="app" v-cloak>
+            <header>
+                <div class="topimage" :style="'position: relative; background-image: url('+ image.topBg +');'">
+                    <div class="user_info">
+                        <div class="top">
+                            <div class="left">
+                                <div class="name">
+                                    {{ text.name }}
+                                </div>
+                                <div class="des">
+                                    <span id="jinrishici-sentence" style="color: #fff;font-size:14px">
+                                        {{ text.desc }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="avatar">
+                                <a :href="link.about" style="text-decoration: none;cursor: pointer;">
+                                    <img :src="image.topAvatar">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="menu">
+                <button class="menu-button" onclick="shows()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                        <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="menu-list">
+                    <div class="menu-item"  v-for="nav in button.navBtn">
+                        <a :href="nav.url" style="border:0px">
+                            <button class="rainbow-text" style="border-radius: 5px;
+                                    box-shadow: rgba(242, 242, 242, 0.5) 4px 4px 6px;
+                                    border: 1px dotted rgb(213, 213, 213);
+                                    height: 30px;
+                                    cursor: pointer;
+                                    background: 0px 0px;">{{nav.title}}  
+                                    <span class="rainbow-text" style="font-size: 0.8rem;">
+                                     {{nav.subTitle}}
+                                    </span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="text nav">
+                <strong>
+                    <ul class="header-nav-ul">
+                        <li class="header-nav-ul-li" v-for="nav in button.navBtn">
+                            <a class="header-nav-ul-li-a" :href="nav.url">
+                                {{nav.title}}
+                            </a>
+                        </li>
+                    </ul>
+                </strong>
+            </div> -->
+            <hr style="margin-top:2px;margin-bottom: 15px;">
+            <div id="main" class="main">
+                <div v-for="obj in items">
+                    <div class="user-info">
+                        <div class="avatar-block">
+                            <a :href="link.about" style="text-decoration: none;cursor: pointer;">
+                                <img :src="getHead(obj.creatorId)" class="avatar">
+                            </a>
+                        </div>
+                        <div class="intro">
+                            <div class="name">
+                                {{ getName(obj.creatorId) }}
+                            </div>
+                            <div>
+                                <span class="tag text-muted">
+                                    {{ formatDate(obj.createdTs) }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-item" v-if="obj.content != undefined || obj.content != ''">
+                        <div>
+                            <div v-html="obj.content" class="text" style="padding-bottom:5px">
+                            </div>
+                        </div>
+                        <div class="pic-group" style="display: flex;flex-wrap: wrap;align-content: center;">
+                            <div v-for="pic in obj.resourceList" class="pic-group-in">
+                                <template v-if="pic.type.indexOf('image') != -1">
+                                    <a v-if="pic.externalLink == '' " class="fancybox" rel="group" :href="preAndSuf.localImgPrefix + pic.id"
+                                    :data-fancybox="'group'+obj.id" :data-caption="obj.content">
+                                        <img :src="preAndSuf.localImgPrefix + pic.id + preAndSuf.localImgSuffix" :class="imgClassHanle(obj)"
+                                        />
+                                    </a>
+                                    <a v-else class="fancybox" rel="group" :href="pic.externalLink" :data-fancybox="'group'+obj.id"
+                                    :data-caption="obj.content">
+                                        <img :src="pic.externalLink + preAndSuf.remoteImgSuffix" :class="imgClassHanle(obj)"
+                                        />
+                                    </a>
+                                </template>
+                                <template v-if="pic.type.indexOf('video') != -1">
+                                    <a v-if="pic.externalLink == ''" class="fancybox" rel="group" :href="preAndSuf.localImgPrefix + pic.id"
+                                   :data-fancybox="'group'+obj.id" :data-caption="obj.content">
+                                        <video preload="none" controls="controls" :poster="pic.poster" :src="preAndSuf.localImgPrefix + pic.id"
+                                        :class="imgClassHanle(obj)">
+                                        </video>
+                                    </a>
+                                    <a v-else class="fancybox" rel="group" :href="pic.externalLink" :data-fancybox="'group'+obj.id"
+                                    :data-caption="obj.content">
+                                        <video preload="none" controls="controls" :src="pic.externalLink"
+                                        :class="imgClassHanle(obj)">
+                                        </video>
+                                    </a>
+                                </template>
+                            </div>
+                        </div>
+                        <!-- <div v-for="music in obj.musics">
+                        <div v-show="music.secondary_type == 1" style="margin-left:-6px">
+                        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100%
+                        style="max-width: 300px;" height=86 :src="'//music.163.com/outchain/player?type=2&id=' + music.detail+'&auto=0&height=66'">
+                        </iframe>
+                        </div>
+                        </div> -->
+                        <div class="tag" style="display:flex;justify-content: space-between;flex-wrap: wrap;margin-top:10px">
+                            <!-- <span v-show="obj.location !=' ' && obj.location !=u ndefined " class="location">
+                            {{obj.location}}
+                            </span> -->
+                            <span>
+                                <span v-for="tag in tags(obj).tags">
+                                    {{ tag }} &nbsp;
+                                </span>
+                                <!-- <span><a :href="'comment.html?comment_id='+obj.id" class="header-nav-ul-li-a2">评论</a></span> -->
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <div class="content-item" v-else>
+                    <p>
+                    <div class="text" style="padding-bottom:5px;color: #b0b0b0;">
+                    ** 该条已隐藏 **
+                    </div>
+                    </p>
+                    </div> -->
+                    <hr style="margin-top:10px;margin-bottom: 15px;">
+                </div>
+            </div>
+            <a id="back-top-button" style="display: inline-block;" href="#top">
+               <!--  <i class="fas fa-chevron-up">
+                </i> -->
+                👆🏻
+            </a>
+            <div class="foot-menu" v-show="button.loadbtn.loadmore">
+                <button id="buton" @click="next" class="loadbtn">
+                    {{ button.loadbtn.text }}
+                </button>
+            </div>
+        </div>
+        <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
+        type="application/javascript">
+        </script>
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.js"
+        type="application/javascript">
+        </script>
+        <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"
+        type="application/javascript">
+        </script>
+        <script type="text/javascript" src="https://js.cybozu.com/markedjs/v0.3.5/marked.min.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js">
+        </script>
+        <script type="text/javascript" src="./assets/js/index.js">
+        </script>
+    </body>
+
+</html>
