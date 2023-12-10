@@ -91,6 +91,10 @@
 
         
         <link rel="stylesheet" type="text/css" media="screen" href="/css/index.css" />
+        <style type="text/css">
+                #maomao {position: fixed; bottom: 40px; right: -5px; width: 57px; height: 70px; background-image: url(./img/mao.svg); background-position: center; background-size: cover; background-repeat: no-repeat; transition: background .3s;}
+                #maomao:hover {background-position: 60px 50%;}
+        </style>
     </head>
     <body>
         <div class="main animate__animated animate__fadeInDown">
@@ -598,6 +602,7 @@
 </div>
             </div>
         </div>
+         <div id="maomao" onMouseOut="duoMaomao()"></div>
         <a id="back_to_top" href="#" class="back_to_top">
     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
         <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
@@ -755,9 +760,31 @@
 
 
 
+
         <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"></script>
         
         <script src="/js/common.js"></script>
         <script src="/js/index.js"></script>
+
+        <script type="text/javascript">
+              var duoMaomao = function() {
+                var maomao = $('#maomao');
+                maomao.css('bottom', randomNum(5, 80) + 'vh');
+              }
+
+            var randomNum = function(minNum, maxNum) {
+            switch(arguments.length){
+              case 1:
+                return parseInt(Math.random() * minNum + 1, 10);
+                break;
+              case 2:
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+              default:
+                return 0;
+                break;
+            }
+          }
+        </script>
     </body>
 </html>
