@@ -7,7 +7,9 @@
 }
 
 .post .post_content p{
-        margin-bottom: 0px !important;
+/*        margin-bottom: 0px !important;*/
+    margin: 2px;
+    margin-bottom: 10px;
 }
 
 .post .post_footer {
