@@ -1,0 +1,770 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" >
+     <head>
+        
+    <meta charset="utf-8" />
+    <meta name="referrer" content="strict-origin" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
+    <meta name="author" content="Damon" />
+	
+	
+	
+	<title>浅尝MySQL索引 ｜ 好事发生</title>
+	
+    
+    
+    <meta name="description" content="写在前面的废话 Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。 这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿到了" />
+    
+
+    
+    
+    <meta name="keywords" content="小韩, damon" />
+    
+
+	
+    
+
+     <link rel="shortcut icon" type="image/x-icon" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+     <link rel="icon" type="image/x-icon" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+     <link rel="apple-touch-icon" href="https://files.hahaha.cc/resource/img/icon/favicon.png">
+
+    
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/animate.css/4.1.1/animate.min.css" />
+
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/zozo.css" />
+
+    
+	
+    <link rel="stylesheet" type="application/javascript" media="screen" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js" />
+    
+    
+    
+    <style type="text/css">
+         @keyframes blink {
+                 0% {
+                     color: red;
+                     opacity: 1;
+                }
+                 50% {
+                     color: blue;
+                     opacity: 0.2;
+                }
+                 100% {
+                     color: red;
+                     opacity: 1;
+                }
+            }
+        .rainbow-text {
+            background: linear-gradient(to right, #ff0000, #0000ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             
+        }
+        .rainbow:hover:not(.hidden){
+            fill: red;
+            background: linear-gradient(to right, #ff0000, #0000ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+             animation: blink 2.5s infinite; 
+        }
+        .rainbow-static:hover:not(.hidden){
+            fill: red;
+            background: linear-gradient(to right, #ff0000, #0000ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+         
+    </style>
+
+  
+
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
+                 <style type="text/css">
+     
+            .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between;
+                 flex-direction: row;
+                 align-items: stretch;
+            }
+
+            .flex-group a,.flex-group p a{
+                 flex-basis: 100%;
+                 margin:0px 5px 5px 5px;
+            }
+
+            .flex-group2 a, .flex-group2 p a {
+                 flex-basis: calc(100%/2 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+           
+            .flex-group3 a, .flex-group3 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group4 a, .flex-group4 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group5 a, .flex-group5 p a  {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group6 a, .flex-group6 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group7 a, .flex-group7 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group8 a, .flex-group8 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group9 a, .flex-group9 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+
+
+          
+             
+
+            .post_content a img{
+                 max-height: 900px;
+            }
+
+    </style>
+    </head>
+    <body>
+        <div class="main animate__animated animate__fadeInDown">
+            <div class="nav_container animated fadeInDown">
+    <div class="site_nav" id="site_nav">
+        <ul>
+            
+            
+            <li>
+                  <a href="https://hahaha.cc//" style="font-weight: bold !important;">导航</a> 
+            </li>
+            
+            <li>
+                  <a href="https://hahaha.cc/home/" style="font-weight: bold !important;">首页</a> 
+            </li>
+            
+            <li>
+                  <a href="https://hahaha.cc/memos/" style="font-weight: bold !important;">片刻</a> 
+            </li>
+            
+            <li>
+                  <a href="https://hahaha.cc/music/" target="_blank" style="font-weight: bold !important;">音乐</a> 
+            </li>
+            
+            <li>
+                  <a href="https://hahaha.cc/about/" style="font-weight: bold !important;">关于</a> 
+            </li>
+            
+        </ul>
+    </div>
+    <div class="menu_icon">
+        
+        
+            <a id="menu_icon"> 
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
+        </a>
+    </div>
+</div> 
+            <div class="header animated fadeInDown" style="padding: 50px 0 100px 0;">
+    <div class="site_title_container">
+        <div class="site_title">
+            <h1>
+                
+                    <a href="/home/">
+                     <span class="rainbow">੭ ᐕ)੭</span>
+                </a>
+            </h1>
+        </div>
+        <div class="description">
+            <p class="sub_title" style="font-size: 12px;">     
+                  <span id="hitokoto" class="rainbow">
+                  </span>
+                  <span   class="rainbow-text"> 
+                    记录日常、好事发生
+                 </span>
+             </p>
+            <div class="my_socials">
+               
+                
+
+                <a href="/memos/" title="片刻"  style="margin-left:10px"  class="rainbow">
+                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"></path></svg>
+                </a>
+
+                <a href="/music/" title="音乐" target="_blank" style="margin-left:10px"  class="rainbow">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"/></svg>
+                </a>
+
+                
+
+
+                <a href="https://weibo.com/sohanyu" title="微博" target="_blank" style="margin-left:10px" class="rainbow">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewBox="0 0 512 512"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg>
+                </a>
+
+                 
+
+            <a href="https://github.com/okhanyu" title="Github" target="_blank"  style="margin-left:10px" class="rainbow">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 496 512">
+                      <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
+                    </svg>
+                </a>
+                <a href="/about/" title="关于"  style="margin-left:10px"  class="rainbow">
+                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                </a>
+                <a href="/index.xml" type="application/xml" title="Rss" target="_blank" style="margin-left:10px" class="rainbow">
+                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 448 512"><path d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM0 416a64 64 0 1 1 128 0A64 64 0 1 1 0 416zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="content">
+                <div class="post_page">
+                    <div class="post animate__animated animate__fadeInDown">
+                       
+                        <div class="post_title post_detail_title">
+                            <h2><a href='/blog/tech/2/'>浅尝MySQL索引</a></h2>
+                           
+                            <span class="date">2022.02.09</span>
+                           
+                        </div>
+
+                        
+<aside style="line-height: 1.2rem;font-size: 0.8rem;border-bottom: 1px dashed gray;">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面的废话">写在前面的废话</a></li>
+    <li><a href="#什么是索引">什么是索引</a></li>
+    <li><a href="#索引的用处">索引的用处</a></li>
+    <li><a href="#索引的缺点">索引的缺点</a></li>
+    <li><a href="#索引到底是个什么">索引到底是个什么</a></li>
+    <li><a href="#索引在mysql架构体系位置">索引在MySQL架构体系位置</a></li>
+    <li><a href="#索引类型的比较">索引类型的比较</a>
+      <ul>
+        <li><a href="#btree和b-treeb-tree读b树不读b减树">B+tree和B-tree(B-tree读B树不读B减树)</a></li>
+        <li><a href="#btree-索引与-hash-表">B+tree 索引与 Hash 表</a></li>
+        <li><a href="#btree索引结构图">B+tree索引结构图</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据页是什么">数据页是什么</a>
+      <ul>
+        <li><a href="#为什么页默认16k">为什么页默认16K</a></li>
+      </ul>
+    </li>
+    <li><a href="#索引的分类">索引的分类</a>
+      <ul>
+        <li><a href="#物理角度">物理角度</a></li>
+        <li><a href="#字段约束角度应用角度">字段约束角度&amp;应用角度</a></li>
+      </ul>
+    </li>
+    <li><a href="#回表">回表</a></li>
+    <li><a href="#索引覆盖">索引覆盖</a></li>
+    <li><a href="#最左前缀">最左前缀</a></li>
+    <li><a href="#索引下推">索引下推</a></li>
+    <li><a href="#索引重建">索引重建</a></li>
+    <li><a href="#索引创建原则">索引创建原则</a></li>
+    <li><a href="#哪些情况下索引会失效">哪些情况下索引会失效</a></li>
+  </ul>
+</nav>
+</aside>
+
+
+
+                        
+                        <div>
+                              
+
+                        </div>
+                       
+                        <div class="post_content markdown"><h2 id="写在前面的废话">写在前面的废话</h2>
+<p>Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。
+这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿到了些一线大厂和一些独角兽的offer。这段时间面试的经验和学习的过程对我自己帮助很大，面经还在整理中，后续会发出来给大家做一个参考吧。<br>
+因为每家公司的面试官不同，出题也是千遍万化，所以有些基础的核心知识，必须要体系化的学习，今天写这篇MySQL索引相关的知识也都是面试必问，后面我也会把一些锁、事务等等相关知识点写出来。<br>
+从今天开始，也会持续更新啦。虽然这篇文章很八股很基础，但总要一点点来，不积跬步无以至千里。如果觉得西瓜不错，可以点击关注哦。</p>
+<p>咱们一起成长吧！</p>
+<h2 id="什么是索引">什么是索引</h2>
+<p>索引是一种<strong>有序</strong>的数据结构，它的作用很多人形象的比喻为书的目录。</p>
+<blockquote>
+<p>注：数据结构一般是指逻辑上数据的组织形式，就好像运动会时老师要班级里的同学按照某一种队形站位一样。</p>
+</blockquote>
+<h2 id="索引的用处">索引的用处</h2>
+<p>正因为索引是一种一种有序的数据组织形式，所以可以提高查询效率，也让排序行为变得简单。</p>
+<h2 id="索引的缺点">索引的缺点</h2>
+<ul>
+<li>虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行insert、update和delete。因为更新表时，不仅要保存数据，还要保存一下索引文件。</li>
+<li>建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会增长很快。
+索引只是提高效率的一个因素，如果有大数据量的表，就需要花时间研究建立最优秀的索引，或优化查询语句。</li>
+</ul>
+<h2 id="索引到底是个什么">索引到底是个什么</h2>
+<p>其实索引就只是一个硬盘上的文件而已，例如，在InnoDB引擎下，索引其实就是如下MySQL相关目录下的一个后缀名为.ibd的文件。</p>
+<!--![索引文件位置](img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png)-->
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<blockquote>
+<p>注：<br>
+如果使用MyISAM存储引擎，数据库文件类型就包括.frm (表结构描述)、.MYD (表数据)、.MYI (索引)<br>
+如果使用InnoDB存储引擎，数据库文件类型就包括.frm (表结构描述)、ibdata1 (共享表空间)、.ibd (索引)</p>
+</blockquote>
+<h2 id="索引在mysql架构体系位置">索引在MySQL架构体系位置</h2>
+<p>MySQL宏观层面可以大致分层如图：</p>
+<!--![架构体系](img/MySQL.png)-->
+<p>
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/MySQL.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/MySQL.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+<br>
+如上图可知，MySQL的索引其实是属于引擎层的数据结构。<br>
+MySQL支持的索引类型是和引擎息息相关的：</p>
+<!--![MySQL引擎和索引](img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png)-->
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/MySQL%E5%BC%95%E6%93%8E%E5%92%8C%E7%B4%A2%E5%BC%95.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<h2 id="索引类型的比较">索引类型的比较</h2>
+<p>现在MySQL默认的存储引擎使用的是InnoDB，也是大多数公司的选择，而InnoDB的索引数据结构就是B+tree.每一个索引在InnoDB里面对应一棵B+树。</p>
+<h3 id="btree和b-treeb-tree读b树不读b减树">B+tree和B-tree(B-tree读B树不读B减树)</h3>
+<p>B+tree是B-Tree的一个变种，B+tree只在叶子节点存储数据，而B-tree非叶子节点也存储数据，以下是实验链接：<br>
+<a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">B-tree</a>   <br>
+<a href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">B+tree</a><br>
+因此，B+tree 单个节点的数量更小，在相同的磁盘 IO 下能查询更多的节点。<br>
+另外 B+tree 叶子节点采用双向链表结构，适合MySQL中常见的基于范围的顺序检索场景，而 B-tree 无法做到这一点。</p>
+<h3 id="btree-索引与-hash-表">B+tree 索引与 Hash 表</h3>
+<p>基于哈希表实现，只有精确匹配索引所有列的查询才有效，对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码（hash code），并且Hash索引将所有的哈希码存储在索引中，同时在索引表中保存指向每个数据行的指针。<br>
+但范围查询是MySQL数据库中常见的场景，而Hash表不适合做范围查询，Hash表更适合做等值查询。</p>
+<h3 id="btree索引结构图">B+tree索引结构图</h3>
+<!--![主键索引B+tree索引结构图](img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png)-->
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E4%B8%BB%E9%94%AE%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<!--![二级索引B+tree索引结构图](img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png)-->
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<h2 id="数据页是什么">数据页是什么</h2>
+<p>在 InnoDB 存储引擎中，所有的数据都被逻辑地存放在表空间中，表空间（tablespace）是存储引擎中最高的存储逻辑单位，在表空间的下面又包括段（segment）、区（extent）、页（page），这部分非本文的重点内容，后续单开一篇来讲。<br>
+<strong>页（Pages）是mysql中磁盘和内存交换的基本单位，也是mysql管理存储空间的基本单位。</strong></p>
+<!--![数据页](img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png)-->
+<p>
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%BB%93%E6%9E%84.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+Buffer Pool 中存的就是一页一页的数据。再比如，当我们要查询的数据不在 Buffer Pool 中时，InnoDB 会将记录所在的页整个加载到 Buffer Pool 中去；同样的，当我们修改数据时，都需要将数据所在的数据页从磁盘读入到Buffer Pool中，然后在Buffer Pool中对其进行操作，操作完成后将 Buffer Pool 中的脏页刷入磁盘时，也是按照页为单位刷入磁盘的。同一个数据库实例的所有表空间都有相同的页大小，默认情况下，表空间中的页大小都为 16KB，当然也可以通过改变源码中的页大小参数重新编译进行修改，不同的页大小最终也会导致区大小的不同。</p>
+<p>当插入一行数据时，会将该数据页加载到Buffer Pool中，然后从空闲区域中拿出一部分空间分配给数据行区域，当空闲区域耗尽时，表示该数据页已经满了。</p>
+<p>这里多提一句，表空间其实就是一个磁盘文件，它们通常以表名.idb的格式存储，数据页都是放在表空间里的，但是因为数据页太多，所以，MySQL又引入了数据区(extent)的概念。</p>
+<blockquote>
+<p>引用：表空间的基本结构，一个表空间对应着一些磁盘文件，每个表空间中有多组数据区，每组数据区中有256个数据区，一个数据区的大小为1mb，每个数据区中存放着64个数据页，每个表空间的第一组数据区的前三个数据页分别为FSP_HDR数据页(存放表空间和该组数据区的基本属性)、IBUF_BITMAP数据页(存放这组数据页中所有的insert_buffer信息)、INODE数据页，其他每组数据区的第一个数据区的前两个数据页都是存放一些特殊信息。</p>
+</blockquote>
+<h3 id="为什么页默认16k">为什么页默认16K</h3>
+<p>假设我们一行数据大小为1K，那么一页就能存储16条数据，也就是一个叶子节点能存16条数据，假设索引列是bigint类型，那么长度为8B(byte)，指针大小在InnoDB的源码中为6B，一共就是14B，那么一页里就可以存 16KB/14B = 1170.<br>
+那么一颗高度为2的B+树能存储的数据为1170<em>16 = 18720条，一颗高度为3的B+树能存储的数据为1170</em>1170*16 = 21902400.<br>
+引擎一次最少从磁盘读取16KB内容到内存中，当然一次最少也要把内存中16KB内容刷新到磁盘中，单页读取代价也是蛮高的，一般都会进行预读。<br>
+每次新建节点直接申请一个页的空间,这样就保证一个节点物理上也存储在一个系统页或邻近页里，就实现了一个节点的载入只需要一次I/O.<br>
+MySQL使用页的概念，能很好的利用的文件系统的 <strong>局部性原理</strong>。<br>
+这里需要先普及下磁盘相关知识：
+<font size=2px></p>
+<blockquote>
+<p>引用：磁盘存取，磁盘I/O涉及机械操作。磁盘是由大小相同且同轴的圆形盘片组成，磁盘可以转动(各个磁盘须同时转动)。磁盘的一侧有磁头支架，磁头支架固定了一组磁头，每个磁头负责存取一个磁盘的内容。磁头不动，磁盘转动，但磁臂可以前后动，用于读取不同磁道上的数据。磁道就是以盘片为中心划分出来的一系列同心环。磁道又划分为一个个小段，叫扇区，是磁盘的最小存储单元。<br>
+磁盘读取时，系统将数据逻辑地址传给磁盘，磁盘的控制电路会解析出物理地址（哪个磁道，哪个扇区），于是磁头需要前后移动到相应的磁道——寻道，消耗的时间叫——寻道时间，磁盘旋转将对应的扇区转到磁头下（磁头找到对应磁道的对应扇区），消耗的时间叫——旋转时间，这一系列操作是非常耗时。<br>
+为了尽量减少I/O操作，计算机系统一般采取预读的方式，预读的长度一般为页（区别于MySQL的页）的整倍数。页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（在许多操作系统中，页的大小通常为4k），主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。 <br>
+计算机系统是分页读取和存储的，一般一页为4KB（8个扇区，每个扇区125B，8*125B=4KB），每次读取和存取的最小单元为一页，而磁盘预读时通常会读取页的整倍数。根据文章上述的【局部性原理】①当一个数据被用到时，其附近的数据也通常会马上被使用。②程序运行期间所需要的数据通常比较集中。由于磁盘顺序读取的效率很高（不需要寻道时间，只需很少的旋转时间），所以即使只需要读取一个字节，磁盘也会读取一页的数据。<br>
+</font></p>
+</blockquote>
+<p>关于<strong>页</strong>的知识我们先讲这些，后续会单开一篇专门讲。</p>
+<h2 id="索引的分类">索引的分类</h2>
+<!--![MySQL索引分类](img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png)-->
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/MySQL%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<h3 id="物理角度">物理角度</h3>
+<p><strong>聚簇索引:</strong>
+聚簇索引（clustered index）不是单独的一种索引类型，而是一种数据存储方式，这种存储方式是依靠B+树来实现的。根据表的主键构造一棵B+树且B+树叶子节点存放的都是表的行记录数据时，称该主键索引为聚簇索引。简单说就是，聚簇索引也可理解为将数据存储与索引放到了一块，找到索引也就找到了数据。<br>
+优点：</p>
+<ul>
+<li>数据访问更快，因为聚簇索引将索引和数据保存在同一个B+树中，因此从聚簇索引中获取数据比非聚簇索引更快</li>
+<li>聚簇索引对于主键的排序查找和范围查找速度非常快</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>插入速度严重依赖于插入顺序，按照主键的顺序插入是最快的方式，否则将会出现页分裂，严重影响性能。因此，对于InnoDB表，我们一般都会定义一个自增的ID列为主键（主键列不要选没有意义的自增列，选经常查询的条件列才好，不然无法体现其主键索引性能）</li>
+<li>更新主键的代价很高，因为将会导致被更新的行移动。因此，对于InnoDB表，我们一般定义主键为不可更新。</li>
+</ul>
+<p><strong>非聚簇索引:</strong>
+非聚簇索引数据和索引是分开的，B+树叶子节点存放的不是数据表的行记录，而是主键ID。<br>
+缺点：二级索引访问需要两次索引查找，第一次找到主键值，第二次根据主键值找到行数据。</p>
+<p>注：虽然InnoDB和MyISAM存储引擎都默认使用B+树结构存储索引，但是只有InnoDB的主键索引才是聚簇索引，InnoDB中的辅助索引以及MyISAM使用的都是非聚簇索引。每张表最多只能拥有一个聚簇索引。</p>
+<h3 id="字段约束角度应用角度">字段约束角度&amp;应用角度</h3>
+<p><strong>主键索引:</strong>
+一张表只能有一个主键索引，是一种特殊的唯一索引，一个表只能有一个主键、不允许有空值、不允许重复、不允许为 NULL，一般是在建表的时候同时创建主键索引。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">建表方式：例如</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">title</span><span class="o">`</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p><strong>普通索引:</strong>
+是最基本的索引，没有什么特殊的限制。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">创建方式：</span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="k">column</span><span class="p">(</span><span class="k">length</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">修改方式：</span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="k">column</span><span class="p">(</span><span class="k">length</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">建表方式：</span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="w"> </span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">title</span><span class="o">`</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">(</span><span class="k">length</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p><strong>唯一索引:</strong>
+与前面的普通索引类似，不同的就是，索引列的值必须唯一，但允许有空值。如果是联合（多列）索引，则列值的组合必须唯一。它有以下几种创建方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">创建方式：</span><span class="k">CREATE</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">indexName</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table</span><span class="p">(</span><span class="k">column</span><span class="p">(</span><span class="k">length</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">修改方式：</span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="n">indexName</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">(</span><span class="k">column</span><span class="p">(</span><span class="k">length</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">建表方式：</span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="w"> </span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">`</span><span class="n">title</span><span class="o">`</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="n">indexName</span><span class="w"> </span><span class="p">(</span><span class="n">title</span><span class="p">(</span><span class="k">length</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p><strong>联合索引:</strong>
+两个或两个以上字段联合组成一个索引。使用时需要注意满足最左匹配原则！</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_name_city_age</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">city</span><span class="p">,</span><span class="n">age</span><span class="p">);</span><span class="w"> 
+</span></span></span></code></pre></div><p><strong>tips：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">删除索引的方法</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table_name</span><span class="w">
+</span></span></span></code></pre></div><h2 id="回表">回表</h2>
+<p>假设你的某个索引由 a,b 两个字段组成为名为 idx_a_b的索引，然后你的查询语句是</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="k">c</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></span></span></code></pre></div><p>此时因为你的 idx_a_b 的索引树叶子结点并不包含字段c的数据，所以MySQL会根据idx_a_b这棵树的叶子结点中存储的主键ID，去主键索引树上去查询数据，这个过程就叫做回表。<br>
+<strong>简单一句话就是，二级索引叶子结点不完全包含要查询的数据，所以需要根据二级索引叶子结点中的主键ID去主键索引树查数据。</strong></p>
+<h2 id="索引覆盖">索引覆盖</h2>
+<p>如果你使用某个二级索引查询数据，这个索引的叶子结点包含了你要查询的全部字段，不需要进行<strong>回表</strong>（回主键树查），那么就叫做<strong>索引覆盖</strong>。</p>
+<h2 id="最左前缀">最左前缀</h2>
+<p>在MySQL建立联合索引时会遵守最左前缀匹配原则，即最左优先，在检索数据时从联合索引的最左边开始匹配。 联合索引中除最左侧字段外，其他都是相对顺序。假设由 a,b (均int类型)组成的联合索引树如图，在上面的数字是a，下面上数字为b，当a的值相等时，b的值才有序（相对有序）。</p>
+<!--![联合索引树](img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png)-->
+<p>
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95B%2Btree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%E5%9B%BE.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<strong>在文章的最下面会详细解释最左前缀原则的实际案例。</strong></p>
+<h2 id="索引下推">索引下推</h2>
+<p>假设有这样一张表：</p>
+<!--![用户表](img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png)-->
+<p>
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/tech/2/img/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+有如下查询：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;韩%&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>根据前面说的“最左前缀原则”，该语句在搜索索引树的时候，只能匹配到名字第一个字是“韩”的记录，接下来是怎么处理的呢？当然就是从这条记录开始，逐个回表，到主键索引上找出相应的记录，再比对age字段的值是否符合条件。<br>
+但是！MySQL 5.6引入了索引下推优化，可以在二级索引（假设由name和age组成的联合索引idx_name_age）遍历过程中，对索引中包含的字段先做判断（查出第一个“韩”，然后直接对比age字段），先过滤掉不符合条件的记录，减少回表次数。</p>
+<h2 id="索引重建">索引重建</h2>
+<p>索引可能因为删除，或者页分裂等原因，导致数据页有空洞，重建索引的过程会创建一个新的索引，把数据按顺序插入，这样页面的利用率最高，也就是索引更紧凑、更省空间。
+可使用以下方式重建索引：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="o">`</span><span class="n">index_name</span><span class="o">`</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">`</span><span class="k">table_name</span><span class="o">`</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="k">index</span><span class="p">(</span><span class="o">`</span><span class="n">index_name</span><span class="o">`</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h2 id="索引创建原则">索引创建原则</h2>
+<ul>
+<li>表的主键、外键必须有索引；</li>
+<li>经常与其他表进行连接的表，在连接字段上应该建立索引；</li>
+<li>经常出现在where子句中的字段，特别是大表的字段，应该建立索引</li>
+<li>索引应该建在选择性高的字段上；</li>
+<li>在经常需要根据范围进行搜索的列上创建索引，因为索引已经排序，其指定的范围是连续的；</li>
+<li>在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间；</li>
+<li>为经常出现在关键字order by、group by、distinct后面的字段，建立索引；</li>
+<li>索引应该建在小字段上，对于大的文本字段甚至超长字段，不要建索引；</li>
+<li>频繁进行数据操作的表，不要建立太多的索引，因为索引需要维护；</li>
+<li>删除无用的索引，避免对执行计划造成负面影响；</li>
+<li>对于那些在查询中很少使用或者参考的列不应该创建索引。既然这些列很少使用到，因此有索引或者无索引，并不能提高查询速度。相反，由于增加了索引，反而降低了系统的维护速度和增大了空间需求；</li>
+<li>不要在有大量相同取值的字段上，建立索引。这是因为，由于这些列的取值很少，例如性别列，在查询的结果中，结果集的数据行占了表中数据行的很大比例，即需要在表中搜索的数据行的比例很大。增加索引，并不能明显加快检索速度；</li>
+<li>当修改性能需求远远大于检索性能时，不应该创建索引。这是因为，修改性能和检索性能是互相矛盾的。当增加索引时，会提高检索性能，但是会降低修改性能。当减少索引时，会提高修改性能，降低检索性能。因此，当修改性能需求远远大于检索性能时，不应该创建索引。</li>
+<li>对字符串列进行索引，应该指定一个前缀长度（前缀索引）。例如，如果有一个char(255)的列，如果在前10个或20个字符内，多数值是唯一的（区分度大），那么就不要对整个列进行索引。前缀索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作。</li>
+</ul>
+<h2 id="哪些情况下索引会失效">哪些情况下索引会失效</h2>
+<ul>
+<li>不要在where条件语句 &lsquo;=&rsquo; 的左边进行函数、运算符或表达式的计算，如</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tb_user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">age</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="err">以及</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">YEAR</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2022</span><span class="w"> </span><span class="err">，索引不会生效（引擎会放弃使用索引，进行全表扫描）；</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>不推荐使用like操作，如果非使用不可，like &lsquo;%aaa%&rsquo; 和 like &lsquo;%aaa&rsquo; 都不会使用索引而 like &lsquo;aaa%&rsquo; 可以使用索引；</li>
+<li>避免对字段进行null的判断，因为索引不会生效（可以用一个值代替null，如-999）</li>
+<li>避免使用or，可以用union替代（要想使用or，又让索引生效，or条件中的每个列都必须加上索引）</li>
+<li>使用exist代替in（表中数据越多，exist的效率就比in要越大）</li>
+<li>数据类型隐形转换，索引不会生效：如</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">phone</span><span class="o">=</span><span class="mi">13011112222</span><span class="p">;</span><span class="err">（</span><span class="n">phone字段在数据库中为varchar类型</span><span class="err">，应改成</span><span class="w"> </span><span class="n">phone</span><span class="o">=</span><span class="s1">&#39;13011112222&#39;</span><span class="err">）</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>联合索引要符合最左前缀原则，例如，由三个字段 a,b,c 组成联合索引 idx_a_b_c</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">索引生效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">索引生效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">索引生效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">索引失效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">索引失效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">部分生效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">部分生效：</span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span></span></span></code></pre></div><p><strong>索引两个字听起来简单，但关于索引、关于MySQL还有很多很多重要的知识点，一篇文章我们讲不完，西瓜会一点一滴写出MySQL系列文章，和大家一起进步。</strong></p>
+<blockquote>
+<p>辛苦移步微信公众号点赞、在看、关注、转发：
+<a href="https://mp.weixin.qq.com/s/5UbmpnxmIV9ZDnAF9KaYdg">MySQL系列 | 浅尝MySQL索引</a></p>
+</blockquote>
+</div>
+                        <div class="post_footer">
+                            
+                            <div class="meta">
+                                <div class="info">
+                                    <span class="field tags">
+                                              
+                                        <span>#</span>
+                                        <a href="https://hahaha.cc/tags/mysql/">MySQL</a>
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                     
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <a id="back_to_top" href="#" class="back_to_top">
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+        <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
+        />
+    </svg>
+</a>
+
+<footer class="footer">
+    <div class="powered_by">
+        <div  style="margin-bottom:3px">
+            <a>
+                
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+
+               
+                
+                
+                
+                
+               
+
+               29 篇 46934 字
+
+            </a>
+        </div>
+        <div>
+         <a></a>  
+           
+        </div>
+    </div>
+    
+   
+     <div class="powered_by">
+          <a  style="margin-right: 0;padding: 0;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502051850"  target="_blank">
+            <img width="8px" src="/img/ba.png">
+            <span>
+              京公网安备11010502051850号</span> · 
+          </a>
+          <a  style="margin-left: 0;padding: 0;" href="https://beian.miit.gov.cn/"  target="_blank"><span id="icp">京ICP备18031874号-9号
+            </span>
+          </a>
+    </div>
+         
+
+</footer>
+ 
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js"></script>
+<script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js"></script>
+<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
+
+<script src="/js/zozo.js"></script>
+<script src="/js/common.js"></script>
+
+
+
+
+<script type="text/javascript" async
+    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
+                processEscapes: true,
+                processEnvironments: true,
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+                TeX: {
+                    equationNumbers: { autoNumber: "AMS" },
+                    extensions: ["AMSmath.js", "AMSsymbols.js"]
+                }
+            }
+        });
+
+        MathJax.Hub.Queue(function () {
+            
+            
+            
+            var all = MathJax.Hub.getAllJax(), i;
+            for (i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+
+<style>
+    code.has-jax {
+        font: inherit;
+        font-size: 100%;
+        background: inherit;
+        border: inherit;
+        color: #515151;
+    }
+</style>
+
+
+
+
+
+        
+         <script src="/js/single.js"></script>
+
+    </body>
+</html>     

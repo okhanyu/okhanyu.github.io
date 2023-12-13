@@ -24,7 +24,7 @@ const app = createApp({
                 navBtn: [{
                     title: "回到首页",
                     subTitle: "",
-                    url: "/"
+                    url: "/home/"
                 },{
                     title: "回前一页",
                     subTitle: "",
