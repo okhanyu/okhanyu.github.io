@@ -46,11 +46,13 @@ html::-webkit-scrollbar-thumb {
 }
 
 body {
-        font-size: 0.9em;
+/*        font-size: 0.9em;*/
     font-weight: bold;
   color: #333333;
 /*  font-family:"LXGW WenKai Screen", sans-serif, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";*/
-/*  font-size: 16px;*/
+  font-size: 15px;
+
+
   width: 100%;
 /*  background-color: #f7f7f7;*/
   margin: 0;
