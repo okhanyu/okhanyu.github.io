@@ -13,7 +13,7 @@
       <link>https://hahaha.cc/blog/tech/1/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
       <guid>https://hahaha.cc/blog/tech/1/</guid>
-      <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境 一般</description>
+      <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境</description>
     </item>
   </channel>
 </rss>
