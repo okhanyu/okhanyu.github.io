@@ -1,94 +1,341 @@
-
 <!DOCTYPE html>
-<html lang="zh-cn" >
-     <head>
-        
-    <meta charset="utf-8" />
+<html>
+  <head>    <meta charset="utf-8" />
     <meta name="referrer" content="strict-origin" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
-    <meta name="author" content="Damon" />
-	
-	
-	
-	<title>分布式锁之电商防超卖的N&#43;1个坑 ｜ 好事发生</title>
-	
-    
-    
-    <meta name="description" content="大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境" />
-    
 
-    
-    
-    <meta name="keywords" content="小韩, damon" />
-    
 
-	
-    
 
+<title>分布式锁之电商防超卖的N&#43;1个坑 - 好事发生</title>
+
+
+
+<link rel="stylesheet" href="/scss/style.min.522a775fe394921e0238ab47a1751d6b9edba405fa52c1b5485546fd8c43c1ce.css">
+
+
+<link rel="stylesheet" href="/css/css.css">
      <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
      <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
      <link rel="apple-touch-icon" href="/img/favicon.png">
-
+</head>
+  <body>
     
+   
+    <div class="container"><style type="text/css">
 
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+  .rainbow-text {
+    background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/animate.css/4.1.1/animate.min.css" />
+#mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
 
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/zozo.css" />
+.header {
+  position: relative;
+  z-index: 2;
+}
 
-    
-	
-    <link rel="stylesheet" type="application/javascript" media="screen" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js" />
-    
-    
-    
-    <style type="text/css">
-         @keyframes blink {
-                 0% {
-                     color: red;
-                     opacity: 1;
-                }
-                 50% {
-                     color: blue;
-                     opacity: 0.2;
-                }
-                 100% {
-                     color: red;
-                     opacity: 1;
-                }
-            }
-        .rainbow-text {
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-             
-        }
-        .rainbow:hover:not(.hidden){
-            fill: red;
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-             animation: blink 2.5s infinite; 
-        }
-        .rainbow-static:hover:not(.hidden){
-            fill: red;
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-         
-    </style>
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+}
 
+.headerNav {
+  display: flex;
+  position: relative;  
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%;  
+   right: 0;   
+  margin: 0;  
+  border-radius: 12px;
+    padding: 12px;
+    min-width: 158px;
+
+    border: 1px solid rgba(60, 60, 67, .12);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .08);
+    transition: background-color .5s;
+ 
+    overflow-y: auto;
+}
+
+.submenu a {
+    cursor: pointer;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.headerNav div {
+  position: relative;  
+  display: inline-block;  
   
+}
 
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
-                 <style type="text/css">
+.headerNav div:hover .submenu {
+  display: block;
+
+}
+
+.headerNav div a span:hover{
+  background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.headerNav div span:hover{
+  background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+ 
+@media screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .headerNav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+  }
+  .headerNav div {
+  position: relative;  
+  display: block;  
+}
+
+  .headerNav div:hover .submenu {
+    display: none;
+  }
+
+  .headerNav div .submenu {
+    display: none;
+    position: static;
+  }
+
+  .headerNav div.active .submenu {
+    display: block;
+
+  }
+
+  .submenu {
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+  z-index: 1;
+  top: 100%;  
+   right: 0;   
+  margin: 0;  
+  border-radius: 12px;
+    padding: 12px;
+    min-width: 158px;
+    border: 0px solid rgba(60, 60, 67, .12);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    transition: background-color .5s;
+ 
+    overflow-y: auto;
+}
+
+}
+
+ul{
+  padding: 0px;
+}
+li {
+  list-style: none;
+}
+
+.submenu li:hover{
+ 
+   border-radius: 5px;
+}
+
+.icon {
+    display: inline-block;
+    margin-top: -1px;
+    margin-left: 4px;
+    width: 11px;
+    height: 11px;
+    fill: rgba(60, 60, 67, .33);
+    transition: fill .25s;
+    flex-shrink: 0;
+}
+</style>
+
+<header class="header">
+  
+  <div id="mask" style="display: none;"></div>
+  <div class="header__title" style="font-size: 1.8rem;font-family: Playtwo, Playone,'Eczar', serif;font-weight: bold !important;">
+    <a href="https://hahaha.cc/">好事发生</a>
+  </div>
+  <div class="menu-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </div>
+  <div class="headerNav">
+     
+     
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+           
+          <a href="https://hahaha.cc//" style="font-weight: bold !important;"><span>首页</span>
+         
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+          
+          <a href="https://hahaha.cc/moment/" style="font-weight: bold !important;" target="_blank"><span>片刻</span>
+             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" height="24px" viewBox="0 0 24 24" width="24px" class="icon" data-v-9f11c062=""><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"></path></svg>
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+          
+          <a href="https://hahaha.cc/music/" style="font-weight: bold !important;" target="_blank"><span>音乐</span>
+             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" height="24px" viewBox="0 0 24 24" width="24px" class="icon" data-v-9f11c062=""><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"></path></svg>
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+           
+          <a href="https://hahaha.cc/about/" style="font-weight: bold !important;"><span>关于</span>
+         
+          
+        </a>
+      </div>
+    
+    
+    <div style="padding: 10px;position: relative;text-align:center">
+        <span style="font-weight: bold !important;">其他
+        </span>
+        <ul class="submenu">
+          
+          
+          <li><a href="https://txt.hahaha.cc"><span>换装</span></a></li>
+          
+        </ul>
+      </div>
+     
+  </div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var menuIcon = document.querySelector('.menu-icon');
+  var headerNav = document.querySelector('.headerNav');
+  var mask = document.getElementById('mask');
+  var submenus = document.querySelectorAll('.submenu');
+
+  menuIcon.addEventListener('click', function(){
+    if (headerNav.style.display === '' || headerNav.style.display === 'none') {
+      headerNav.style.display = 'block';
+      mask.style.display = 'block';
+    } else {
+      headerNav.style.display = 'none';
+      mask.style.display = 'none';
+    }
+  });
+
+  headerNav.querySelectorAll('div').forEach(function(div) {
+    div.addEventListener('mouseenter', function(){
+      if (window.innerWidth > 600) {
+        this.querySelector('.submenu').style.display = 'block';
+      }
+    });
+
+    div.addEventListener('mouseleave', function(){
+      if (window.innerWidth > 600) {
+        this.querySelector('.submenu').style.display = 'none';
+      }
+    });
+
+    div.addEventListener('click', function(e){
+      if (window.innerWidth <= 600) {
+        e.stopPropagation();
+        var submenu = this.querySelector('.submenu');
+        if (submenu.style.display === '' || submenu.style.display === 'none') {
+          submenu.style.display = 'block';
+        } else {
+          submenu.style.display = 'none';
+        }
+        Array.from(this.parentNode.children).forEach(function(sibling){
+          if (sibling !== this && sibling.querySelector('.submenu')) {
+            sibling.querySelector('.submenu').style.display = 'none';
+          }
+        }, this);
+      }
+    });
+  });
+
+  document.addEventListener('click', function(){
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+
+  mask.addEventListener('click', function(){
+    this.style.display = 'none';
+    headerNav.style.display = 'none';
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+});
+
+</script>
+
+<main class="main">
+        
+
+
+<link rel="stylesheet" href="/css/detail.css">
+  
+<style type="text/css">
      
             .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
                  display: flex;
@@ -141,145 +388,52 @@
           
              
 
-            .post_content a img{
+            .post__content a img{
                  max-height: 900px;
             }
 
+            a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    display: none;
+}
+
     </style>
-    </head>
-    <body>
-        <div class="main animate__animated animate__fadeInDown">
-            <div class="nav_container animated fadeInDown">
-    <div class="site_nav" id="site_nav">
-        <ul>
-            
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/home/" style="font-weight: bold !important;">首页</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/memos/" style="font-weight: bold !important;">片刻</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/music/" target="_blank" style="font-weight: bold !important;">
-                 音乐
-                 </a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/about/" style="font-weight: bold !important;">关于</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://txt.hahaha.cc" style="font-weight: bold !important;">换装</a> 
-                 
-            </li>
-            
-        </ul>
-    </div>
-    <div class="menu_icon">
-        
-        
-            <a id="menu_icon"> 
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
-        </a>
-    </div>
-</div> 
-            <div class="header animated fadeInDown" style="padding: 50px 0 100px 0;">
-    <div class="site_title_container">
-        <div class="site_title">
-            <h1>
-                
-                    <a href="/home/">
-                     <span class="rainbow">੭ ᐕ)੭</span>
-                </a>
-            </h1>
-        </div>
-        <div class="description">
-            <p class="sub_title" style="font-size: 12px;">     
-                  <span id="hitokoto" class="rainbow">
-                  </span>
-                  <span   class="rainbow-text"> 
-                    记录日常、好事发生
-                 </span>
-             </p>
-            <div class="my_socials">
-               
-                
 
-                <a href="/memos/" title="片刻"  style="margin-left:10px"  class="rainbow">
-                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"></path></svg>
-                </a>
+<div class="post ">
+  <div class="post__header">
+    
+      
+          <img class="article__image" src="/img/1.webp">
+      
+  </div>
 
-                <a href="/music/" title="音乐" target="_blank" style="margin-left:10px"  class="rainbow">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"/></svg>
-                </a>
+  
+  <div class="post__tags">
+    
+      <a class="post__tag" href="https://hahaha.cc/tags/redis">Redis</a>
+    
+  </div>
+  
 
-                
-
-
-                <a href="https://weibo.com/sohanyu" title="微博" target="_blank" style="margin-left:10px" class="rainbow">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewBox="0 0 512 512"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg>
-                </a>
-
-                 
-
-            <a href="https://github.com/okhanyu" title="Github" target="_blank"  style="margin-left:10px" class="rainbow">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 496 512">
-                      <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-                    </svg>
-                </a>
-                <a href="/about/" title="关于"  style="margin-left:10px"  class="rainbow">
-                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
-                </a>
-                <a href="/index.xml" type="application/xml" title="Rss" target="_blank" style="margin-left:10px" class="rainbow">
-                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 448 512"><path d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM0 416a64 64 0 1 1 128 0A64 64 0 1 1 0 416zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-            <div class="content">
-                <div class="post_page">
-                    <div class="post animate__animated animate__fadeInDown">
-                       
-                        <div class="post_title post_detail_title">
-                            <h2><a href='/blog/tech/1/'>分布式锁之电商防超卖的N&#43;1个坑</a></h2>
-                           
-                            <span class="date">2021.03.23</span>
-                           
-                        </div>
-
-                        
-<aside style="line-height: 1.2rem;font-size: 0.8rem;border-bottom: 1px dashed gray;">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#单实例环境">单实例环境</a></li>
-    <li><a href="#分布式环境">分布式环境</a></li>
-  </ul>
-</nav>
-</aside>
-
-
-
-                        
-                        <div>
-                              
-
-                        </div>
-                       
-                        <div class="post_content markdown"><p>大家好，我是Damon。<br>
+  <section class="post__content">
+    <h1 id="title">分布式锁之电商防超卖的N&#43;1个坑</h1>
+    <div>
+      <article>
+          <p>大家好，我是Damon。<br>
 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。</p>
 <h2 id="单实例环境">单实例环境</h2>
 <p>一般电商体系防止库存超卖，主要有以下几种方式：</p>
@@ -307,50 +461,54 @@
     </a>
 
 <p>这三个任何一个都可以保证同一单位时间只有一个线程能够进行库存扣减，废话不多说，上码！</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 库存扣减（伪代码 ReentrantLock )
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param stockRequestDTO
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return Boolean
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">stockHandle</span><span class="p">(</span><span class="n">StockRequestDTO</span><span class="w"> </span><span class="n">stockRequestDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 日志打印...校验...前置处理等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stockMapper</span><span class="p">.</span><span class="na">getStock</span><span class="p">(</span><span class="n">stockRequestDTO</span><span class="p">.</span><span class="na">getGoodsId</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">reentrantLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">0</span><span class="w"> </span><span class="o">?</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">stockMapper</span><span class="p">.</span><span class="na">updateStock</span><span class="p">(</span><span class="n">stockRequestDTO</span><span class="p">.</span><span class="na">getGoodsId</span><span class="p">(),</span><span class="w"> </span><span class="o">--</span><span class="n">stock</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 异常日志打印及处理...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">reentrantLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 库存扣减（伪代码 synchronized )
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param stockRequestDTO
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return Boolean
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">stockHandle</span><span class="p">(</span><span class="n">StockRequestDTO</span><span class="w"> </span><span class="n">stockRequestDTO</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 执行业务逻辑...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 库存扣减（伪代码 Semaphore )
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param stockRequestDTO
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return Boolean
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">stockHandle</span><span class="p">(</span><span class="n">StockRequestDTO</span><span class="w"> </span><span class="n">stockRequestDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="k">try</span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">semaphore</span><span class="p">.</span><span class="na">acquire</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c1">// 执行业务逻辑...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">semaphore</span><span class="p">.</span><span class="na">release</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>如果你的项目是单实例部署，那么使用以上锁或并发工具中的一种，都可以有效的防止超卖出现。</p>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 库存扣减（伪代码 ReentrantLock )
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param stockRequestDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Boolean
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Boolean <span style="color:#a6e22e">stockHandle</span>(StockRequestDTO stockRequestDTO) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 日志打印...校验...前置处理等...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> stock <span style="color:#f92672">=</span> stockMapper.<span style="color:#a6e22e">getStock</span>(stockRequestDTO.<span style="color:#a6e22e">getGoodsId</span>());
+</span></span><span style="display:flex;"><span>        reentrantLock.<span style="color:#a6e22e">lock</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> stock <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">?</span> 
+</span></span><span style="display:flex;"><span>                    stockMapper.<span style="color:#a6e22e">updateStock</span>(stockRequestDTO.<span style="color:#a6e22e">getGoodsId</span>(), <span style="color:#f92672">--</span>stock) : 0;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> result <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">?</span> <span style="color:#66d9ef">true</span> : <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (SQLException e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 异常日志打印及处理...</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            reentrantLock.<span style="color:#a6e22e">unlock</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 库存扣减（伪代码 synchronized )
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param stockRequestDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Boolean
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> Boolean <span style="color:#a6e22e">stockHandle</span>(StockRequestDTO stockRequestDTO){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 执行业务逻辑...</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 库存扣减（伪代码 Semaphore )
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param stockRequestDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Boolean
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Boolean <span style="color:#a6e22e">stockHandle</span>(StockRequestDTO stockRequestDTO) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>          semaphore.<span style="color:#a6e22e">acquire</span>();
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 执行业务逻辑...</span>
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>          semaphore.<span style="color:#a6e22e">release</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div>
+  </div>
+</div><p>如果你的项目是单实例部署，那么使用以上锁或并发工具中的一种，都可以有效的防止超卖出现。</p>
 <h2 id="分布式环境">分布式环境</h2>
 <p>但现在的互联网公司，基本都是负载均衡的方式，访问集群中多个实例的，所以基于JVM级别的锁无法发挥作用，需要引入第三方组件来解决，分布式锁登场。</p>
 <p>如果想实现分布式环境下的锁机制，最简单的莫过于利用MySQL的锁机制:</p>
@@ -365,68 +523,80 @@
            
       </a>
 
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">***</span><span class="w"> </span><span class="err">使用悲观锁实现</span><span class="w"> </span><span class="o">***</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">begin</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 开启事务
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">select</span><span class="w">  </span><span class="n">stock_num</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">t_stock</span><span class="w"> </span><span class="n">t_stock</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">goodsId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;12345&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">update</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 获取并设置排他锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">update</span><span class="w"> </span><span class="n">t_stock</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">stock_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock_num</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">goodsId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;12345&#39;</span><span class="w"> </span><span class="err">；</span><span class="c1">-- 更新资源
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">commit</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 提交事务并解锁
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="err">乐观锁实现</span><span class="w"> </span><span class="o">***</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">update</span><span class="w"> </span><span class="n">t_stock</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">stock_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stock_num</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">goodsId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;12345&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 1.更新资源时先判断当前数据版本号和之前获取时是否一致
-</span></span></span><span class="line"><span class="cl"><span class="c1">-- 2.如果版本号一致，更新资源并版本号+1
-</span></span></span><span class="line"><span class="cl"><span class="c1">-- 3.若版本号不一致，返回错误并由业务系统进行自旋重试
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">***</span><span class="w"> </span><span class="err">唯一索引实现</span><span class="w"> </span><span class="o">***</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">较简单，此方式实际应用几乎没有，不再赘述</span><span class="w">
-</span></span></span></code></pre></div><p>有一点要注意，乐观锁的自旋是需要在自己的业务逻辑中实现的。</p>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">***</span> <span style="color:#960050;background-color:#1e0010">使用悲观锁实现</span> <span style="color:#f92672">***</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">begin</span>; <span style="color:#75715e">-- 开启事务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">select</span>  stock_num <span style="color:#66d9ef">from</span> t_stock t_stock <span style="color:#66d9ef">where</span> goodsId <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345&#39;</span> <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">update</span>; <span style="color:#75715e">-- 获取并设置排他锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">update</span> t_stock <span style="color:#66d9ef">set</span> stock_num <span style="color:#f92672">=</span> stock_num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>  <span style="color:#66d9ef">where</span> goodsId <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345&#39;</span> <span style="color:#960050;background-color:#1e0010">；</span><span style="color:#75715e">-- 更新资源
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">commit</span>; <span style="color:#75715e">-- 提交事务并解锁
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">***</span> <span style="color:#960050;background-color:#1e0010">乐观锁实现</span> <span style="color:#f92672">***</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">update</span> t_stock <span style="color:#66d9ef">set</span> stock_num <span style="color:#f92672">=</span> stock_num <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> , <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">where</span> goodsId <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;12345&#39;</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">version</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 1.更新资源时先判断当前数据版本号和之前获取时是否一致
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 2.如果版本号一致，更新资源并版本号+1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">-- 3.若版本号不一致，返回错误并由业务系统进行自旋重试
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">***</span> <span style="color:#960050;background-color:#1e0010">唯一索引实现</span> <span style="color:#f92672">***</span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">较简单，此方式实际应用几乎没有，不再赘述</span></span></span></code></pre></div>
+  </div>
+</div><p>有一点要注意，乐观锁的自旋是需要在自己的业务逻辑中实现的。</p>
 <p>使用数据库作为分布式锁，优点是实现简单、不需要引入其他中间件，缺点是可能存在磁盘IO，性能一般。</p>
 <p>那有没有性能够用、实现简单、且在分布式环境下能保证资源并发安全的方案呢？常规有三，Redis、Zookeeper、MQ，其中MQ的解决方案不能算分布式锁。<br>
 今天我们介绍第一种，使用Redis实现分布式锁，Redis分布式锁的特点是轻松保证可重入、互斥。<br>
 Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// redis原生命令
-</span></span><span class="line"><span class="cl">redis-cli 127.0.0.1:6379&gt; SETNX KEY_NAME VALUE
-</span></span><span class="line"><span class="cl">redis-cli 127.0.0.1:6379&gt; EXPlRE &lt;key&gt; &lt;ttl&gt; 
-</span></span></code></pre></div><p>spring-boot-starter-data-redis 也提供了操作Redis的模板类：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">     </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 库存扣减 (伪代码 spring-boot-starter-data-redis中提供的模板方法)
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param stockRequestDTO
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return Boolean
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">rollbackFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">RuntimeException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">.</span><span class="na">class</span><span class="p">})</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">stockHandle</span><span class="p">(</span><span class="n">StockRequestDTO</span><span class="w"> </span><span class="n">stockRequestDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 省略日志打印...校验...前置处理等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Boolean</span><span class="w"> </span><span class="n">redisLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">setIfAbsent</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">redisLock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">expire</span><span class="p">((</span><span class="n">stockLockKey</span><span class="p">,</span><span class="n">1</span><span class="p">,</span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">Object</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">stockKeyPrefix</span><span class="p">.</span><span class="na">concat</span><span class="p">(</span><span class="n">stockRequestDTO</span><span class="p">.</span><span class="na">getGoodsId</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">stock</span><span class="p">.</span><span class="na">toString</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 库存异常</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 扣减库存</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">stock</span><span class="p">.</span><span class="na">toString</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 更新数据库、缓存等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 释放锁等等后置处理...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>// redis原生命令
+</span></span><span style="display:flex;"><span>redis-cli 127.0.0.1:6379&gt; SETNX KEY_NAME VALUE
+</span></span><span style="display:flex;"><span>redis-cli 127.0.0.1:6379&gt; EXPlRE &lt;key&gt; &lt;ttl&gt; </span></span></code></pre></div>
+  </div>
+</div><p>spring-boot-starter-data-redis 也提供了操作Redis的模板类：</p>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>     <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 库存扣减 (伪代码 spring-boot-starter-data-redis中提供的模板方法)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param stockRequestDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Boolean
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>(rollbackFor <span style="color:#f92672">=</span> {RuntimeException.<span style="color:#a6e22e">class</span>, Error.<span style="color:#a6e22e">class</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Boolean <span style="color:#a6e22e">stockHandle</span>(StockRequestDTO stockRequestDTO) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 省略日志打印...校验...前置处理等...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Boolean redisLock <span style="color:#f92672">=</span> redisTemplate
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">setIfAbsent</span>(stockLockKey, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (redisLock) {
+</span></span><span style="display:flex;"><span>                redisTemplate.<span style="color:#a6e22e">expire</span>((stockLockKey,1,TimeUnit.<span style="color:#a6e22e">SECONDS</span>);
+</span></span><span style="display:flex;"><span>                Object stock <span style="color:#f92672">=</span> redisTemplate
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">get</span>(stockKeyPrefix.<span style="color:#a6e22e">concat</span>(stockRequestDTO.<span style="color:#a6e22e">getGoodsId</span>()));
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> stock <span style="color:#f92672">||</span> Integer.<span style="color:#a6e22e">parseInt</span>(stock.<span style="color:#a6e22e">toString</span>()) <span style="color:#f92672">&lt;=</span> 0) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 库存异常</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 扣减库存</span>
+</span></span><span style="display:flex;"><span>                    stock <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">parseInt</span>(stock.<span style="color:#a6e22e">toString</span>()) <span style="color:#f92672">-</span> 1;
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 更新数据库、缓存等...</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 释放锁等等后置处理...</span>
+</span></span><span style="display:flex;"><span>            redisTemplate.<span style="color:#a6e22e">delete</span>(stockLockKey);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>原子性问题</p>
 </blockquote>
 <p>以上代码存在一个问题，假设</p>
@@ -436,31 +606,43 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 <li>3.）A线程还没来得及给锁设置过期时间，Redis中资源会被永久锁住</li>
 </ul>
 <p>所以我们需要使用原子指令：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// redis原生命令
-</span></span><span class="line"><span class="cl">redis-cli 127.0.0.1:6379&gt; <span class="nb">set</span> key value <span class="o">[</span>EX seconds<span class="o">]</span> <span class="o">[</span>PX milliseconds<span class="o">]</span> <span class="o">[</span>NX<span class="p">|</span>XX<span class="o">]</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 方式一：省略其他代码......</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">boolean</span><span class="w"> </span><span class="n">redisLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">setIfAbsent</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="n">30</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 方式二：使用Lua脚本进行加锁保证原子性（伪代码）</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;if redis.call(\&#34;setnx\&#34;, KEYS[1], KEYS[2]) == 1 then&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;return redis.call(\&#34;pexpire\&#34;, KEYS[1], KEYS[3])&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;else&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;return 0&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LUA_SCRIPT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="nf">redisLockByLua</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 脚本里的KEYS参数，忽略类型转换等......</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">keys</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">keys</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">keys</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">30</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DefaultRedisScript</span><span class="p">(</span><span class="n">LUA_SCRIPT</span><span class="p">),</span><span class="w"> </span><span class="n">keys</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>// redis原生命令
+</span></span><span style="display:flex;"><span>redis-cli 127.0.0.1:6379&gt; set key value <span style="color:#f92672">[</span>EX seconds<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>PX milliseconds<span style="color:#f92672">]</span> <span style="color:#f92672">[</span>NX|XX<span style="color:#f92672">]</span></span></span></code></pre></div>
+  </div>
+</div><div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 方式一：省略其他代码......</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">boolean</span> redisLock <span style="color:#f92672">=</span> redisTemplate
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">setIfAbsent</span>(stockLockKey,<span style="color:#66d9ef">true</span>,30, TimeUnit.<span style="color:#a6e22e">SECONDS</span>);</span></span></code></pre></div>
+  </div>
+</div><div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">// 方式二：使用Lua脚本进行加锁保证原子性（伪代码）</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>        StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;if redis.call(\&#34;setnx\&#34;, KEYS[1], KEYS[2]) == 1 then&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;return redis.call(\&#34;pexpire\&#34;, KEYS[1], KEYS[3])&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;else&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;return 0&#34;</span>);
+</span></span><span style="display:flex;"><span>        LUA_SCRIPT <span style="color:#f92672">=</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Long <span style="color:#a6e22e">redisLockByLua</span>(String key, <span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 脚本里的KEYS参数，忽略类型转换等......</span>
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> keys <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        keys.<span style="color:#a6e22e">add</span>(stockLockKey);
+</span></span><span style="display:flex;"><span>        keys.<span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>        keys.<span style="color:#a6e22e">add</span>(30);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">long</span>) redisTemplate.<span style="color:#a6e22e">execute</span>(<span style="color:#66d9ef">new</span> DefaultRedisScript(LUA_SCRIPT), keys);
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>超时&amp;误删锁问题</p>
 </blockquote>
 <p>虽然我们优化了，但还是有BUG，假设现在A 和 B 两个线程同时访问以上代码：</p>
@@ -484,73 +666,81 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
 <li>2.）A线程将锁的value设置为该随机串</li>
 <li>3.）A线程删除锁时先判断锁的value是否为A线程刚才随机生成的随机串</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * 库存扣减 (伪代码 spring-boot-starter-data-redis中提供的模板方法)
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @param stockRequestDTO
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return Boolean
-</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">rollbackFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">RuntimeException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">Error</span><span class="p">.</span><span class="na">class</span><span class="p">})</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">stockHandle</span><span class="p">(</span><span class="n">StockRequestDTO</span><span class="w"> </span><span class="n">stockRequestDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 省略日志打印...校验...前置处理等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nonceStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ScheduledExecutorService</span><span class="w"> </span><span class="n">scheduledExecutorService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newScheduledThreadPool</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">//竞争锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">redisLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">setIfAbsent</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">30</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">redisLock</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 开启守护线程定时对锁续命</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">scheduledExecutorService</span><span class="p">.</span><span class="na">scheduleWithFixedDelay</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">hasKey</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">expire</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">,</span><span class="w"> </span><span class="n">30</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">},</span><span class="w"> </span><span class="n">15</span><span class="p">,</span><span class="w"> </span><span class="n">15</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 获取库存</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">stockKey</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">stockKeyPrefix</span><span class="p">.</span><span class="na">concat</span><span class="p">(</span><span class="n">stockRequestDTO</span><span class="p">.</span><span class="na">getGoodsId</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">Object</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">stockKey</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">stock</span><span class="p">.</span><span class="na">toString</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 库存异常</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 扣减库存</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                            </span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">stockKey</span><span class="p">,</span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">stock</span><span class="p">.</span><span class="na">toString</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="c1">// 更新数据库等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 释放锁等等后置处理... 也可使用lua脚本保证原子性判断和删除锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="n">nonceStr</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">scheduledExecutorService</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>释放锁也需要原子性执行，我们依然使用Lua脚本来保证原子：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="c1">// 解锁 (伪代码)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;if redis.call(\&#34;get\&#34;,KEYS[1]) == KEYS[2] then&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;return redis.call(\&#34;del\&#34;,KEYS[1])&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;else&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&#34;return -1&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">LUA_SCRIPT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="nf">redisUnlockByLua</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 脚本里的KEYS参数，忽略类型转换等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">keys</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">stockLockKey</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">keys</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;线程加锁时生成的随机数&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DefaultRedisScript</span><span class="p">(</span><span class="n">LUA_SCRIPT</span><span class="p">),</span><span class="w"> </span><span class="n">keys</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 库存扣减 (伪代码 spring-boot-starter-data-redis中提供的模板方法)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param stockRequestDTO
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Boolean
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>(rollbackFor <span style="color:#f92672">=</span> {RuntimeException.<span style="color:#a6e22e">class</span>, Error.<span style="color:#a6e22e">class</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Boolean <span style="color:#a6e22e">stockHandle</span>(StockRequestDTO stockRequestDTO) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 省略日志打印...校验...前置处理等...</span>
+</span></span><span style="display:flex;"><span>        String nonceStr <span style="color:#f92672">=</span> UUID.<span style="color:#a6e22e">randomUUID</span>().<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>        ScheduledExecutorService scheduledExecutorService <span style="color:#f92672">=</span> Executors.<span style="color:#a6e22e">newScheduledThreadPool</span>(1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//竞争锁</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">boolean</span> redisLock <span style="color:#f92672">=</span> redisTemplate
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>                    .<span style="color:#a6e22e">setIfAbsent</span>(stockLockKey, <span style="color:#66d9ef">true</span>, 30, TimeUnit.<span style="color:#a6e22e">SECONDS</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (redisLock) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 开启守护线程定时对锁续命</span>
+</span></span><span style="display:flex;"><span>                scheduledExecutorService.<span style="color:#a6e22e">scheduleWithFixedDelay</span>(() <span style="color:#f92672">-&gt;</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (redisTemplate.<span style="color:#a6e22e">hasKey</span>(stockLockKey)) {
+</span></span><span style="display:flex;"><span>                        redisTemplate.<span style="color:#a6e22e">expire</span>(stockLockKey, 30, TimeUnit.<span style="color:#a6e22e">SECONDS</span>);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }, 15, 15, TimeUnit.<span style="color:#a6e22e">SECONDS</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 获取库存</span>
+</span></span><span style="display:flex;"><span>                String stockKey <span style="color:#f92672">=</span>  stockKeyPrefix.<span style="color:#a6e22e">concat</span>(stockRequestDTO.<span style="color:#a6e22e">getGoodsId</span>());
+</span></span><span style="display:flex;"><span>                Object stock <span style="color:#f92672">=</span> redisTemplate
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">get</span>(stockKey);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> stock <span style="color:#f92672">||</span> Integer.<span style="color:#a6e22e">parseInt</span>(stock.<span style="color:#a6e22e">toString</span>()) <span style="color:#f92672">&lt;=</span> 0) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 库存异常</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 扣减库存</span>
+</span></span><span style="display:flex;"><span>                    redisTemplate.<span style="color:#a6e22e">opsForValue</span>()
+</span></span><span style="display:flex;"><span>                            .<span style="color:#a6e22e">set</span>(stockKey,Integer.<span style="color:#a6e22e">parseInt</span>(stock.<span style="color:#a6e22e">toString</span>()) <span style="color:#f92672">-</span> 1);
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// 更新数据库等...</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 释放锁等等后置处理... 也可使用lua脚本保证原子性判断和删除锁</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (redisTemplate.<span style="color:#a6e22e">opsForValue</span>().<span style="color:#a6e22e">get</span>(stockLockKey).<span style="color:#a6e22e">equals</span>(nonceStr)) {
+</span></span><span style="display:flex;"><span>                redisTemplate.<span style="color:#a6e22e">delete</span>(stockLockKey);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            scheduledExecutorService.<span style="color:#a6e22e">shutdownNow</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div>
+  </div>
+</div><p>释放锁也需要原子性执行，我们依然使用Lua脚本来保证原子：</p>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">// 解锁 (伪代码)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>        StringBuilder sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;if redis.call(\&#34;get\&#34;,KEYS[1]) == KEYS[2] then&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;return redis.call(\&#34;del\&#34;,KEYS[1])&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;else&#34;</span>);
+</span></span><span style="display:flex;"><span>        sb.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;return -1&#34;</span>);
+</span></span><span style="display:flex;"><span>        LUA_SCRIPT <span style="color:#f92672">=</span> sb.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Long <span style="color:#a6e22e">redisUnlockByLua</span>(String key, <span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 脚本里的KEYS参数，忽略类型转换等...</span>
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>Object<span style="color:#f92672">&gt;</span> keys <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        keys.<span style="color:#a6e22e">add</span>(stockLockKey);
+</span></span><span style="display:flex;"><span>        keys.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;线程加锁时生成的随机数&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">long</span>) redisTemplate.<span style="color:#a6e22e">execute</span>(<span style="color:#66d9ef">new</span> DefaultRedisScript(LUA_SCRIPT), keys);
+</span></span><span style="display:flex;"><span>    }</span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>Redisson</p>
 </blockquote>
 <p>对于锁超时问题，我们还可以使用现成的工具Redisson，Redisson提供了WatchDog（看门狗）机制，内置了锁续命机制，无需手动实现。</p>
@@ -566,29 +756,33 @@ Redis中提供了SetNX+Expire两个命令，可以对指定的Key加锁：</p>
       </a>
 
 <p>注意，要想使用开门狗机制Redisson加锁时不要指定超时时间，默认锁超时时间30秒，看门狗每隔30秒的1/3时间也就是10秒去检查一次锁状态，锁还在就进行续命。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 构造Redisson Config</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Config</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Config</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">config</span><span class="p">.</span><span class="na">useClusterServers</span><span class="p">().</span><span class="na">addNodeAddress</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;redis://ip1:port1&#34;</span><span class="p">,</span><span class="s">&#34;redis://ip2:port2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;redis://ip3:port3&#34;</span><span class="p">,</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;redis://ip4:port4&#34;</span><span class="p">,</span><span class="s">&#34;redis://ip5:port5&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;redis://ip6:port6&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">setPassword</span><span class="p">(</span><span class="s">&#34;a123456&#34;</span><span class="p">).</span><span class="na">setScanInterval</span><span class="p">(</span><span class="n">5000</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 构造RedissonClient</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RedissonClient</span><span class="w"> </span><span class="n">redissonClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Redisson</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 设置锁定资源名称</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RLock</span><span class="w"> </span><span class="n">rLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redissonClient</span><span class="p">.</span><span class="na">getLock</span><span class="p">(</span><span class="s">&#34;lock_key&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// boolean isLock;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 尝试获取分布式锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// isLock = rLock.tryLock(500, 15000, TimeUnit.MILLISECONDS);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">rLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 日志...业务处理等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 日志等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 解锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">rLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 构造Redisson Config</span>
+</span></span><span style="display:flex;"><span>Config config <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Config();
+</span></span><span style="display:flex;"><span>config.<span style="color:#a6e22e">useClusterServers</span>().<span style="color:#a6e22e">addNodeAddress</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;redis://ip1:port1&#34;</span>,<span style="color:#e6db74">&#34;redis://ip2:port2&#34;</span>, <span style="color:#e6db74">&#34;redis://ip3:port3&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;redis://ip4:port4&#34;</span>,<span style="color:#e6db74">&#34;redis://ip5:port5&#34;</span>, <span style="color:#e6db74">&#34;redis://ip6:port6&#34;</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">setPassword</span>(<span style="color:#e6db74">&#34;a123456&#34;</span>).<span style="color:#a6e22e">setScanInterval</span>(5000);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 构造RedissonClient</span>
+</span></span><span style="display:flex;"><span>RedissonClient redissonClient <span style="color:#f92672">=</span> Redisson.<span style="color:#a6e22e">create</span>(config);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 设置锁定资源名称</span>
+</span></span><span style="display:flex;"><span>RLock rLock <span style="color:#f92672">=</span> redissonClient.<span style="color:#a6e22e">getLock</span>(<span style="color:#e6db74">&#34;lock_key&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// boolean isLock;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 尝试获取分布式锁</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// isLock = rLock.tryLock(500, 15000, TimeUnit.MILLISECONDS);</span>
+</span></span><span style="display:flex;"><span>    rLock.<span style="color:#a6e22e">lock</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 日志...业务处理等...</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 日志等...</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 解锁</span>
+</span></span><span style="display:flex;"><span>    rLock.<span style="color:#a6e22e">unlock</span>();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>主从数据一致性问题</p>
 </blockquote>
 <p>不过此时还可能出现一种意外情况，假设Redis主从环境：</p>
@@ -611,38 +805,42 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
 后面我们找个时间专门讲一下RedLock源码以及存在的问题。</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Config</span><span class="w"> </span><span class="n">config1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Config</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">config1</span><span class="p">.</span><span class="na">useSingleServer</span><span class="p">().</span><span class="na">setAddress</span><span class="p">(</span><span class="s">&#34;redis://ip1:port1&#34;</span><span class="p">).</span><span class="na">setPassword</span><span class="p">(</span><span class="s">&#34;...&#34;</span><span class="p">).</span><span class="na">setDatabase</span><span class="p">(</span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RedissonClient</span><span class="w"> </span><span class="n">redissonClient1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Redisson</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">config1</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Config</span><span class="w"> </span><span class="n">config2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Config</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">config2</span><span class="p">.</span><span class="na">useSingleServer</span><span class="p">().</span><span class="na">setAddress</span><span class="p">(</span><span class="s">&#34;redis://ip2:port2&#34;</span><span class="p">).</span><span class="na">setPassword</span><span class="p">(</span><span class="s">&#34;...&#34;</span><span class="p">).</span><span class="na">setDatabase</span><span class="p">(</span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RedissonClient</span><span class="w"> </span><span class="n">redissonClient2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Redisson</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">config2</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Config</span><span class="w"> </span><span class="n">config3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Config</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">config3</span><span class="p">.</span><span class="na">useSingleServer</span><span class="p">().</span><span class="na">setAddress</span><span class="p">(</span><span class="s">&#34;redis://ip3:port3&#34;</span><span class="p">).</span><span class="na">setPassword</span><span class="p">(</span><span class="s">&#34;...&#34;</span><span class="p">).</span><span class="na">setDatabase</span><span class="p">(</span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RedissonClient</span><span class="w"> </span><span class="n">redissonClient3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Redisson</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">config3</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">lockKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;lock_key&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">RedissonRedLock</span><span class="w"> </span><span class="n">redLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RedissonRedLock</span><span class="p">(</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">redissonClient1</span><span class="p">.</span><span class="na">getLock</span><span class="p">(</span><span class="n">lockKey</span><span class="p">),</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">redissonClient2</span><span class="p">.</span><span class="na">getLock</span><span class="p">(</span><span class="n">lockKey</span><span class="p">),</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">redissonClient3</span><span class="p">.</span><span class="na">getLock</span><span class="p">(</span><span class="n">lockKey</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// boolean isLock;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 尝试获取分布式锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// isLock = redLock.tryLock(500, 15000, TimeUnit.MILLISECONDS);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redLock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 日志...业务处理等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 日志等...</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 解锁</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redLock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Config config1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Config();
+</span></span><span style="display:flex;"><span>config1.<span style="color:#a6e22e">useSingleServer</span>().<span style="color:#a6e22e">setAddress</span>(<span style="color:#e6db74">&#34;redis://ip1:port1&#34;</span>).<span style="color:#a6e22e">setPassword</span>(<span style="color:#e6db74">&#34;...&#34;</span>).<span style="color:#a6e22e">setDatabase</span>(0);
+</span></span><span style="display:flex;"><span>RedissonClient redissonClient1 <span style="color:#f92672">=</span> Redisson.<span style="color:#a6e22e">create</span>(config1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Config config2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Config();
+</span></span><span style="display:flex;"><span>config2.<span style="color:#a6e22e">useSingleServer</span>().<span style="color:#a6e22e">setAddress</span>(<span style="color:#e6db74">&#34;redis://ip2:port2&#34;</span>).<span style="color:#a6e22e">setPassword</span>(<span style="color:#e6db74">&#34;...&#34;</span>).<span style="color:#a6e22e">setDatabase</span>(0);
+</span></span><span style="display:flex;"><span>RedissonClient redissonClient2 <span style="color:#f92672">=</span> Redisson.<span style="color:#a6e22e">create</span>(config2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Config config3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Config();
+</span></span><span style="display:flex;"><span>config3.<span style="color:#a6e22e">useSingleServer</span>().<span style="color:#a6e22e">setAddress</span>(<span style="color:#e6db74">&#34;redis://ip3:port3&#34;</span>).<span style="color:#a6e22e">setPassword</span>(<span style="color:#e6db74">&#34;...&#34;</span>).<span style="color:#a6e22e">setDatabase</span>(0);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>RedissonClient redissonClient3 <span style="color:#f92672">=</span> Redisson.<span style="color:#a6e22e">create</span>(config3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>String lockKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lock_key&#34;</span>;
+</span></span><span style="display:flex;"><span>RedissonRedLock redLock <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RedissonRedLock(
+</span></span><span style="display:flex;"><span>                redissonClient1.<span style="color:#a6e22e">getLock</span>(lockKey), 
+</span></span><span style="display:flex;"><span>                redissonClient2.<span style="color:#a6e22e">getLock</span>(lockKey), 
+</span></span><span style="display:flex;"><span>                redissonClient3.<span style="color:#a6e22e">getLock</span>(lockKey)
+</span></span><span style="display:flex;"><span>                );
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// boolean isLock;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 尝试获取分布式锁</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// isLock = redLock.tryLock(500, 15000, TimeUnit.MILLISECONDS);</span>
+</span></span><span style="display:flex;"><span>    redLock.<span style="color:#a6e22e">lock</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 日志...业务处理等...</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 日志等...</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 解锁</span>
+</span></span><span style="display:flex;"><span>    redLock.<span style="color:#a6e22e">unlock</span>();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+  </div>
+</div><blockquote>
 <p>事务问题</p>
 </blockquote>
 <p>至此，是不是万无一失了呢？其实还没完，还有一个隐藏问题。<br>
@@ -685,203 +883,91 @@ RedLock的方式也有缺点，因为需要对多个节点操作加锁解锁，�
 <p>要解决这种隐藏BUG，可以将库存信息放入Redis，利用Redis的decr方法在分布式环境下原子性的扣减库存：</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// 省略其他代码</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// Redis原子扣减库存</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">Long</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">decrement</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stock</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">stock</span><span class="p">.</span><span class="na">toString</span><span class="p">())</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">0</span><span class="p">){</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// 库存异常</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 更新数据库等...</span><span class="w">
-</span></span></span></code></pre></div><p>至于MQ和Zookeeper方式今天不在此介绍啦，大家感兴趣的话我后面专门开篇来讲。<br>
+<div class="code-block-container"><div class="code-block-filename-container">
+    
+  </div>
+  <div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>  <span style="color:#75715e">// 省略其他代码</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Redis原子扣减库存</span>
+</span></span><span style="display:flex;"><span>   Long stock <span style="color:#f92672">=</span> redisTemplate.<span style="color:#a6e22e">opsForValue</span>().<span style="color:#a6e22e">decrement</span>(1);
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> stock <span style="color:#f92672">||</span> Integer.<span style="color:#a6e22e">parseInt</span>(stock.<span style="color:#a6e22e">toString</span>()) <span style="color:#f92672">&lt;</span> 0){
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 库存异常</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">//</span> 更新数据库等...</span></span></code></pre></div>
+  </div>
+</div><p>至于MQ和Zookeeper方式今天不在此介绍啦，大家感兴趣的话我后面专门开篇来讲。<br>
 其实没有最完美无缺的方案，以上方案还是会存在某些特定场景下的特定问题，具体场景具体分析，逐步优化，一步步思考，加固项目城墙之余，也夯实自身的技术壁垒。</p>
 <blockquote>
 <p>辛苦移步微信公众号点赞、在看、关注：
 <a href="https://mp.weixin.qq.com/s/82S1AbBeJzYuGhl6FvjQcg">Redis系列 | 分布式锁-电商防超卖的N+1个坑！</a></p>
 </blockquote>
-</div>
-                        <div class="post_footer">
-                            
-                            <div class="meta">
-                                <div class="info">
-                                    <span class="field tags">
-                                              
-                                        <span>#</span>
-                                        <a href="https://hahaha.cc/tags/redis/">Redis</a>
-                                        
-                                    </span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                     
-                    
 
-                    
-                </div>
-            </div>
-        </div>
-
-        <a id="back_to_top" href="#" class="back_to_top">
-    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-        <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
-        />
-    </svg>
-</a>
-
-<footer class="footer">
-    <div class="powered_by">
-        <div  style="margin-bottom:3px">
-            <a>
-                
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-
-               
-                
-                
-                
-                
-               
-
-               29 篇 46934 字
-
-            </a>
-        </div>
-        <div>
-         <a></a>  
-           
-        </div>
+      </article>
     </div>
-    
-   
-     <div class="powered_by">
-          <a  style="margin-right: 0;padding: 0;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502054294"  target="_blank">
-            <img width="8px" src="/img/ba.png">
-            <span>
-              京公网安备11010502054294号</span> · 
+  </section>
+</div>
+<a id="back_to_top" href="#" class="back_to_top" style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3.0l192 192c12.5 12.5 12.5 32.8.0 45.3s-32.8 12.5-45.3.0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3.0s-12.5-32.8.0-45.3l192-192z"></path></svg></a>
+
+
+
+<script src=https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js>
+</script>
+<link href=https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css
+rel=stylesheet>
+<script src=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js>
+</script>
+
+
+<script type="text/javascript">
+
+
+     
+$(document).ready((function (_this) {
+     $('[data-fancybox="gallery"]').fancybox();
+$(".fancybox").fancybox();
+
+  return function () {
+    let bt
+    bt = $('#back_to_top')
+    if ($(document).width() > 480) {
+      $(window).scroll(function () {
+        let st
+        st = $(window).scrollTop()
+        if (st > 30) {
+          return bt.css('display', 'block')
+        } else {
+          return bt.css('display', 'none')
+        }
+      })
+      return bt.click(function () {
+        $('body,html').animate({
+          scrollTop: 0,
+        }, 800)
+        return false
+      })
+    }
+  }
+})(this));
+
+
+
+</script>
+
+      </main><footer class="footer">
+  <div style="display: block;">
+
+          <a style="margin-right: 0;padding: 0;display: inline-block;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502054294"  target="_blank">
+
+            <span>  <img width="8px" src="/img/ba.png" style="width:9px;display: inline;border: 0px;" > 
+             京公网安备11010502054294号</span> · 
           </a>
           <a  style="margin-left: 0;padding: 0;" href="https://beian.miit.gov.cn/"  target="_blank"><span id="icp">京ICP备18031874号-9号
             </span>
           </a>
-    </div>
-         
-
+  <span>&copy; 2023 <a href="https://hahaha.cc/">好事发生</a></span>
+</div>
 </footer>
- 
-        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
-<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js"></script>
-<script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js"></script>
-<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
 
-<script src="/js/zozo.js"></script>
-<script src="/js/common.js"></script>
-
-
-
-
-<script type="text/javascript" async
-    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
-                processEscapes: true,
-                processEnvironments: true,
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                TeX: {
-                    equationNumbers: { autoNumber: "AMS" },
-                    extensions: ["AMSmath.js", "AMSsymbols.js"]
-                }
-            }
-        });
-
-        MathJax.Hub.Queue(function () {
-            
-            
-            
-            var all = MathJax.Hub.getAllJax(), i;
-            for (i = 0; i < all.length; i += 1) {
-                all[i].SourceElement().parentNode.className += ' has-jax';
-            }
-        });
-    </script>
-
-<style>
-    code.has-jax {
-        font: inherit;
-        font-size: 100%;
-        background: inherit;
-        border: inherit;
-        color: #515151;
-    }
-</style>
-
-
-
-
-
-        
-         <script src="/js/single.js"></script>
-
-    </body>
-</html>     
+    </div>
+  </body>
+</html>

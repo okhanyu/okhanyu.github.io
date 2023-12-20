@@ -14,16 +14,16 @@
     <loc>https://hahaha.cc/tags/</loc>
     <lastmod>2023-10-08T16:40:00+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/</loc>
+    <loc>https://hahaha.cc/blog/other/1/</loc>
     <lastmod>2023-10-08T16:40:00+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <loc>https://hahaha.cc/</loc>
     <lastmod>2023-10-08T16:40:00+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/tags/%E6%80%9D%E8%80%83/</loc>
     <lastmod>2023-10-08T16:40:00+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/blog/other/1/</loc>
+    <loc>https://hahaha.cc/categories/%E7%94%9F%E6%B4%BB/</loc>
     <lastmod>2023-10-08T16:40:00+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/blog/life/</loc>
@@ -77,13 +77,13 @@
     <loc>https://hahaha.cc/blog/tech/</loc>
     <lastmod>2023-05-04T10:01:22+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/blog/tech/3/</loc>
-    <lastmod>2023-05-04T10:01:22+08:00</lastmod>
-  </url><url>
     <loc>https://hahaha.cc/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2023-05-04T10:01:22+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/tags/%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2023-05-04T10:01:22+08:00</lastmod>
+  </url><url>
+    <loc>https://hahaha.cc/blog/tech/3/</loc>
     <lastmod>2023-05-04T10:01:22+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/blog/life/0-11/</loc>
@@ -95,10 +95,10 @@
     <loc>https://hahaha.cc/blog/life/0-5/</loc>
     <lastmod>2023-04-24T13:01:22+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/tags/%E7%A2%8E%E7%89%87/</loc>
+    <loc>https://hahaha.cc/blog/life/0-10/</loc>
     <lastmod>2023-04-13T18:00:01+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/blog/life/0-10/</loc>
+    <loc>https://hahaha.cc/tags/%E7%A2%8E%E7%89%87/</loc>
     <lastmod>2023-04-13T18:00:01+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/blog/life/0-4/</loc>
@@ -134,10 +134,10 @@
     <loc>https://hahaha.cc/blog/growing/1/</loc>
     <lastmod>2022-02-25T00:19:49+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <loc>https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/</loc>
     <lastmod>2022-02-25T00:19:49+08:00</lastmod>
   </url><url>
-    <loc>https://hahaha.cc/categories/%E8%81%8C%E5%9C%BA/</loc>
+    <loc>https://hahaha.cc/tags/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2022-02-25T00:19:49+08:00</lastmod>
   </url><url>
     <loc>https://hahaha.cc/tags/mysql/</loc>
@@ -154,9 +154,5 @@
   </url><url>
     <loc>https://hahaha.cc/blog/life/1/</loc>
     <lastmod>2012-09-27T19:22:06+08:00</lastmod>
-  </url><url>
-    <loc>https://hahaha.cc/home/</loc>
-  </url><url>
-    <loc>https://hahaha.cc/memos/</loc>
   </url>
 </urlset>

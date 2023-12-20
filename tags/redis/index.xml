@@ -5,7 +5,7 @@
     <link>https://hahaha.cc/tags/redis/</link>
     <description>Recent content in Redis on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en-us</language>
     <lastBuildDate>Tue, 23 Mar 2021 22:40:49 +0800</lastBuildDate>
     <atom:link href="https://hahaha.cc/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://hahaha.cc/blog/tech/1/</link>
       <pubDate>Tue, 23 Mar 2021 22:40:49 +0800</pubDate>
       <guid>https://hahaha.cc/blog/tech/1/</guid>
-      <description>大家好，我是Damon。 今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。 单实例环境</description>
+      <description>大家好，我是Damon。&#xA;今天和同事讨论库存防超卖问题，发现虽然只是简单的库存扣减场景，却隐藏着很多坑，一不小心就容易翻车，让我来填平这些坑。&#xA;单实例环境 一般电商体系防止库存超卖，主要有以下几种方式：&#xA;防止库存超卖，最先想到的可能就是「锁」，如果是一些单实例部署的库存服务，大部分情况下我们可以使用以下锁或并发工具类：&#xA;这三个任何一个都可以保证同一单位时间只有一个线程能够进行库存扣减，废话不多说，上码！&#xA;/** * 库存扣减（伪代码 ReentrantLock ) * @param stockRequestDTO * @return Boolean */ public Boolean stockHandle(StockRequestDTO stockRequestDTO) { // 日志打印...校验...前置处理等... int stock = stockMapper.getStock(stockRequestDTO.getGoodsId()); reentrantLock.lock(); try { int result = stock &amp;gt; 0 ? stockMapper.updateStock(stockRequestDTO.getGoodsId(), --stock) : 0; return result &amp;gt; 0 ? true : false; } catch (SQLException e) { // 异常日志打印及处理... return false; } finally { reentrantLock.unlock(); } } /** * 库存扣减（伪代码 synchronized ) * @param stockRequestDTO * @return Boolean */ public synchronized Boolean stockHandle(StockRequestDTO stockRequestDTO){ // 执行业务逻辑.</description>
     </item>
   </channel>
 </rss>

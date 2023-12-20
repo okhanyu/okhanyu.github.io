@@ -5,7 +5,7 @@
     <link>https://hahaha.cc/tags/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en-us</language>
     <lastBuildDate>Mon, 24 Apr 2023 13:01:22 +0800</lastBuildDate>
     <atom:link href="https://hahaha.cc/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://hahaha.cc/blog/life/0-5/</link>
       <pubDate>Mon, 24 Apr 2023 13:01:22 +0800</pubDate>
       <guid>https://hahaha.cc/blog/life/0-5/</guid>
-      <description>最近被工具困扰，不断的在做选择。 以下是我结合了易用性、self-host、云数据安全性、速度、价格等各方面的维度，最终给自己选定的工具集。 思维导图工具</description>
+      <description>最近被工具困扰，不断的在做选择。&#xA;以下是我结合了易用性、self-host、云数据安全性、速度、价格等各方面的维度，最终给自己选定的工具集。&#xA;思维导图工具： xmind、mindmaster -&amp;gt; 幕布 幕布算是国内领先的大纲工具，体验好、界面干净、够轻量，运营时间足够长，免费版本暂时够用，收费版不贵。&#xA;XMIND和MINDMASTER主题多，功能更强大，但是对我自己目前的需求来说过于臃肿。&#xA;Markdown工具： bear、macdown -&amp;gt; obsidian 界面清爽、双链、能处理合集，最近爆火，其他功能插件之类的还没研究，单单是界面就让我足够喜欢了。&#xA;碎片笔记工具： 语雀小记、flomo 目前在两个中来回横跳。&#xA;flomo团队小，我一直担心会有变故，且flomo数据导出只能导出HTML，缺少数据安全感；&#xA;语雀小记的标签不支持分级，并且mac下的客户端总是有小问题，使用体验也一般。&#xA;类Notion工具： Notion、 Wolai -&amp;gt; FlowUs&#xA;有时候记录本身就是一件有心里门槛、容易拖延的事情，像notion这样在国内速度这么慢这么不稳定，甚至有时候还要上电梯，以国内用户现在的狂热，可能会被砌墙，还是先等等。 Wolai的界面清爽，但是免费版限制颇多。现在背靠阿里是个优势，但是创始人的行径被诟病，尤其是隐私问题，还是算了。 FlowUs用了很长一段时间，目前尚可，只是暂时没有大资本进入。&#xA;截图 tinysnap&#xA;一个字：好看好用到想哭，无需多言的那种。&#xA;云盘： 阿里云盘、百度网盘&#xA;双备份，一个不限速，一个共享方便，哪个跑路都不担心。&#xA;知识库、云文档： 飞书知识库 -&amp;gt; 语雀、wolai 起初用飞书知识库，但是实在是性能太差渲染太慢了，很难受，暂时弃用了；&#xA;语雀用来记大块的技术学习笔记、后期可以形成开源书，界面干净带目录；&#xA;wolai就用来做书签收藏馆之类。 FlowUs就用来做收藏库书签。&#xA;博客： hexo、vuepress -&amp;gt; hugo + oss&#xA;强推hugo，最近这几个月，最喜欢的就是混博客圈子，特别有趣。 大概十几年前我用过wordpress，是真的又慢又乱，现在看好多人用typecho，经常搞来搞去数据没了，服务器挂了，要不就是被爆漏洞，一天到晚还不够糟心的。 我之前用hexo和vuepress，这两个从生成速度、到模板改动容易程度、环境安装简易程度，都不太满意，查了大量资料，最后尝试了hugo，那一刻我仿佛重生了，那一刻我仿佛明白了什么叫享受、什么叫丝滑，什么叫极致。&#xA;暂时先想到这么多。&#xA;一个工具，最基本的就两点：&#xA;易用 把用户数据当回事儿 仿佛现在大家都在互相追赶易用性，却让用户越来越没有安全感，安全感，从来都不是与生俱来。</description>
     </item>
   </channel>
 </rss>

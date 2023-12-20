@@ -1,94 +1,341 @@
-
 <!DOCTYPE html>
-<html lang="zh-cn" >
-     <head>
-        
-    <meta charset="utf-8" />
+<html>
+  <head>    <meta charset="utf-8" />
     <meta name="referrer" content="strict-origin" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
-    <meta name="author" content="小韩" />
-	
-	
-	
-	<title>怒斥XX主义极端患者下 ｜ 好事发生</title>
-	
-    
-    
-    <meta name="description" content="昨天的一篇文章，引来的许多评论，大家都是客观而又真诚的，我非常感动于大家的思考与成熟。 我本来发文是抱着中立态度，不对这件事本身做评论以及定论的，只是想" />
-    
 
-    
-    
-    <meta name="keywords" content="小韩, damon" />
-    
 
-	
-    
 
+<title>怒斥XX主义极端患者下 - 好事发生</title>
+
+
+
+<link rel="stylesheet" href="/scss/style.min.522a775fe394921e0238ab47a1751d6b9edba405fa52c1b5485546fd8c43c1ce.css">
+
+
+<link rel="stylesheet" href="/css/css.css">
      <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
      <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
      <link rel="apple-touch-icon" href="/img/favicon.png">
-
+</head>
+  <body>
     
+   
+    <div class="container"><style type="text/css">
 
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+  .rainbow-text {
+    background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/animate.css/4.1.1/animate.min.css" />
+#mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
 
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/zozo.css" />
+.header {
+  position: relative;
+  z-index: 2;
+}
 
-    
-	
-    <link rel="stylesheet" type="application/javascript" media="screen" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js" />
-    
-    
-    
-    <style type="text/css">
-         @keyframes blink {
-                 0% {
-                     color: red;
-                     opacity: 1;
-                }
-                 50% {
-                     color: blue;
-                     opacity: 0.2;
-                }
-                 100% {
-                     color: red;
-                     opacity: 1;
-                }
-            }
-        .rainbow-text {
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-             
-        }
-        .rainbow:hover:not(.hidden){
-            fill: red;
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-             animation: blink 2.5s infinite; 
-        }
-        .rainbow-static:hover:not(.hidden){
-            fill: red;
-            background: linear-gradient(to right, #ff0000, #0000ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-         
-    </style>
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+}
 
+.headerNav {
+  display: flex;
+  position: relative;  
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%;  
+   right: 0;   
+  margin: 0;  
+  border-radius: 12px;
+    padding: 12px;
+    min-width: 158px;
+
+    border: 1px solid rgba(60, 60, 67, .12);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .08);
+    transition: background-color .5s;
+ 
+    overflow-y: auto;
+}
+
+.submenu a {
+    cursor: pointer;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.headerNav div {
+  position: relative;  
+  display: inline-block;  
   
+}
 
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/detail.css" />
-                 <style type="text/css">
+.headerNav div:hover .submenu {
+  display: block;
+
+}
+
+.headerNav div a span:hover{
+  background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.headerNav div span:hover{
+  background: linear-gradient(to right,#ff0000,#0000ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+ 
+@media screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .headerNav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 100%;
+  }
+  .headerNav div {
+  position: relative;  
+  display: block;  
+}
+
+  .headerNav div:hover .submenu {
+    display: none;
+  }
+
+  .headerNav div .submenu {
+    display: none;
+    position: static;
+  }
+
+  .headerNav div.active .submenu {
+    display: block;
+
+  }
+
+  .submenu {
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+  z-index: 1;
+  top: 100%;  
+   right: 0;   
+  margin: 0;  
+  border-radius: 12px;
+    padding: 12px;
+    min-width: 158px;
+    border: 0px solid rgba(60, 60, 67, .12);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    transition: background-color .5s;
+ 
+    overflow-y: auto;
+}
+
+}
+
+ul{
+  padding: 0px;
+}
+li {
+  list-style: none;
+}
+
+.submenu li:hover{
+ 
+   border-radius: 5px;
+}
+
+.icon {
+    display: inline-block;
+    margin-top: -1px;
+    margin-left: 4px;
+    width: 11px;
+    height: 11px;
+    fill: rgba(60, 60, 67, .33);
+    transition: fill .25s;
+    flex-shrink: 0;
+}
+</style>
+
+<header class="header">
+  
+  <div id="mask" style="display: none;"></div>
+  <div class="header__title" style="font-size: 1.8rem;font-family: Playtwo, Playone,'Eczar', serif;font-weight: bold !important;">
+    <a href="https://hahaha.cc/">好事发生</a>
+  </div>
+  <div class="menu-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </div>
+  <div class="headerNav">
+     
+     
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+           
+          <a href="https://hahaha.cc//" style="font-weight: bold !important;"><span>首页</span>
+         
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+          
+          <a href="https://hahaha.cc/moment/" style="font-weight: bold !important;" target="_blank"><span>片刻</span>
+             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" height="24px" viewBox="0 0 24 24" width="24px" class="icon" data-v-9f11c062=""><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"></path></svg>
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+          
+          <a href="https://hahaha.cc/music/" style="font-weight: bold !important;" target="_blank"><span>音乐</span>
+             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" height="24px" viewBox="0 0 24 24" width="24px" class="icon" data-v-9f11c062=""><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"></path></svg>
+          
+        </a>
+      </div>
+    
+      <div style="padding: 10px;position: relative;text-align:center">
+        
+           
+          <a href="https://hahaha.cc/about/" style="font-weight: bold !important;"><span>关于</span>
+         
+          
+        </a>
+      </div>
+    
+    
+    <div style="padding: 10px;position: relative;text-align:center">
+        <span style="font-weight: bold !important;">其他
+        </span>
+        <ul class="submenu">
+          
+          
+          <li><a href="https://txt.hahaha.cc"><span>换装</span></a></li>
+          
+        </ul>
+      </div>
+     
+  </div>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var menuIcon = document.querySelector('.menu-icon');
+  var headerNav = document.querySelector('.headerNav');
+  var mask = document.getElementById('mask');
+  var submenus = document.querySelectorAll('.submenu');
+
+  menuIcon.addEventListener('click', function(){
+    if (headerNav.style.display === '' || headerNav.style.display === 'none') {
+      headerNav.style.display = 'block';
+      mask.style.display = 'block';
+    } else {
+      headerNav.style.display = 'none';
+      mask.style.display = 'none';
+    }
+  });
+
+  headerNav.querySelectorAll('div').forEach(function(div) {
+    div.addEventListener('mouseenter', function(){
+      if (window.innerWidth > 600) {
+        this.querySelector('.submenu').style.display = 'block';
+      }
+    });
+
+    div.addEventListener('mouseleave', function(){
+      if (window.innerWidth > 600) {
+        this.querySelector('.submenu').style.display = 'none';
+      }
+    });
+
+    div.addEventListener('click', function(e){
+      if (window.innerWidth <= 600) {
+        e.stopPropagation();
+        var submenu = this.querySelector('.submenu');
+        if (submenu.style.display === '' || submenu.style.display === 'none') {
+          submenu.style.display = 'block';
+        } else {
+          submenu.style.display = 'none';
+        }
+        Array.from(this.parentNode.children).forEach(function(sibling){
+          if (sibling !== this && sibling.querySelector('.submenu')) {
+            sibling.querySelector('.submenu').style.display = 'none';
+          }
+        }, this);
+      }
+    });
+  });
+
+  document.addEventListener('click', function(){
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+
+  mask.addEventListener('click', function(){
+    this.style.display = 'none';
+    headerNav.style.display = 'none';
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+});
+
+</script>
+
+<main class="main">
+        
+
+
+<link rel="stylesheet" href="/css/detail.css">
+  
+<style type="text/css">
      
             .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
                  display: flex;
@@ -141,296 +388,220 @@
           
              
 
-            .post_content a img{
+            .post__content a img{
                  max-height: 900px;
             }
 
+            a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    display: none;
+}
+
     </style>
-    </head>
-    <body>
-        <div class="main animate__animated animate__fadeInDown">
-            <div class="nav_container animated fadeInDown">
-    <div class="site_nav" id="site_nav">
-        <ul>
-            
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/home/" style="font-weight: bold !important;">首页</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/memos/" style="font-weight: bold !important;">片刻</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/music/" target="_blank" style="font-weight: bold !important;">
-                 音乐
-                 </a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://hahaha.cc/about/" style="font-weight: bold !important;">关于</a> 
-                 
-            </li>
-            
-            <li>
-                  
-                 <a href="https://txt.hahaha.cc" style="font-weight: bold !important;">换装</a> 
-                 
-            </li>
-            
-        </ul>
-    </div>
-    <div class="menu_icon">
-        
-        
-            <a id="menu_icon"> 
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"/></svg>
-        </a>
-    </div>
-</div> 
-            <div class="header animated fadeInDown" style="padding: 50px 0 100px 0;">
-    <div class="site_title_container">
-        <div class="site_title">
-            <h1>
-                
-                    <a href="/home/">
-                     <span class="rainbow">੭ ᐕ)੭</span>
-                </a>
-            </h1>
-        </div>
-        <div class="description">
-            <p class="sub_title" style="font-size: 12px;">     
-                  <span id="hitokoto" class="rainbow">
-                  </span>
-                  <span   class="rainbow-text"> 
-                    记录日常、好事发生
-                 </span>
-             </p>
-            <div class="my_socials">
-               
-                
 
-                <a href="/memos/" title="片刻"  style="margin-left:10px"  class="rainbow">
-                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M220.6 121.2L271.1 96 448 96v96H333.2c-21.9-15.1-48.5-24-77.2-24s-55.2 8.9-77.2 24H64V128H192c9.9 0 19.7-2.3 28.6-6.8zM0 128V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H271.1c-9.9 0-19.7 2.3-28.6 6.8L192 64H160V48c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16l0 16C28.7 64 0 92.7 0 128zM168 304a88 88 0 1 1 176 0 88 88 0 1 1 -176 0z"></path></svg>
-                </a>
-
-                <a href="/music/" title="音乐" target="_blank" style="margin-left:10px"  class="rainbow">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512"><path d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7v72V368c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V147L192 223.8V432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6V200 128c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"/></svg>
-                </a>
-
-                
-
-
-                <a href="https://weibo.com/sohanyu" title="微博" target="_blank" style="margin-left:10px" class="rainbow">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.4em" viewBox="0 0 512 512"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"></path></svg>
-                </a>
-
-                 
-
-            <a href="https://github.com/okhanyu" title="Github" target="_blank"  style="margin-left:10px" class="rainbow">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 496 512">
-                      <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-                    </svg>
-                </a>
-                <a href="/about/" title="关于"  style="margin-left:10px"  class="rainbow">
-                   <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 576 512"><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
-                </a>
-                <a href="/index.xml" type="application/xml" title="Rss" target="_blank" style="margin-left:10px" class="rainbow">
-                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 448 512"><path d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM0 416a64 64 0 1 1 128 0A64 64 0 1 1 0 416zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-            <div class="content">
-                <div class="post_page">
-                    <div class="post animate__animated animate__fadeInDown">
-                       
-                        <div class="post_title post_detail_title">
-                            <h2><a href='/blog/life/0-15/'>怒斥XX主义极端患者下</a></h2>
-                           
-                            <span class="date">2023.06.14</span>
-                           
-                        </div>
-
-                        
-
-
-                        
-                         <div class="post_content markdown">**该文章已隐藏**</div>
-
-                    
-                </div>
-            </div>
-        </div>
-
-        <a id="back_to_top" href="#" class="back_to_top">
-    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-        <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"
-        />
-    </svg>
-</a>
-
-<footer class="footer">
-    <div class="powered_by">
-        <div  style="margin-bottom:3px">
-            <a>
-                
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-
-               
-                
-                
-                
-                
-               
-
-               29 篇 46934 字
-
-            </a>
-        </div>
-        <div>
-         <a></a>  
-           
-        </div>
-    </div>
+<div class="post ">
+  <div class="post__header">
     
-   
-     <div class="powered_by">
-          <a  style="margin-right: 0;padding: 0;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502054294"  target="_blank">
-            <img width="8px" src="/img/ba.png">
-            <span>
-              京公网安备11010502054294号</span> · 
+      
+          <img class="article__image" src="/img/1.webp">
+      
+  </div>
+
+  
+  <div class="post__tags">
+    
+      <a class="post__tag" href="https://hahaha.cc/tags/%E6%84%9F%E5%8F%97">感受</a>
+    
+  </div>
+  
+
+  <section class="post__content">
+    <h1 id="title">怒斥XX主义极端患者下</h1>
+    <div>
+      <article>
+          <p>昨天的一篇文章，引来的许多评论，大家都是客观而又真诚的，我非常感动于大家的思考与成熟。<br>
+我本来发文是抱着中立态度，不对这件事本身做评论以及定论的，只是想通过这个事件巩固和炫耀自己了解的那一丁点经济学中的社会成本知识。</p>
+<p>意外的是，这次事件中的那位女博主也在文章底下留言，表达了她的一些看法。<br>
+在我阅读三遍这位女性博主的留言后，原本我对她的尊重荡然无存，感受到无比的失望、愤怒、无语。 <br>
+在我眼中，她曾是我认为的文化人。</p>
+<p>想说：读的书多，从来不是你宣泄怨念、滥杀无辜的武器。</p>
+<p><strong>文章原文：</strong> <br>
+<a href="https://hanyu.life/blog/life/9/">https://hanyu.life/blog/life/9/</a></p>
+<p><strong>女博主的第一次留言：</strong>  <br>
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/life/10/img/1.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/life/10/img/1.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+</p>
+<p><strong>我对留言的第一次回复：</strong></p>
+<p>很抱歉，千层面博主，很感谢你用手机非常认真的写下这么多字的留言，能感受到你奋笔疾书时情绪。</p>
+<p>我用7个小时的时间思考，6个小时的时间编写了4000字左右作为给你的留言回复，我文化有限，水平颇低，以下文字，均为大白话，标点使用有误，请勿公开耻笑，谢谢。</p>
+<p>很认真的看完你的评论（三遍，一遍比一遍愤怒）后，我非常生气和难受，反复斟酌，该如何心平气和的回复你，斟酌再三后，决定带着愤怒的情绪回复你即可，毕竟你我之间，本无交情。</p>
+<p>再次对你说，抱歉，恕我忍不住表达对你【这份留言（而非群内事件）】的一千层不满，毕竟你叫千层面。</p>
+<p>对你原本的支持、尊重、理解，因你的留言而完全改变，不知你是否在情绪稳定之后，重读过你在我文章下的留言，我先总结下看完你的留言后，我内心的感受关键词（我的词汇量有限，以下词汇包括但不限于）： <br>
+[高级版尖酸刻薄、搞性别对立、<del><del>包容性差</del></del>无包容性、无差别污蔑群体、对做<strong>技术</strong>的人不尊重、对整体群友不尊重、妄想代替整个女性群体、全文使用代词“你” = 对我的极大不尊重、将历史遗留问题归咎于当代男性、不懂得如何积极解决问题、留言处处误导他人令其进入你的情绪世界和你共鸣]</p>
+<p>如果你觉得以上用词不对，那么请你再次默读你自己的留言，大声朗读给你的亲朋好友也可，读给你做技术的男性朋友为最佳实践。</p>
+<p>首先，想先请你深呼吸，放轻松，这个阶段我们的交流是平等且舒适的，我是尊重你且尊重事实的。<br>
+我必须坚定的承认，那位男博主的那句话，是带有黄色意味的，因为有评论的博友指出“玩”这个字。<br>
+对于看到这句话的女性来说，会是极度难受的，是不平等的，因为”玩”字，代表了一方对另一方的羞辱意味。<br>
+同时，在任何公开场合表示出对女性的言语上的侮辱和不尊重，都是非常错误的行为，所以，那位男博主的这句话不分场合也有极大问题。<br>
+你的退群，是你的个人权利，是远离让你不舒服的环境的一种自然选择，我非常理解以及尊重，我也能非常清晰的感受到你的痛苦和不适，也从未忽略过你的糟糕感受，被伤害的感受，被不可理喻的事情折磨的感受。</p>
+<p>我相信你看到这里，还是会觉得很无语，似乎我没有透彻的理解你想表达的，也许你想让看到你的留言的人明白的是：那位男博主就不应该从言行上、从潜意识里说出这样话，有这样对女性有欺辱性的、“肮脏”的想法，而不仅仅是场合不合适。</p>
+<p>理解。他做的不对，这毋庸置疑。可我们要怎么做，才能让他真正彻底的从内心深处就明白他的错误呢？<br>
+会不会有这样一种选择，会不会有更好的效果：<br>
+1、群内，严肃告知这位男性博友，不要再开这种黄色玩笑，对于这样的玩笑你非常深恶痛绝，且这样的玩笑有损男性体面<br>
+2、群内@群主，立下群规，再有此类言论，直接踢出<br>
+3、群内和大家严肃普及，哪些男性不以为意的言论会对女性造成巨大伤害</p>
+<p>当然，这不是你的义务，但让男性与女性更加平衡的互相尊重，不是所有人的期望吗？</p>
+<p>你愿意和我一起切换到那位男博主的视角，去尝试理解他吗？不，我相信你不愿意，我相信你是厌恶的。<br>
+因为你只是恰巧遇到了情绪出口，你的【留言（非群内事件）】让我感觉你从未想解决问题，用你为女性发声的“大义”挑起性别对立，最终你赢得这场战役才是你期望，以维护你的女权主义或满满的成就感。</p>
+<p>下面，是我对你的极度不满，你一字一句让我非常不适，我的回复也会让你极度不爽，如果介意，你请自动忽略，关闭页面后回到你的小世界里安稳度余生（我这么说是不是太过分了）。</p>
+<p>1、你说：“国骂为什么是“草你妈”而不是“草你爹”，为什么骂人要骂“婊子养的”，问候女性家人，而没有对父亲、叔伯的性冒犯呢？”</p>
+<p>历史原因，曾经是男权社会，那时候女人只能属于一个男人，如果一个男人的女人和另一个人有关系，是一件无法忍受的事情，而母亲又是儿女最在意的人，所以，使用“草你妈”会让被骂的一方有更大的伤害，同时也隐含“我是你爹”的意思，而当这种脏话成为旧社会的骂人的共识时，改变的难度是巨大的，期望你以后能改变这个局面，毕竟这三个字谁都不愿意听。</p>
+<p>2、你说：“为什么“奸（姦）佞”“嫉妒”“婪”“奴”“妖”，这些男女共通的人性暗面只含有“女”字呢？”</p>
+<p>历史原因，是历史成见，例如 “婪” 字，我百度查为什么是女字底，一个解答是：示意妾众多，表示男子希望妾像树林般众多，至于文字由来，博主你可以自行去搜索引擎查询。<br>
+但我想回复你两点：<br>
+（1）有些字，意不好，但未必是你理解的有“女”字旁组成即是诋毁女性；<br>
+（2）从象形文字、到旧社会、到当代，文字是一切历史、文化、交流的基础载体，如果没有人有强大的影响力去修改这些文字，那么现状将一直持续，你可以把你的抱怨、不解，变为力量，想法设法的改变这些文字组成。</p>
+<p>3、你说：“从小到大的“见怪不怪”之间，潜移默化地给了生活其中的每个人差劲的教育，使得无论男女都有意无意地歧视、慢待、无视女性。”</p>
+<p>你无形之中给我扣了一顶帽子，你口中的我仿佛是原罪，看到你这样“蛮不讲理”，我此刻开始失望和愤怒。<br>
+我不知道你对男性有多大的偏见和多大的创伤，或者说你多崇高的思想境界，才会让你看到“见怪不怪”四个字会像触碰荆棘的猫一样。 <br>
+抱歉，我不是圣母、也不是圣父，更不是圣战，我没有那么多的时间、精气神、以及传说中猫的九条命，我活在一个真实的、现实的社会之中，我有我的人际圈、有我的同事、有我的朋友、有我的亲戚、有我熟悉但又没那么熟悉的人，我这半生未到，见识、接触到的人也难以数清了，我没有大无畏精神，我不是大英雄，也不能总是去对某些人的不适当的言论去教育、制止、反对、争辩，我还有更多想做的事情，想去的地方，我还要赚钱、养家、和谐的处理身边关系，你不是也一样，毫无“作为”的退群逃离吗。</p>
+<p>4、你的原话：“进群之前就深知独立博客博主这个群体以男性为主，兴趣或职业大部分与<strong>技术相关</strong>，这<strong>一群体的性别观念过时落后</strong>我已有所了解和心理准备，但并未想到短短几天就到了自己难以忍受的地步。”</p>
+<p>当看到你这句话时，我内心深处已经无法尊重你了，但鉴于我残存了一丝教养，我还是劝自己心平气和的回复你，一定要忍住我说脏话的臭毛病，请问这就是你“独立女性”、“女权主义”的一言一行吗？ 对男性的不尊重，对“技术”职业的歧视和不知道哪里来没来由的鄙视是从何而来？把男性、把做技术的人、把整体群友，统一归类成观念过时落后的勇气和证据又是从何而来？请问你还有最起码的明辨是非的能力吗？你让我看到你的言论，又如何能够做到尊重你或你的女权主义呢？你说的话，值得尊重吗？</p>
+<p>5、你说：“女性总是被男性审视的客体，由男性来定义女性美的标准（其中一种主流审美与照片基本一致），女性没有掌控自己身体、衣着和审美的权利。”</p>
+<p>从没有人定义女性美的标准，没有一条法律规定女性必须怎么样才算符合美的标准，你可以随意掌控自己的身体或胖或瘦，或暴露或包裹，你之所以能问出这样的话，是因为你从未尊重个体选择美的权利，我喜欢苗条身材的女人，你喜欢健硕大胸肌的男人，这难道也不能遵循本心本意了吗？你长得胖瘦美丑，你打扮的花枝招展或锦衣素面，是你的权利，没有人捆绑住你给你三个大嘴巴告诉你必须怎样，是你内心的牢笼困住你自己，你有没有想过，一个肥头大耳的大肚便便的男人你觉得他好看吗？你不也在时刻定义男性的美吗？</p>
+<p>6、你说：“因为夏天裙子短被猥琐目光上下打量的不是你，在公交地铁上被偷拍猥亵的不是你，被拐卖远离家人被迫成为生育工具的不是你。学校录取分数线与工作录用标准向你倾斜，男性结成同盟保护你，你基本不必担心走夜路被性侵，或月经/生育带来的不便与污名。”</p>
+<p>（1）你全文用的代称都是“你”，请问，我是你情绪发泄的对象或工具？还是和你相交甚好的挚友？有没有觉得你全文的代称都不合适？   <br>
+（2）裙子长短是女性的自由，那么请问，你为何要穿短裙？是因为你觉得你的腿配上短裙，又凉快又美，既然是美，男性为什么将目光聚集在美的事物上就一定被称为猥琐？男性看到女性搭配好看的短裙，目光被吸引，就不能被定义为欣赏和喜欢？同理，为什么女性盯着身材好穿紧身衣的男性就不被称之为猥琐？ <br>
+（3）地铁上偷拍猥亵的，但凡被发现或女孩求助，哪个没被揍或被曝光严惩？这种情况难道不是越来越少了（我可不做不严谨的人，我声明我没查统计数据）？学校录取分数线和工作录用标准请问为何又要处处公平，你知道这样的公平要让雇主付出什么样的代价？那请问为何男性做“育儿嫂”就会被歧视，这是不是也是不公平？警察抓人时闯红灯算不算不公平？送你两句我现查的话：</p>
+<ul>
+<li>知之非艰，行之惟艰</li>
+<li>未经他人苦，莫劝他人善</li>
+</ul>
+<p>7、你说：“大多群友没有性别观念教育，更遑论实践，自然也不知道如何讲话如何行动，意识不到玩笑与冒犯的边界在哪里。只有女性，从小到大积攒了许多被歧视和冒犯的不适，意识到这中间的糟糕和错误，才会进行自我性别教育。”</p>
+<p>你又一次又一次又一次的在肆意的定义别人，什么叫大多数群友？中文博客群，100多个人，请问大多数是多少？你怎知其中99个人有没有性别观念教育？只有你的教育是高等的、高知的、甚至把你变成高傲的、高不可攀的？当你在谴责群友不知道边界在哪里时，也请问问你自己，你的包容性在哪里？你有去尝试认真的、真诚的解决问题吗？也请你深思熟虑，纵观你活着的这些年，多少人用着你这种粗劣的方式仿佛为女性呐喊权益，而导致男性被刻意歧视和冒犯。</p>
+<p>8、你说：“这个群当然能以古旧的性别意识维系下去，但介意歧视与冒犯的女性会越来越多，当你或其他群友在各种场合与这样的女性相遇，这种古旧就会极大地败坏好感、拉低印象，推着别人离开。”</p>
+<p>这里你又一次又一次又又又一次用代称“你”，这一次你更过分，我原文章的论断是制止这样不好的情况发生，而你，竟然不分缘由，不分对象，不分是非，不分青红皂白赤橙黄绿青蓝紫直接放肆的谴责整个群里的人，谴责我，你不觉得你此处极其莫名其妙吗？你确实也该好好思考下，到底是谁在古旧社会的怨念中无法自拔了。</p>
+<p>现在是凌晨4点41，我依然难以入眠，可恨。 <br>
+<strong>令我不解的是</strong>，为何你非要事事似站在男性的对立面，这样会让男性更尊重女性吗？我甚至怀疑你是不是男扮女装在挑起性别对立。<br>
+<strong>令我生气的是</strong>，在群内发生这件事我没有谴责过任何人，我也没有发表我的观点，连原文章中都未有，你凭何在留言中处处冒犯我？这就是你所谓的懂边界？我是不是该想想怎么骂人才算有边界？ <br>
+<strong>令我失望的是</strong>，来文字从不能代表一个人的文化与认知水平，写字先做人啊，天。 <br>
+<strong>令我想骂人的是</strong>，你口口声声在为女性发声，在宣读你的道德圣经，我原以为你是知书达理的、你是高贵雍容的、你是高知明是非的，但你的留言，处处是刺，咄咄逼人，肆意妄为的将你看不惯的任何一个群体的全部，贬低到尘埃。</p>
+<p>一个人，要想赢得尊重，先要懂得尊重别人。 <br>
+不需要你的文字功底有多深，不需要你多会使用排比句，不需要你处处似伸张正义，不需要你看似深刻却处处把人归类、暗藏杀机的表述。    <br>
+先学会成熟，再学会尊重，一切期待自然而来，没有站在你这边的，你未必就要针锋相对、针眼扎人、针针见血、大杀四方、滥杀无辜。</p>
+<p>可恶，为这篇留言回复而熬夜，属实不值。</p>
+<p>看完如果有想骂我的人，<strong>忍一忍，我不抗骂</strong>，我挺无辜。</p>
+<p>我真是闲的 - - 。</p>
+<p>最后我想说，留言请留你的真实邮箱，退群、到我这里留言又留假邮箱，给你的回复你收不到，也就是只能你来对别人肆意泼洒不尊重，别人的回复你甚至拒绝接收，那又何必交流和表达？  （我这说话的感觉有没有点像你一样刻薄）</p>
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/life/10/img/2.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/life/10/img/2.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+<h5 id="6月15日1327-更新以下二次留言回复">6月15日13:27 更新以下二次留言回复：</h5>
+
+
+
+
+    <a class="imgshow" data-fancybox="gallery" href="https://files.hahaha.cc/files/blog/life/10/img/3.png?imageMogr2/rquality/70" data-caption="" style="text-align: center;">
+    
+        <img src="https://files.hahaha.cc/files/blog/life/10/img/3.png?imageView2/1/q/25" style="max-width: 100%;height: 100%;object-fit: cover;" />
+         
+    </a>
+
+
+      </article>
+    </div>
+  </section>
+</div>
+<a id="back_to_top" href="#" class="back_to_top" style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3.0l192 192c12.5 12.5 12.5 32.8.0 45.3s-32.8 12.5-45.3.0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3.0s-12.5-32.8.0-45.3l192-192z"></path></svg></a>
+
+
+
+<script src=https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js>
+</script>
+<link href=https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css
+rel=stylesheet>
+<script src=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js>
+</script>
+
+
+<script type="text/javascript">
+
+
+     
+$(document).ready((function (_this) {
+     $('[data-fancybox="gallery"]').fancybox();
+$(".fancybox").fancybox();
+
+  return function () {
+    let bt
+    bt = $('#back_to_top')
+    if ($(document).width() > 480) {
+      $(window).scroll(function () {
+        let st
+        st = $(window).scrollTop()
+        if (st > 30) {
+          return bt.css('display', 'block')
+        } else {
+          return bt.css('display', 'none')
+        }
+      })
+      return bt.click(function () {
+        $('body,html').animate({
+          scrollTop: 0,
+        }, 800)
+        return false
+      })
+    }
+  }
+})(this));
+
+
+
+</script>
+
+      </main><footer class="footer">
+  <div style="display: block;">
+
+          <a style="margin-right: 0;padding: 0;display: inline-block;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502054294"  target="_blank">
+
+            <span>  <img width="8px" src="/img/ba.png" style="width:9px;display: inline;border: 0px;" > 
+             京公网安备11010502054294号</span> · 
           </a>
           <a  style="margin-left: 0;padding: 0;" href="https://beian.miit.gov.cn/"  target="_blank"><span id="icp">京ICP备18031874号-9号
             </span>
           </a>
-    </div>
-         
-
+  <span>&copy; 2023 <a href="https://hahaha.cc/">好事发生</a></span>
+</div>
 </footer>
- 
-        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
-<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js"></script>
-<script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/marked/4.0.2/marked.min.js"></script>
-<script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
 
-<script src="/js/zozo.js"></script>
-<script src="/js/common.js"></script>
-
-
-
-
-<script type="text/javascript" async
-    src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\[\[', '\]\]']],
-                processEscapes: true,
-                processEnvironments: true,
-                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-                TeX: {
-                    equationNumbers: { autoNumber: "AMS" },
-                    extensions: ["AMSmath.js", "AMSsymbols.js"]
-                }
-            }
-        });
-
-        MathJax.Hub.Queue(function () {
-            
-            
-            
-            var all = MathJax.Hub.getAllJax(), i;
-            for (i = 0; i < all.length; i += 1) {
-                all[i].SourceElement().parentNode.className += ' has-jax';
-            }
-        });
-    </script>
-
-<style>
-    code.has-jax {
-        font: inherit;
-        font-size: 100%;
-        background: inherit;
-        border: inherit;
-        color: #515151;
-    }
-</style>
-
-
-
-
-
-        
-         <script src="/js/single.js"></script>
-
-    </body>
-</html>     
+    </div>
+  </body>
+</html>

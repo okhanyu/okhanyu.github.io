@@ -5,7 +5,7 @@
     <link>https://hahaha.cc/tags/mysql/</link>
     <description>Recent content in MySQL on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en-us</language>
     <lastBuildDate>Wed, 09 Feb 2022 17:28:32 +0800</lastBuildDate>
     <atom:link href="https://hahaha.cc/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://hahaha.cc/blog/tech/2/</link>
       <pubDate>Wed, 09 Feb 2022 17:28:32 +0800</pubDate>
       <guid>https://hahaha.cc/blog/tech/2/</guid>
-      <description>写在前面的废话 Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。 这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿</description>
+      <description>写在前面的废话 Hello，大家好，我是Damon，一年前我写了一篇文章，然后拖更至今。 这其中有自己懒惰、工作变动等因素，年前这段时间一直在求职面试，拿到了些一线大厂和一些独角兽的offer。这段时间面试的经验和学习的过程对我自己帮助很大，面经还在整理中，后续会发出来给大家做一个参考吧。&#xA;因为每家公司的面试官不同，出题也是千遍万化，所以有些基础的核心知识，必须要体系化的学习，今天写这篇MySQL索引相关的知识也都是面试必问，后面我也会把一些锁、事务等等相关知识点写出来。&#xA;从今天开始，也会持续更新啦。虽然这篇文章很八股很基础，但总要一点点来，不积跬步无以至千里。如果觉得西瓜不错，可以点击关注哦。&#xA;咱们一起成长吧！&#xA;什么是索引 索引是一种有序的数据结构，它的作用很多人形象的比喻为书的目录。&#xA;注：数据结构一般是指逻辑上数据的组织形式，就好像运动会时老师要班级里的同学按照某一种队形站位一样。&#xA;索引的用处 正因为索引是一种一种有序的数据组织形式，所以可以提高查询效率，也让排序行为变得简单。&#xA;索引的缺点 虽然索引大大提高了查询速度，同时却会降低更新表的速度，如对表进行insert、update和delete。因为更新表时，不仅要保存数据，还要保存一下索引文件。 建立索引会占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果你在一个大表上创建了多种组合索引，索引文件的会增长很快。 索引只是提高效率的一个因素，如果有大数据量的表，就需要花时间研究建立最优秀的索引，或优化查询语句。 索引到底是个什么 其实索引就只是一个硬盘上的文件而已，例如，在InnoDB引擎下，索引其实就是如下MySQL相关目录下的一个后缀名为.ibd的文件。&#xA;注：&#xA;如果使用MyISAM存储引擎，数据库文件类型就包括.frm (表结构描述)、.MYD (表数据)、.MYI (索引)&#xA;如果使用InnoDB存储引擎，数据库文件类型就包括.frm (表结构描述)、ibdata1 (共享表空间)、.ibd (索引)&#xA;索引在MySQL架构体系位置 MySQL宏观层面可以大致分层如图：&#xA;如上图可知，MySQL的索引其实是属于引擎层的数据结构。&#xA;MySQL支持的索引类型是和引擎息息相关的：&#xA;索引类型的比较 现在MySQL默认的存储引擎使用的是InnoDB，也是大多数公司的选择，而InnoDB的索引数据结构就是B+tree.每一个索引在InnoDB里面对应一棵B+树。&#xA;B+tree和B-tree(B-tree读B树不读B减树) B+tree是B-Tree的一个变种，B+tree只在叶子节点存储数据，而B-tree非叶子节点也存储数据，以下是实验链接：&#xA;B-tree B+tree&#xA;因此，B+tree 单个节点的数量更小，在相同的磁盘 IO 下能查询更多的节点。&#xA;另外 B+tree 叶子节点采用双向链表结构，适合MySQL中常见的基于范围的顺序检索场景，而 B-tree 无法做到这一点。&#xA;B+tree 索引与 Hash 表 基于哈希表实现，只有精确匹配索引所有列的查询才有效，对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码（hash code），并且Hash索引将所有的哈希码存储在索引中，同时在索引表中保存指向每个数据行的指针。&#xA;但范围查询是MySQL数据库中常见的场景，而Hash表不适合做范围查询，Hash表更适合做等值查询。&#xA;B+tree索引结构图 数据页是什么 在 InnoDB 存储引擎中，所有的数据都被逻辑地存放在表空间中，表空间（tablespace）是存储引擎中最高的存储逻辑单位，在表空间的下面又包括段（segment）、区（extent）、页（page），这部分非本文的重点内容，后续单开一篇来讲。&#xA;页（Pages）是mysql中磁盘和内存交换的基本单位，也是mysql管理存储空间的基本单位。&#xA;Buffer Pool 中存的就是一页一页的数据。再比如，当我们要查询的数据不在 Buffer Pool 中时，InnoDB 会将记录所在的页整个加载到 Buffer Pool 中去；同样的，当我们修改数据时，都需要将数据所在的数据页从磁盘读入到Buffer Pool中，然后在Buffer Pool中对其进行操作，操作完成后将 Buffer Pool 中的脏页刷入磁盘时，也是按照页为单位刷入磁盘的。同一个数据库实例的所有表空间都有相同的页大小，默认情况下，表空间中的页大小都为 16KB，当然也可以通过改变源码中的页大小参数重新编译进行修改，不同的页大小最终也会导致区大小的不同。&#xA;当插入一行数据时，会将该数据页加载到Buffer Pool中，然后从空闲区域中拿出一部分空间分配给数据行区域，当空闲区域耗尽时，表示该数据页已经满了。</description>
     </item>
   </channel>
 </rss>

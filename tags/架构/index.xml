@@ -5,7 +5,7 @@
     <link>https://hahaha.cc/tags/%E6%9E%B6%E6%9E%84/</link>
     <description>Recent content in 架构 on 好事发生</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en-us</language>
     <lastBuildDate>Thu, 04 May 2023 10:01:22 +0800</lastBuildDate>
     <atom:link href="https://hahaha.cc/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -13,7 +13,7 @@
       <link>https://hahaha.cc/blog/tech/3/</link>
       <pubDate>Thu, 04 May 2023 10:01:22 +0800</pubDate>
       <guid>https://hahaha.cc/blog/tech/3/</guid>
-      <description>原则与底线：不说废话、不凑字数、不标题党。 注：本文均为韩宇的胡思乱写，你随便抄 背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。 比如我发微博内容</description>
+      <description>原则与底线：不说废话、不凑字数、不标题党。&#xA;注：本文均为韩宇的胡思乱写，你随便抄&#xA;背景 什么是短链 一个长的网址链接，转换为一个短的网址链接。&#xA;比如我发微博内容带有 https://blog.hanyu.cool/about/ 链接时，链接会自动转换成 https://t.cn/A6NlWmYi 这样的短网址。&#xA;微博的短网址域名为：t.cn，腾讯的短网址域名为 url.cn，阅读本文后，就可以自己实现一个高性能短链服务。&#xA;短链的作用 缩减无意义的地址长度，多出空间给实际内容（当前微博限制5000个字） 对URL进行流控、点击统计，来源识别等，方便进行数据分析 防止直接暴露参数等信息，防止某些平台对参数中的关键词屏蔽 方便对URL进行封禁，相同URL通过生成转换之后，最终地址是相同的 原理与实现 核心原理 生成&amp;amp;转换 存储 映射 实现过程 用户先访问短网址，短网址将自动请求至短链服务器 短链服务器收到请求后，在映射中通过短网址查找原始长链 服务端将原始长链以302或301状态码返回给用户 用户浏览器收到后重定向到原始长链 生成短链主要有两种方式，哈希和ID生成器。&#xA;哈希 哈希算法 哈希算法可以将一个不管多长的字符串，转化成一个长度固定的哈希值，所以可以利用哈希算法，来生成短网址。&#xA;常用的哈希算法如MD5、SHA、MurMurHash、CRC32等。&#xA;短链不需要考虑反向解密难度，只需要考虑计算速度快、冲突概率小即可。&#xA;目前应用比较广泛非加密算法是2008 年被发明的MurmurHash，据资料显示，现在已经广泛应用到 Redis、MemCache、Cassandra、HBase、Lucene等软件中，MurmurHash算法具体实现可自行去了解，此处不展开（因为我懂得不多）。&#xA;MurmurHash 计算可选长度128位、32位等，位数多碰撞的概率就小，如果短链系统用的人不多，可以选择32位，这样生成的短链更短。&#xA;短链服务端接收到生成的请求后，可以把长链做 MurmurHash 计算，可以得到的一个哈希值，将哈希值与短链域名拼接，即可得到完整短链，如： t.cn/111111111&#xA;进制转换 如上所示，MurmurHash计算后得到的结果并不算短，我们可以优化一下，常用的方式是将10进制转换成62进制。 10进制转换62进制的逻辑就是，一直循环用62取余然后倒序：&#xA;最终 t.cn/111111111 用62进制表示的短链就是 t.cn/7WD4h 。&#xA;假设生成6位字符的短链： 10进制 最大只能生成 10 ^ 6 - 1 = 999999个 16进制 最大只能生成 16 ^ 6 - 1 = 16777215个 62进制 最大竟能生成 62 ^ 6 - 1 = 56800235583个 A-Z a-z 0-9 刚好等于62位。</description>
     </item>
   </channel>
 </rss>
