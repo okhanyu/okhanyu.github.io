@@ -24,11 +24,11 @@ const app = createApp({
                 navBtn: [{
                     title: "回到首页",
                     subTitle: "",
-                    url: "/home/"
+                    url: "/"
                 },{
                     title: "回前一页",
                     subTitle: "",
-                    url: "../memos/"
+                    url: "../moment/"
                 }]
             },
             link: {
