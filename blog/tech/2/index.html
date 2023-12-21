@@ -375,30 +375,17 @@ a{
     transition-property: background-color;
     display: none;
 }
+ul{
+    padding-left: 20px;
+}
+li{
+    list-style: disc;
+}
 
     </style>
 
 <div class="post ">
-  <div class="post__header">
-    
      
-
-
-      
-       
-          <div class="article__image" style="display: flex;flex-wrap: wrap;align-content: center;justify-content: center;align-items: center;color: white;
-            text-shadow:1px 1px 1px #959090;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%;background-color: #ffffff;
-/*            border: 1px solid #eceff133;*/
-              overflow: hidden;filter: blur(1px);font-size: 22px;">浅尝MySQL索引</div>
-      
-
-  </div>
 
   
   <div class="post__tags">
@@ -410,6 +397,45 @@ a{
 
   <section class="post__content">
     <h1 id="title"  style="color:#3c445e">浅尝MySQL索引</h1>
+    
+<aside style="line-height: 1.2rem;font-size: 0.8rem;border-bottom: 1px dashed gray;">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#写在前面的废话">写在前面的废话</a></li>
+    <li><a href="#什么是索引">什么是索引</a></li>
+    <li><a href="#索引的用处">索引的用处</a></li>
+    <li><a href="#索引的缺点">索引的缺点</a></li>
+    <li><a href="#索引到底是个什么">索引到底是个什么</a></li>
+    <li><a href="#索引在mysql架构体系位置">索引在MySQL架构体系位置</a></li>
+    <li><a href="#索引类型的比较">索引类型的比较</a>
+      <ul>
+        <li><a href="#btree和b-treeb-tree读b树不读b减树">B+tree和B-tree(B-tree读B树不读B减树)</a></li>
+        <li><a href="#btree-索引与-hash-表">B+tree 索引与 Hash 表</a></li>
+        <li><a href="#btree索引结构图">B+tree索引结构图</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据页是什么">数据页是什么</a>
+      <ul>
+        <li><a href="#为什么页默认16k">为什么页默认16K</a></li>
+      </ul>
+    </li>
+    <li><a href="#索引的分类">索引的分类</a>
+      <ul>
+        <li><a href="#物理角度">物理角度</a></li>
+        <li><a href="#字段约束角度应用角度">字段约束角度&amp;应用角度</a></li>
+      </ul>
+    </li>
+    <li><a href="#回表">回表</a></li>
+    <li><a href="#索引覆盖">索引覆盖</a></li>
+    <li><a href="#最左前缀">最左前缀</a></li>
+    <li><a href="#索引下推">索引下推</a></li>
+    <li><a href="#索引重建">索引重建</a></li>
+    <li><a href="#索引创建原则">索引创建原则</a></li>
+    <li><a href="#哪些情况下索引会失效">哪些情况下索引会失效</a></li>
+  </ul>
+</nav>
+</aside>
+
     <div>
       <article style="color:#3c445e">
           <h2 id="写在前面的废话">写在前面的废话</h2>
