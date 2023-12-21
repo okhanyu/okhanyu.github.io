@@ -1,6 +1,6 @@
 .article__header {
   position: relative;
-  box-shadow: 2px 2px 8px grey;
+/*  box-shadow: 2px 2px 8px grey;*/
 }
 
 .article__header::after {
