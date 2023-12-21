@@ -25,10 +25,6 @@ const app = createApp({
                     title: "回到首页",
                     subTitle: "",
                     url: "/"
-                },{
-                    title: "回前一页",
-                    subTitle: "",
-                    url: "../moment/"
                 }]
             },
             link: {
