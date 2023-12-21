@@ -267,70 +267,6 @@ li {
   </div>
 </header>
 
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  var menuIcon = document.querySelector('.menu-icon');
-  var headerNav = document.querySelector('.headerNav');
-  var mask = document.getElementById('mask');
-  var submenus = document.querySelectorAll('.submenu');
-
-  menuIcon.addEventListener('click', function(){
-    if (headerNav.style.display === '' || headerNav.style.display === 'none') {
-      headerNav.style.display = 'block';
-      mask.style.display = 'block';
-    } else {
-      headerNav.style.display = 'none';
-      mask.style.display = 'none';
-    }
-  });
-
-  headerNav.querySelectorAll('div').forEach(function(div) {
-    div.addEventListener('mouseenter', function(){
-      if (window.innerWidth > 600) {
-        this.querySelector('.submenu').style.display = 'block';
-      }
-    });
-
-    div.addEventListener('mouseleave', function(){
-      if (window.innerWidth > 600) {
-        this.querySelector('.submenu').style.display = 'none';
-      }
-    });
-
-    div.addEventListener('click', function(e){
-      if (window.innerWidth <= 600) {
-        e.stopPropagation();
-        var submenu = this.querySelector('.submenu');
-        if (submenu.style.display === '' || submenu.style.display === 'none') {
-          submenu.style.display = 'block';
-        } else {
-          submenu.style.display = 'none';
-        }
-        Array.from(this.parentNode.children).forEach(function(sibling){
-          if (sibling !== this && sibling.querySelector('.submenu')) {
-            sibling.querySelector('.submenu').style.display = 'none';
-          }
-        }, this);
-      }
-    });
-  });
-
-  document.addEventListener('click', function(){
-    submenus.forEach(function(submenu){
-      submenu.style.display = 'none';
-    });
-  });
-
-  mask.addEventListener('click', function(){
-    this.style.display = 'none';
-    headerNav.style.display = 'none';
-    submenus.forEach(function(submenu){
-      submenu.style.display = 'none';
-    });
-  });
-});
-
-</script>
 
 <main class="main">
         
@@ -649,6 +585,77 @@ $(".fancybox").fancybox();
 
 
 </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var menuIcon = document.querySelector('.menu-icon');
+  var headerNav = document.querySelector('.headerNav');
+  var mask = document.getElementById('mask');
+  var submenus = document.querySelectorAll('.submenu');
+
+  menuIcon.addEventListener('click', function(){
+    if (headerNav.style.display === '' || headerNav.style.display === 'none') {
+      headerNav.style.display = 'block';
+      mask.style.display = 'block';
+    } else {
+      headerNav.style.display = 'none';
+      mask.style.display = 'none';
+    }
+  });
+
+  headerNav.querySelectorAll('div').forEach(function(div) {
+    div.addEventListener('mouseenter', function(){
+      if (window.innerWidth > 600) {
+        if (this.querySelector('.submenu').style != undefined && this.querySelector('.submenu').style != null){
+          this.querySelector('.submenu').style.display = 'block';
+        }
+      }
+    });
+
+    div.addEventListener('mouseleave', function(){
+      if (window.innerWidth > 600) {
+        if (this.querySelector('.submenu').style != undefined && this.querySelector('.submenu').style != null){
+          this.querySelector('.submenu').style.display = 'none';
+        }
+      }
+    });
+
+    div.addEventListener('click', function(e){
+      if (window.innerWidth <= 600) {
+        e.stopPropagation();
+        var submenu = this.querySelector('.submenu');
+        if (submenu.style.display === '' || submenu.style.display === 'none') {
+          submenu.style.display = 'block';
+        } else {
+          submenu.style.display = 'none';
+        }
+        Array.from(this.parentNode.children).forEach(function(sibling){
+          if (sibling !== this && sibling.querySelector('.submenu')) {
+            sibling.querySelector('.submenu').style.display = 'none';
+          }
+        }, this);
+      }
+    });
+  });
+
+  document.addEventListener('click', function(){
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+
+  mask.addEventListener('click', function(){
+    this.style.display = 'none';
+    headerNav.style.display = 'none';
+    submenus.forEach(function(submenu){
+      submenu.style.display = 'none';
+    });
+  });
+});
+
+</script>
+
     </div>
   </body>
 </html>
