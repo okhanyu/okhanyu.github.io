@@ -1,6 +1,6 @@
-.article__header {
+/*.article__header {
   position: relative;
-/*  box-shadow: 2px 2px 8px grey;*/
+  box-shadow: 2px 2px 8px grey;
 }
 
 .article__header::after {
@@ -10,9 +10,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* black with 50% opacity */
+  background: rgba(0, 0, 0, 0.1);  
 }
-
+*/
 
 
 @font-face {
