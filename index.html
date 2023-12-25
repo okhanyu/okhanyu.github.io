@@ -1,848 +1,750 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<meta name="generator" content="Hugo 0.121.1">    <meta charset="utf-8" />
-    <meta name="referrer" content="strict-origin" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
-
-
-
+<html lang="zh-cn">
+<head>
+	<meta name="generator" content="Hugo 0.121.1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>好事发生</title>
-
-
-
-<link rel="stylesheet" href="/scss/style.min.f6c3513f35775e275cb86a36544a68919c1c21eb5e6389dc75b7097f5238f95e.css">
-
+<meta name="description" content="Thoughts and ideas.">
+<meta name="author" content="Damon Han">
+<meta property="og:title" content="Damon Han" />
+<meta property="og:description" content="Thoughts and ideas." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hahaha.cc" />
+<meta property="og:image" content="https://files.hahaha.cc/resource/img/icon/favicon.ico" />
+<meta name="application-name" content="Damon Han">
+<meta name="apple-mobile-web-app-title" content="Damon Han">
+<meta name="msapplication-TileColor" content="#fff">
+<link rel="apple-touch-icon" sizes="180x180" href="https://files.hahaha.cc/resource/img/icon/favicon.png">
+<link rel="icon" type="image/png" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+<link rel="icon shortcut" type="image/png" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+<link rel="icon" type="image/svg" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+<link rel="icon shortcut" type="image/svg" href="https://files.hahaha.cc/resource/img/icon/favicon.ico">
+<link rel="feed" href="/blog/index.xml" type="application/rss+xml" title="好事发生">
 <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/style.css"  media="print" onload="this.media='all'"> 
-
-<style type="text/css">
-  body{
-     font-size: 16px;
-     font-weight: 400;
-     font-family: LXGW WenKai Screen,  Playtwo, Playone, ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji !important;
-  }
-</style>
-
-
-
-<link rel="stylesheet" href="/css/css.css">
-
-<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
-<link rel="apple-touch-icon" href="/img/favicon.png">
-
-
-<style type="text/css">
-.article{
- 
- 
-  }
-.article::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: -7px;
-    left: -3px;
-    right: 0;
-    z-index: 99;
-    height: 23px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAXCAYAAACS5bYWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABFpJREFUeNrUV0tIo1cUvpkYjQ4xxSA6DxuNqG0dtaUKOgs3s6i0dFd3pSsXdjeIixakiGA34sZuXCkoONLFwJTK4GMYLYXg29gatTpiXurkbd7vv9/5ub+IxuhA7eiFQ5Kbc8/57ne/e87/ywRBYLdl3GG3aNwqsLJ0k0tLS+fmcnNzWUVFBVMoFGx2djarvLxcm5OTw+bm5iytra2xc4ExNjY27iqVyvvwK6CpeDzuCYVC1urq6qDA9UcfPp+PHR4esmAwKK6tr68/l5/8rgQ2Ozub1dbWyiYmJooaGxt/VqvV38jlchX9l0qlwoFA4DWS/RKLxRxFRUVf5+XlPcaaT2AP0sVPJBL2SCRiAPBpu93+vKamZo/Ae71eZjabWV1dXVqw7CKwp43ksrCw8Bhg7MJ/PLDZ5PHx8cz29vYT5JGD/bSYLgTrcDgYdk6siSc6NjZWDaAe4ZoHQL+cmZnRpZPnhWDpD8kw7uKo9ML/NMCsd2tr61vkzboMrEyv138M7TyLRqMWMBsX3sMgaZhMpp+AR5EJrCocDpuEGzKg4x8khs+CVWxubvZfR9JkMik4nU7BarUKLpeLmLsKuwIqTLynp4fqmIzASrqQT09Pf1VVVfX0KsWZ6uHBwQHTaDSsoKAgo6/H4xHLEcrVyRwuEisrKzs5XrrIVAVwiUVDKRRrL+YI32ewdVhMApuHWvcj6vids6J2u90MF4yBHUZNgKoEBaRBQalJqFSqtJfUYrGIlQX+ydXVVTN+u0tKSjQNDQ1axJVl2iTypebn55d7e3v/kqoDgZU1NTU9LCws/Py0M+2ekuGincxJ3yF+18jIyHJLS0slQJUWFxczrBeBE0vE5tHRkbixlZWVfSR8gTX/0P5gH7S1tX3Z3t7+BW8qAvwSfr8/jA0EIRM/qoFtampqbW9vTw+XA+ojUruVd3Z2tvb19T2TQFEim81GgVJoCvvj4+NLOJZgaWmpemdn5y3a6BbcnJDAw8HBwac6ne6eqCW5XDwB3qVSqM9/DAwMUNy/eVLabT7sI25qwgujThCBhWE+mAt2yNc4SQKSZrOQQE1HS22VJkmPAGTr7+//fX19fRk+Zgq0trbGeFAKEAQT98BSqKOj47vm5uaa/Px8JeIk4GcaHh6eWlxcfAU/A8xG67BxAX3fwdcbYUpSDJ06Z49Ak8ZC3OL8f3YiA4PBYKdLQ2AJ9OTk5GpXV9cQiCVh79M94QtlPLDUE/1gPNrd3f0W33W4cBoco48zQuy/IZYAMnGqlSc4c66L9JruQUaSARXeT8HGKzxAqFBekni6+h46+pMzGiJGMgTOJh1yU/KNEGDvZWvfBawkA9ppwGg0mrRa7SOI2g+gxOgbJIpdFpj72PnxSnPX8vqRxTURgBQWKisrH+GThOm+CtAzoK/9/Uiqq/6hoaHfdnd3jaOjo7/yY7yxbwqkWy3sQzpS2C6YirwvUJk0y7hurfyGRrnduPGvAAMASmo8wzeVwfsAAAAASUVORK5CYII=) no-repeat 0 0,url(data:image/png;base64,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) no-repeat 50% 0,url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAXCAYAAACFxybfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAodJREFUeNrsVb1rWlEUv2pN/GqspKRSKFYXWzEloIWif0Fn6dJChQ7OQil0qd3EzcEpg0OgdHDr4CQODk7VRlLMEIVqApX4We0zflR9/Z1Ui4T34ksaaAYP/Hzc673n/M6550PG8zz73yKjn0wm83fDYDAwo9HINBrNnwOQg4MDs0ql2lQqlfdAWont7ng8Pjw+Ps44nc4G1pI9EXWaSOzt7TGO42aH5Pv7+08ajUZ0MBiUeXEZd7vdL5VK5fX29rZ+5tQiEmdxKrlcjsEYczgcynK5/BKKv/IXFNz/XiqVXkHdjUuRIA9SqdRD8or/R8Ez9fr9fqHVakUR4c2z0REjIQuHw2ZcrPBXLCA0RHTezEdHjIQqkUhEr9I4HOILhQLf6/VoOUFEvDMiQiToDx1Cdz+bzZ6bUFarlel0OkkVUK/XWbvdPoVer5fh3ntsfwJ+CJ2XA4p0Op1bpBgJyxDehQQ6nQ5DZXHBYDBZq9V+EhFUndnr9drEqoc2bwJbwGPgtohuVSwWe2Gz2TZMJpNgRKi6qtUqg2EWj8dTgUDgo0KhWPN4PC70EvXOzs67fD6/S6kiRIKeZA1YJ2MiJNbdbvfTUCjkV6vVK2hcDF8GI2w0GrGTkxM2HA5PDxaLxSOfz/cWEfk81X0XIMMFgJJ/srBjCgk8IdcfuVyuZ36//7nFYtkQyAMumUzuRiKRD0jMFLa+AZOpYwqgB/ziBVqmVBKUO7eAB/R0WG/Z7XaTVqtdbTabHJL6EK2djBaBPHA0NSqpbUsiMUeEBgpF4Q5AbZrmSJ/yEWgBTaBNHl9kdkgmMUeG7qwAq9PqovceTA3zlxlgsuswyuXsGsiSxJLEkoSY/BZgAEjRodi+uBruAAAAAElFTkSuQmCC) no-repeat 100% 0;
-}
-</style>
-
-
 </head>
-  <body>
-    
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+     
+
+    --textcolor: #121212;
+    --bgcolor: #fff;
+    --highlight: #009ba0;
+
+  }
+
+  @media (prefers-color-scheme: dark) {
+    * {
+      --textcolor: #dadada;
+      --bgcolor: #141414;
+      --highlight: #009ba0;
+    }
+  }
+
+  body {
+    font-size: 16px;
+    font-family: LXGW WenKai Screen,-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, system-ui, "Arial Unicode MS", sans-serif, "Noto Color Emoji";
+    line-height: 1.4;
+    color: var(--textcolor);
+    background: var(--bgcolor);
+    position: relative;
+    max-width: 64em;
+     
+    margin: 0 auto;
+     
+  }
+
    
-    <div class="container">
-       <img src="https://files.hahaha.cc/resource/img/icon/topMerry.webp" style="position: absolute;top: -35px;left: calc(50% - 60px);z-index: -10;max-width: 150px;height: auto;"><style type="text/css">
 
-  .rainbow-text {
-    background: linear-gradient(to right,#ff0000,#0000ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 1;
-}
-
-.header {
-  position: relative;
-   z-index: 100;
-}
-
-.menu-icon {
-  display: none;
-  cursor: pointer;
-  top: 0;
-  right: 0;
-}
-
-.headerNav {
-  display: flex;
-  position: relative;  
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  top: 100%;  
-   right: 0;   
-  margin: 0;  
-  border-radius: 12px;
-    padding: 12px;
-    min-width: 158px;
-
-    border: 1px solid rgba(60, 60, 67, .12);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, .1), 0 2px 6px rgba(0, 0, 0, .08);
-    transition: background-color .5s;
- 
-    overflow-y: auto;
-}
-
-.submenu a {
-    cursor: pointer;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.headerNav div {
-  position: relative;  
-  display: inline-block;  
-  
-}
-
-.headerNav div:hover .submenu {
-  display: block;
-
-}
-
-.headerNav div a span:hover{
-  background: linear-gradient(to right,#ff0000,#0000ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-}
-
-.headerNav div span:hover{
-  background: linear-gradient(to right,#ff0000,#0000ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-}
-
- 
-@media screen and (max-width: 600px) {
-  .menu-icon {
-    display: block;
-  }
-
-  .headerNav {
+  section {
+    padding: calc(6em + 5vw) 5vw 8vw 5vw;
+     
     display: none;
-    flex-direction: column;
     position: absolute;
-    top: 50px;
-    right: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 100;
+    top: 0;
+    min-height: 100vh;
     width: 100%;
-  }
-  .headerNav div {
-  position: relative;  
-  display: block;  
-}
-
-  .headerNav div:hover .submenu {
-    display: none;
+    background: var(--bgcolor);
   }
 
-  .headerNav div .submenu {
-    display: none;
-    position: static;
-  }
-
-  .headerNav div.active .submenu {
+  section:target {
+     
     display: block;
+  }
+
+  section#home {
+     
+    display: block;
+  }
+
+   
+
+  header {
+    padding: 5vw 5vw 0 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  header h1 {
+    font-size: 1em;
+    flex: 1;
+     
+    white-space: nowrap;
+    padding: 0 5vw .5em 0;
+  }
+
+  nav a:not(:last-of-type) {
+    margin-right: 1.5vw;
+  }
+
+   
+
+  a {
+    text-decoration: none;
+    color: var(--highlight);
+  }
+
+  a:hover {
+    border-bottom: 1px solid;
+  }
+
+  section h1 {
+    font-size: 1em;
+    margin: 0 0 1em 0;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 1.6em 0 .6em 0;
+  }
+
+  p,
+  ul,
+  ol,
+  article {
+    max-width: 60ch;
+     
+    margin-bottom: 1em;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  ul li::marker {
+    content: "\2022   ";
+  }
+
+  li {
+    margin-bottom: .2em;
+  }
+
+  ul,
+  ol {
+    padding-left: 2ch;
+  }
+
+  b,
+  strong {
+    font-weight: 600;
+  }
+
+  small {
+    font-size: .85em;
+    opacity: 0.6;
+  }
+
+  small:hover {
+    opacity: 1;
+  }
+
+  hr {
+    height: 1px;
+    border: 0;
+    background: currentColor;
+    opacity: .1;
+    margin: 1.2em 0;
+  }
+
+  abbr {
+    text-decoration: none;
+  }
+
+  abbr[title]:hover {
+    opacity: .7;
+    cursor: help;
+  }
+
+  blockquote {
+    padding-left: 2ch;
+    opacity: .7;
+    margin-bottom: .6em;
+    position: relative;
+  }
+
+  blockquote:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .3em;
+    bottom: .3em;
+    background: currentColor;
+    width: 1px;
+    opacity: .2;
+  }
+
+  img,
+  svg,
+  video,
+  audio {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    fill: currentColor;
+  }
+
+  code,
+  textarea {
+    font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
+    font-size: 1em;
+    opacity: .7;
+  }
+
+  a code {
+    opacity: 1;
+  }
+
+  pre,
+  textarea {
+     
+    font-size: .9em;
+    color: inherit;
+    line-height: inherit;
+    padding: .6em .9em;
+    margin: .8em 0 1em 0;
+    position: relative;
+    display: block;
+    width: 100%;
+    white-space: pre;
+    border: 0;
+    border-radius: 4px;
+    background: rgba(255, 255, 100, .075);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .2), inset -1px -1px 0 rgba(0, 0, 0, .04);
+  }
+
+   
+
+  label {
+    cursor: pointer;
+    vertical-align: super;
+    line-height: 1;
+    font-size: .75em;
+    padding-left: .1em;
+  }
+
+  label:hover {
+    color: var(--highlight);
+  }
+
+  label:before {
+    content: "[";
+  }
+
+  label:after {
+    content: "]";
+  }
+
+  label+input,
+  label+input+small {
+    display: none;
+  }
+
+  input:checked+small {
+    display: block;
+    padding: .8em 0 1em 2.5vw;
+    ;
+  }
+
+   
+
+  figure {
+    margin: 2em 0 1.5em 0;
+  }
+
+  figure figcaption {
+    margin: 0.8em 0 0 0;
+    font-size: .85em;
+    opacity: .7;
+  }
+
+   
+
+  figure.video {
+    position: relative;
+    padding-bottom: 56.25%;
+     
+    height: 0;
+    overflow: hidden;
+  }
+
+  figure.video iframe,
+  figure.video object,
+  figure.video embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    visibility: hidden;
+     
+  }
+
+  section:target iframe {
+    visibility: visible;
+  }
+
+   
+
+  a[href*="//"]:after {
+    font-weight: 300;
+    font-size: .85em;
+    content: "\2197";
+     
+    color: var(--textcolor);
+    opacity: .4;
+  }
+
+  a[href*="//"]:hover:after {
+    color: var(--highlight);
+    opacity: 1;
+  }
+
+   
+
+  a:before {
+    font-size: .7em;
+    margin-right: .4em;
+  }
+
+   
+
+  a[href$=".pdf"]:before {
+    content: "PDF";
+  }
+
+  a[href$=".txt"]:before {
+    content: "TXT";
+  }
+
+  a[href$=".mp3"]:before {
+    content: "MP3";
+  }
+
+  a[href$=".zip"]:before {
+    content: "ZIP";
+  }
+
+  a[href$=".rar"]:before {
+    content: "RAR";
+  }
+
+  a[href$=".jpeg"]:before,
+  a[href$=".jpg"]:before,
+  a[href$=".gif"]:before,
+  a[href$=".png"]:before {
+    content: "IMG";
+  }
+
+   
+
+  article+article {
+    margin-top: 4.5em;
+  }
+
+  article h2 {
+    font-weight: 700;
+    margin: 0 0 1em 0;
+  }
+
+  article time {
+    margin-left: .6em;
+    font-size: .8em;
+    font-weight: 400;
+    opacity: .7;
+  }
+
+   
+
+  .grid {
+    display: grid;
+    grid-gap: 5vmin;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+     
+    grid-auto-flow: dense;
+    padding: 2em 0;
+  }
+
+  .grid a {
+    position: relative;
+    border: 0;
+  }
+
+  .grid a:hover {
+    transform: scale(.975);
+  }
+
+   
+  .grid a:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  .grid a img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+   
+
+  .slides {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+
+  .slides figure {
+    height: 100vh;
+    padding: 0 5vw;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    scroll-snap-align: center;
+  }
+
+  .slides figure img {
+    max-height: 88vh;
+     
+  }
+
+  .slides figure.cover {
+    padding: 0;
+  }
+
+  .slides figure.cover img {
+    max-height: none;
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+   
+
+  .lightbox {
+    display: none;
+    color: var(--textcolor);
+  }
+
+  .lightbox:target {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    background: var(--bgcolor);
+    border: 0;
+    z-index: 3;
+  }
+
+  .lightbox img {
+    max-height: 100vh;
+    z-index: 4;
+  }
+
+  .lightbox:target:before {
+     
+    content: "";
+    height: 2em;
+    width: 2em;
+    animation: spin .8s infinite linear;
+    border: 1px solid;
+    border-right-color: transparent;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    transform: translateX(-50%);
+    opacity: .25;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .lightbox:target:after {
+     
+    content: "\00D7";
+    position: fixed;
+    font-size: 2em;
+    font-weight: 200;
+    line-height: 0;
+    top: .75em;
+    right: .5em;
+    z-index: 4;
+  }
+
+   
+
+  @media only screen and (max-width: 680px) {
+    body {
+      font-size: 15px;
+    }
+  }
+
+  @media only screen and (max-width: 540px) {
+    nav {
+      width: 100%;
+    }
+
+     
+  }
+
+   
+
+  @media print {
+
+    nav,
+    .lightbox:target:after {
+      display: none;
+    }
+
+    article,
+    figure,
+    img {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+     
+
+    label+input+small {
+      display: inline;
+    }
+
+    label+input+small:before {
+      content: "[";
+    }
+
+    label+input+small:after {
+      content: "]";
+    }
+
+     
+
+    .slides,
+    .slides figure {
+      position: relative;
+      height: auto;
+      padding: 0;
+    }
+
+    .slides figure img,
+    .slides figure.cover img {
+      max-height: auto;
+      position: relative;
+      z-index: 1;
+      width: auto;
+      height: 100vh;
+      object-fit: contain;
+    }
 
   }
 
-  .submenu {
-  cursor: pointer;
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-  z-index: 1;
-  top: 100%;  
-   right: 0;   
-  margin: 0;  
-  border-radius: 12px;
-    padding: 12px;
-    min-width: 158px;
-    border: 0px solid rgba(60, 60, 67, .12);
-    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
-    transition: background-color .5s;
- 
-    overflow-y: auto;
-}
+   
 
-}
+  .serif {
+    font-family: et-book, "Biaodian Pro Serif GB", "Numeral LF Serif", "EB Garamond", "Minion Pro", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Times New Roman", STKaiti, "STKaiti SC", "Huawen Kaiti", "Huawenkaiti", "Han Kaiti GB", Kaiti, "Han Kaiti", Kai, 楷体, cursive, serif;
+  }
 
-ul{
-  padding: 0px;
-}
-li {
-  list-style: none;
-}
+  .name {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
 
-.submenu li:hover{
- 
-   border-radius: 5px;
-}
+  .footer {
+    font-size: 0.8rem;
+    padding-top: 2rem;
+    line-height: 1.5;
+  }
 
-.icon {
-    display: inline-block;
-    margin-top: -1px;
-    margin-left: 4px;
-    width: 11px;
-    height: 11px;
-    fill: rgba(60, 60, 67, .33);
-    transition: fill .25s;
-    flex-shrink: 0;
-}
-a{
-  color:#404965;
-}
+  .eazy-button {
+    margin: 0 5px;
+    font-size: 1rem;
+  }
+
+  .opacity-6 {
+    opacity: 0.6;
+  }
+
+  .opacity-6:hover {
+    opacity: 1;
+  }
 </style>
 
-<header class="header">
-  
-  <div id="mask" style="display: none;"></div>
-  <div class="header__title" style="font-size: 1.8rem;font-family: Playtwo, Playone,'Eczar', serif;font-weight: bold !important;">
-    <a href="https://hahaha.cc/" style="color:#404965;display:flex;color:#404965;align-content: center;justify-content: center;align-items: center;">
-      <img src="https://hahaha.cc/img/favicon.ico" style="display:inline;width:20px;height:100%">
-      好事发生</a>
-  </div>
-  <div class="menu-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </div>
-  <div class="headerNav" style="border-radius:0px 0px 5px 10px;color:#515c7e;">
-     
-     
-      <div style="padding: 10px;position: relative;text-align:center">
-        
-          
-            
-          <a href="https://hahaha.cc/" style="font-weight: bold !important;"><span>首页
-            
-          </span>
-          
-        </a>
-      </div>
-    
-      <div style="padding: 10px;position: relative;text-align:center">
-        
-          
-            
-          <a href="https://hahaha.cc/about/" style="font-weight: bold !important;"><span>关于
-            
-          </span>
-          
-        </a>
-      </div>
-    
-      <div style="padding: 10px;position: relative;text-align:center">
-        
-          
-            
-          <a href="https://hahaha.cc/moment/" style="font-weight: bold !important;"><span>片刻
-            
-              <sup style="font-size:0.8rem" class="rainbow-text">New</sup>
-             
-          </span>
-          
-        </a>
-      </div>
-    
-      <div style="padding: 10px;position: relative;text-align:center">
-        
-          
-          
-          <a href="https://hahaha.cc/music/" style="font-weight: bold !important;" target="_blank"><span>音乐</span>
-             
-          
-        </a>
-      </div>
-    
-    
-
-     
-  </div>
+<body>
+<header>
+  <h1 id="back-home">
+    <a href="/">
+      好事发生
+    </a>
+  </h1>
+  <nav>
+    <a href="/blog/">
+      博客
+    </a>
+    <a href="/moment/">
+      片刻
+    </a>
+    <a href="/music/" target="_blank">
+      歌单
+    </a>
+    <a href="/about/">
+      关于
+    </a>
+  </nav>
 </header>
-
-
-<main class="main">
-        
-
-    <style type="text/css">
-        .home-nav-title:hover{
-            color: gray;
-        }
-    </style><section class="profile">
-    
-    <div class="profile__inner">
-      <div class="profile__body" style="display:flex;align-items: center;flex-wrap: wrap">
-        
-        <div class="rainbow-text  profile__description" style="display: inline;margin:0px 5px 0px 0px">记录日常、好事发生.</div>
-        <div class="profile__social" style="display: inline;">
-          
-          <a href="https://github.com/okhanyu" target="_blank">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-  <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
-</svg>
-          </a>
-          
-        </div>
+<main>
+  <section id="home">
+    <div style="display: inline-flex; align-items: flex-end; margin-bottom: 2rem;">
+      <picture>
+          <img alt="avatar" src="https://files.hahaha.cc/resource/img/avatar/avatarindex.webp" width="120px" height="120px" style="padding-bottom: 10px">
+      </picture>
+      <div style="flex-direction: column;">
+        <p class="serif name">
+          <strong>
+            Hi, I'm Damon.
+          </strong>
+          👋
+          <br>
+          嗨，我是韩宇。
+        </p>
       </div>
     </div>
-    
-</section>
-
-
-  
-  <div class="profile__inner label" style="color:#515c7e;">
-       <a href="https://hahaha.cc/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 mr-3 "> All<i class="hidden md:inline-block text-slate-300 ml-3">/</i> </a>
-          
-             
-             
-             
-                
-                <a href="/blog/life/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Life<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-                 
-             
-                
-             
-                
-                <a href="/blog/growing/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Growing<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-                 
-             
-                
-                <a href="/blog/tech/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Tech<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-                 
-             
-                
-                <a href="/blog/other/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Other<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-                 
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-             
-             
-             
-          
-         <a href="https://hahaha.cc/blog/hidden/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Hidden<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>
-          
-  </div>
-
-  <section class="article-list">
-    
-
-    
-    
-    
-        
-    
-
+    <p>
+      我
+      <em class="opacity-6">
+        he/him/his
+      </em>
+      是一名工程师，居住在北京，主要的工作是使用Go/Java来实现人们期望的产品。
+    </p>
+    <p>
+      我现在正在经历人生的某一个低谷，但我相信，很快就会过去，因为我在努力拯救自己，人生一定是一条波浪线，有低就有高，有坏就有好。
+    </p>
+     <p >
+     我近些年参与的项目，
+      <a href="https://healthcare.tencent.com/production/21?from=tab" style="white-space: nowrap;">
+        腾讯NGOS-IC
+      </a>
+      、
+      <a href="https://www.igetcool.com/" style="white-space: nowrap;">
+        少年得到
+      </a>
+      等，在这些项目上，我倾注了很多的努力，但很可惜，没有等到敲钟，也没有一直陪伴这些产品走下去。
+    </p>
+    <p style="margin-top: 2rem;">
+      我喜欢记录快乐和所思所想，希望未来回看现在的每一段生活和工作，都能够加深快乐的记忆。
+    </p>
    
-    
-    
-    
+    <p>
+     
+      <span class="opacity-6">
+        <em>
+          我和朋友们经常聚在一起发疯。
+        </em>
+      </span>
+    </p>
+    <p style="margin-top: 2rem;">
+        我崇尚自由，但理解这个社会受约束的运行规则，我喜欢听别人讲哲学、讲经济学，这让我拥有完全不同的看世界的视角。
+    </p>
+    <p>
+      我喜欢听不同的人，和我讲他看到的不同的世界，当然，我也很愿意和他们分享自己无知但有趣的过往。
+    </p>
 
-    
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/other/1/">
-    <div class="article__header">
-      
-       
 
-      
+    <div class="footer opacity-6">
+      <p>
+        Thank you for your attention
+        <label for="although">
+          although...
+        </label>
+        <input type="checkbox" id="although">
+        <small>
+          I hope you're not disappointed
+        </small>
+      </p>
+      <p>
+        Last updated: Dec 2023
+        <a href="#">
+          
+        </a>
+      </p>
+      </p>
     </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">为什么小白更该使用静态博客</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2023-10-08 16:40:00 &#43;0800 &#43;0800" style="padding-left: 2px">2023/10/08</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/life/22/">
-    <div class="article__header">
-      
-       
-
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">游记之百里画廊骑行</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2023-09-24 23:58:50 &#43;0800 &#43;0800" style="padding-left: 2px">2023/09/24</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/life/19/">
-    <div class="article__header">
-      
-       
-
-      
-          <img style="filter: blur(0px);" class="article__image" src="https://files.hahaha.cc/files/blog/life/19/img/cover.jpg?q=87">
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">扯蛋之奇怪的自信</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2023-08-24 20:58:50 &#43;0800 &#43;0800" style="padding-left: 2px">2023/08/24</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/life/17/">
-    <div class="article__header">
-      
-       
-
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">扯蛋之发丝的逃离</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2023-06-20 14:41:00 &#43;0800 &#43;0800" style="padding-left: 2px">2023/06/20</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/tech/3/">
-    <div class="article__header">
-      
-       
-
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">高并发短链系统设计</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2023-05-04 10:01:22 &#43;0800 &#43;0800" style="padding-left: 2px">2023/05/04</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/growing/1/">
-    <div class="article__header">
-      
-       
-
-      
-          <img style="filter: blur(0px);" class="article__image" src="https://files.hahaha.cc/files/blog/growing/3/img/cover.jpg?q=87">
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">大厂面试复盘</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2022-02-25 00:19:49 &#43;0800 &#43;0800" style="padding-left: 2px">2022/02/25</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/tech/2/">
-    <div class="article__header">
-      
-       
-
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">浅尝MySQL索引</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2022-02-09 17:28:32 &#43;0800 &#43;0800" style="padding-left: 2px">2022/02/09</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-        
-            
-<article class="article">
-  <a class="article__inner" href="https://hahaha.cc/blog/tech/1/">
-    <div class="article__header">
-      
-       
-
-      
-    </div>
-    <div class="article__text">
-      <h3 class="article__title"><span style="color: #515c7e;">分布式锁之电商防超卖的N&#43;1个坑</span></h3>
-    </div>
-  
-    <footer class="article__footer">
-      <time datetime="2021-03-23 22:40:49 &#43;0800 &#43;0800" style="padding-left: 2px">2021/03/23</time>
-    </footer>
-  </a>
-</article>
-
-        
-            
-        
-    
-
   </section>
-
-
-
-
-<div class="pagination"  >
-
-   
-
-<div class="pagination__item">
-    <a class="pagination__link" href="/page/2/" style="padding: 3px 6px; box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25), inset 0 0 6px #d3d5da, inset 0 80px 80px -40px #ffffff, 1px 1px 3px rgb(235 235 241 / 75%); border: 1px solid #e3e5e9;color:#515c7e;">Next</a>
-     </div>
-
-</div>
-
-
-      </main><footer class="footer">
-  <div style="display: block;">
-
-          <a style="margin-right: 0;padding: 0;display: inline-block;color: #d5d5d5;" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502054294"  target="_blank">
-
-            <span style="color: #d5d5d5;">  <img width="8px" src="/img/ba.png" style="width:9px;display: inline;border: 0px;" > 
-             京公网安备11010502054294号</span> · 
-          </a>
-          <a  style="color: #d5d5d5;margin-left: 0;padding: 0;" href="https://beian.miit.gov.cn/"  target="_blank"><span id="icp" style="color: #d5d5d5;">京ICP备18031874号-9号
-            </span>
-          </a>
-          <br>
-  <span style="color: #d5d5d5;">&copy; 2020-2023 <a href="https://hahaha.cc/" style="color: #d5d5d5;">好事发生</a></span>
-</div>
-</footer>
-
-<script type="text/javascript">
+</main>
+</body>
+<script defer>
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  var menuIcon = document.querySelector('.menu-icon');
-  var headerNav = document.querySelector('.headerNav');
-  var mask = document.getElementById('mask');
-  var submenus = document.querySelectorAll('.submenu');
-
-  menuIcon.addEventListener('click', function(){
-    if (headerNav.style.display === '' || headerNav.style.display === 'none') {
-      headerNav.style.display = 'block';
-      mask.style.display = 'block';
-    } else {
-      headerNav.style.display = 'none';
-      mask.style.display = 'none';
-    }
-  });
-
-  headerNav.querySelectorAll('div').forEach(function(div) {
-    div.addEventListener('mouseenter', function(){
-      if (window.innerWidth > 600) {
-        if (this.querySelector('.submenu') != undefined && this.querySelector('.submenu') != null){
-          this.querySelector('.submenu').style.display = 'block';
-        }
-      }
-    });
-
-    div.addEventListener('mouseleave', function(){
-      if (window.innerWidth > 600) {
-        if (this.querySelector('.submenu') != undefined && this.querySelector('.submenu') != null){
-          this.querySelector('.submenu').style.display = 'none';
-        }
-      }
-    });
-
-    div.addEventListener('click', function(e){
-      if (window.innerWidth <= 600) {
-        e.stopPropagation();
-        var submenu = this.querySelector('.submenu');
-        if (submenu.style.display === '' || submenu.style.display === 'none') {
-          submenu.style.display = 'block';
-        } else {
-          submenu.style.display = 'none';
-        }
-        Array.from(this.parentNode.children).forEach(function(sibling){
-          if (sibling !== this && sibling.querySelector('.submenu')) {
-            sibling.querySelector('.submenu').style.display = 'none';
-          }
-        }, this);
-      }
-    });
-  });
-
-  document.addEventListener('click', function(){
-    submenus.forEach(function(submenu){
-      submenu.style.display = 'none';
-    });
-  });
-
-  mask.addEventListener('click', function(){
-    this.style.display = 'none';
-    headerNav.style.display = 'none';
-    submenus.forEach(function(submenu){
-      submenu.style.display = 'none';
-    });
-  });
-});
-
-</script>
-
-    </div>
-  </body>
 </html>
