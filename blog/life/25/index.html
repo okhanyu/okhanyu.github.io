@@ -7,7 +7,7 @@
 
 
 
-<title>Hidden - 好事发生</title>
+<title>取关槽边往事 - 好事发生</title>
 
 
 
@@ -317,331 +317,200 @@ a{
 
 <main class="main">
         
-    <style type="text/css">
-        .home-nav-title:hover{
-            color: gray;
-        }
-    </style><section class="profile">
-    
-    <div class="profile__inner">
-      <div class="profile__body" style="display:flex;align-items: center;flex-wrap: wrap">
-        
-        <div class="rainbow-text  profile__description" style="display: inline;margin:0px 5px 0px 0px">记录日常、好事发生.</div>
-        <div class="profile__social" style="display: inline;">
-          
-          <a href="https://github.com/okhanyu" target="_blank">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-  <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
-</svg>
-          </a>
-          
-        </div>
-      </div>
-    </div>
-    
-</section>
+
+  <style type="text/css">
+.post__header{
+ 
+        box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25), inset 0 0 6px #d3d5da, inset 0 80px 80px -40px #ffffff, 1px 1px 3px rgb(235 235 241 / 75%);
+  }
+.post__header::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: -3px;
+    right: 0;
+    z-index: 99;
+    height: 23px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAXCAYAAACS5bYWAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABFpJREFUeNrUV0tIo1cUvpkYjQ4xxSA6DxuNqG0dtaUKOgs3s6i0dFd3pSsXdjeIixakiGA34sZuXCkoONLFwJTK4GMYLYXg29gatTpiXurkbd7vv9/5ub+IxuhA7eiFQ5Kbc8/57ne/e87/ywRBYLdl3GG3aNwqsLJ0k0tLS+fmcnNzWUVFBVMoFGx2djarvLxcm5OTw+bm5iytra2xc4ExNjY27iqVyvvwK6CpeDzuCYVC1urq6qDA9UcfPp+PHR4esmAwKK6tr68/l5/8rgQ2Ozub1dbWyiYmJooaGxt/VqvV38jlchX9l0qlwoFA4DWS/RKLxRxFRUVf5+XlPcaaT2AP0sVPJBL2SCRiAPBpu93+vKamZo/Ae71eZjabWV1dXVqw7CKwp43ksrCw8Bhg7MJ/PLDZ5PHx8cz29vYT5JGD/bSYLgTrcDgYdk6siSc6NjZWDaAe4ZoHQL+cmZnRpZPnhWDpD8kw7uKo9ML/NMCsd2tr61vkzboMrEyv138M7TyLRqMWMBsX3sMgaZhMpp+AR5EJrCocDpuEGzKg4x8khs+CVWxubvZfR9JkMik4nU7BarUKLpeLmLsKuwIqTLynp4fqmIzASrqQT09Pf1VVVfX0KsWZ6uHBwQHTaDSsoKAgo6/H4xHLEcrVyRwuEisrKzs5XrrIVAVwiUVDKRRrL+YI32ewdVhMApuHWvcj6vids6J2u90MF4yBHUZNgKoEBaRBQalJqFSqtJfUYrGIlQX+ydXVVTN+u0tKSjQNDQ1axJVl2iTypebn55d7e3v/kqoDgZU1NTU9LCws/Py0M+2ekuGincxJ3yF+18jIyHJLS0slQJUWFxczrBeBE0vE5tHRkbixlZWVfSR8gTX/0P5gH7S1tX3Z3t7+BW8qAvwSfr8/jA0EIRM/qoFtampqbW9vTw+XA+ojUruVd3Z2tvb19T2TQFEim81GgVJoCvvj4+NLOJZgaWmpemdn5y3a6BbcnJDAw8HBwac6ne6eqCW5XDwB3qVSqM9/DAwMUNy/eVLabT7sI25qwgujThCBhWE+mAt2yNc4SQKSZrOQQE1HS22VJkmPAGTr7+//fX19fRk+Zgq0trbGeFAKEAQT98BSqKOj47vm5uaa/Px8JeIk4GcaHh6eWlxcfAU/A8xG67BxAX3fwdcbYUpSDJ06Z49Ak8ZC3OL8f3YiA4PBYKdLQ2AJ9OTk5GpXV9cQiCVh79M94QtlPLDUE/1gPNrd3f0W33W4cBoco48zQuy/IZYAMnGqlSc4c66L9JruQUaSARXeT8HGKzxAqFBekni6+h46+pMzGiJGMgTOJh1yU/KNEGDvZWvfBawkA9ppwGg0mrRa7SOI2g+gxOgbJIpdFpj72PnxSnPX8vqRxTURgBQWKisrH+GThOm+CtAzoK/9/Uiqq/6hoaHfdnd3jaOjo7/yY7yxbwqkWy3sQzpS2C6YirwvUJk0y7hurfyGRrnduPGvAAMASmo8wzeVwfsAAAAASUVORK5CYII=) no-repeat 0 0,url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE0AAAAXCAYAAABOHMIhAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABiZJREFUeNrsWMtPlFcUvzPMwIDysLyRR4uATDHWCiVgSmRlios2DeiiXUFs0nRBd6arxqQhJDapkYXhP4BqDKTQhZaFNQSCaBEVJjwdHsNr5DUMDDPDzPT3u7nTDEgRKrKgc5KT+z3uufec33de99P4fD4RpL2RNgjB3kn35MkTeRERESFiYmLkGBoaKnQ6nWSNRvPPZFxr+vv7k6KioiIdDsfa8vLyQkFBgcP3Bnel3MDAQArWI0eFhISE87nb7bZ7PJ4VvLYuLi5O5+fnu9+kMNfq6+tLjIyMzMY6KeBEbK/XarXReI3lPDZMWcc4v7GxYV1dXR3Jy8ub2E5HPvJ6vRSSDH0ku1wuAfsEZOV1IEFHoeNFdHS0yMrK2knR0Lm5uR+hxLdQMjbwHTZbB41h8RGwCdc9MzMzneHh4bGJiYlf4SN8ijkfwqiIncCAAR7Iz2GPSShudjqdfeCeqampvwBQfFxc3JdYqwTv8gB8/F48A8BgKecE14V+L7ju2tpae05OzkuCCZvkPOj8mizmC6vVKtmPu+bx48cC3qI1mUyFUOyywWD4SHlELBaLJmCHNcwAghuAOujtuF4FqHO4nsX4EsAS3I4TJ04ME1h8PDE9PS09TYZoY2Pj1729vd6lpSVfkDYTPG0UkfNDRUWFgQ5Gb2Mh0N29e9eG/GQfHh4W8/PzwUy/ObQ/gMfVVlZW1iAiZdQxp3nv3LljRoL/5erVq1UIxzSiiVD9X4EDYATynCwAzGO858hCQRoaGmJFZNJz8YIcBc4BF966dau6sLAwBxVSJCUlCSThQwuU3W6XkYUok1Vzm5znQx5bbm9v77p+/frPeNSNRzZ/ISBwrG4ZR48eLamtrf2+uLjYSEG9Xi/wTISFhQlWGXohyzO/CJlVl23KQRLbABoaHx+/Z1lUZ/Hq1SsJFj3JT3hmHx8fnydPTEzMj46OziHPW2w22wxeD4Kfgadh/4YEzU8Az4DhffAn5eXlX1y6dKkEoCTspAQ9Mjs7+0BBo8Fms1lkZGTsOo0QLLRNkvnR+fEJzIMHD0xtbW39CL8JTFtSbAOvBIyLHIGVm9VzE2gKuDAMSSpcT6KXyT137lx2cnLyMXhcGDb3wq3XuWF3d/fCzZs3P0c4v5eSknJQbYLo7Ox0gC2lpaVZ3Be67Th/dnZWoAJKsJC3XA8fPhxoamp6hMb+BaaMgWcUMGtszZjiFDNmvcDI91pzG0iY4ARwkwrxkcHBwUdgNrRMbnrqoRbkVzDcvn3bl5qaWsmcgFH4G8XdEGUWFhak51AuISFBnkoCTyFbyWKxCJwIxlC0fq2rq7tcVFRkRKskjh8/Lr0+kBjCCDV/knfdv3//WX19/R8IRRNemxlu4AXwKqM+EJwdj1HbPYSwh3sCPAJDABm2LLchCjS+5/kirKGhwWk0GrMuXrxYQuX9hm/XXTMXMY+srKwI5ApZrbYmZh7deEJhAUKjLe/pLTzSsCuHrK+1tbUJVe3P6upq87Vr174rKysrYHVj/uW+OH3IfEuw4F3ee/fuPQfAvwOs5yyE4CnlFOu7BWrTCWlreO6FACpBZGwUw4BvkANLobReHb3kGZYGsGzTq/zlO8AT1ru6uoZbWlqeA6gINJAfnz59OlVLoX8Jtebm5raampqfcMvQYgTknz9//sKVK1c+y83NTdIEuCnaKMuNGzd+6+np6cCtSTkAw9D9X8Dyh+dbgaaAC1XAnUlPTy+qqqq6cPbs2UzkmWjNljiDJzpwHFnCkW2yo6NjCKW8H54wjlezKvRT09LSTsJrz5w6dSoN+Yp51ADAPUj8VoDbDq9pxrwuJcNIYQllJTIi/xopBw/VA7DJp0+f9hA78CgL5F5C8J2CpoCj8sfA6WCe/FPRhsRlZmbGIs8Y4FFO5CJgtrSsvrRVGW1V93b1myoGnKAKEcHgnwsWpg1lNI0fphwrmdqbckeU18WrnlOjqp5/j7W3BWvfQVPKa5SBkcrYCNVB65TRTlWZ1lXiXVU5xbtlDb2SPaLWYwrgHIcqPg6Vc7fbX69Yoyqfa7/AeiegbWOEVhmsVcWDwPn224iDJgla8Hd38Hd3ELQgaIeI/hZgAIPEp0vmQJdoAAAAAElFTkSuQmCC) no-repeat 50% 0,url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAXCAYAAACFxybfAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAodJREFUeNrsVb1rWlEUv2pN/GqspKRSKFYXWzEloIWif0Fn6dJChQ7OQil0qd3EzcEpg0OgdHDr4CQODk7VRlLMEIVqApX4We0zflR9/Z1Ui4T34ksaaAYP/Hzc673n/M6550PG8zz73yKjn0wm83fDYDAwo9HINBrNnwOQg4MDs0ql2lQqlfdAWont7ng8Pjw+Ps44nc4G1pI9EXWaSOzt7TGO42aH5Pv7+08ajUZ0MBiUeXEZd7vdL5VK5fX29rZ+5tQiEmdxKrlcjsEYczgcynK5/BKKv/IXFNz/XiqVXkHdjUuRIA9SqdRD8or/R8Ez9fr9fqHVakUR4c2z0REjIQuHw2ZcrPBXLCA0RHTezEdHjIQqkUhEr9I4HOILhQLf6/VoOUFEvDMiQiToDx1Cdz+bzZ6bUFarlel0OkkVUK/XWbvdPoVer5fh3ntsfwJ+CJ2XA4p0Op1bpBgJyxDehQQ6nQ5DZXHBYDBZq9V+EhFUndnr9drEqoc2bwJbwGPgtohuVSwWe2Gz2TZMJpNgRKi6qtUqg2EWj8dTgUDgo0KhWPN4PC70EvXOzs67fD6/S6kiRIKeZA1YJ2MiJNbdbvfTUCjkV6vVK2hcDF8GI2w0GrGTkxM2HA5PDxaLxSOfz/cWEfk81X0XIMMFgJJ/srBjCgk8IdcfuVyuZ36//7nFYtkQyAMumUzuRiKRD0jMFLa+AZOpYwqgB/ziBVqmVBKUO7eAB/R0WG/Z7XaTVqtdbTabHJL6EK2djBaBPHA0NSqpbUsiMUeEBgpF4Q5AbZrmSJ/yEWgBTaBNHl9kdkgmMUeG7qwAq9PqovceTA3zlxlgsuswyuXsGsiSxJLEkoSY/BZgAEjRodi+uBruAAAAAElFTkSuQmCC) no-repeat 100% 0;
+}
 
 
+</style>
 
-<div class="profile__inner label" style="color:#515c7e;">
-    <a href="https://hahaha.cc/blog/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 mr-3 "> All<i class="hidden md:inline-block text-slate-300 ml-3">/</i> </a>
-       
-          
-          
+
+<link rel="stylesheet" href="/css/detail.css">
+  
+<style type="text/css">
+     
+            .flex-group, .flex-group2, .flex-group3, .flex-group4, .flex-group5, .flex-group6, .flex-group7, .flex-group8, .flex-group9, .flex-group2 p, .flex-group3 p, .flex-group4 p, .flex-group5 p, .flex-group6 p, .flex-group7 p, .flex-group8 p, .flex-group9 p, .flex-group p{
+                 display: flex;
+                 flex-wrap: wrap;
+                 justify-content: space-between;
+                 flex-direction: row;
+                 align-items: stretch;
+            }
+
+            .flex-group a,.flex-group p a{
+                 flex-basis: 100%;
+                 margin:0px 5px 5px 5px;
+            }
+
+            .flex-group2 a, .flex-group2 p a {
+                 flex-basis: calc(100%/2 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+           
+            .flex-group3 a, .flex-group3 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group4 a, .flex-group4 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group5 a, .flex-group5 p a  {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group6 a, .flex-group6 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group7 a, .flex-group7 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group8 a, .flex-group8 p a {
+                 flex-basis: calc(100%/4 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+            .flex-group9 a, .flex-group9 p a {
+                 flex-basis: calc(100%/3 - 10px);
+                 margin:0px 5px 5px 5px;
+            }
+
+
           
              
-             <a href="/blog/life/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Life<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-              
-          
-             
-          
-             
-             <a href="/blog/growing/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Growing<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-              
-          
-             
-             <a href="/blog/tech/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Tech<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-              
-          
-             
-             <a href="/blog/other/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Other<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>  
-              
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-          
-          
-          
-       
-      <a href="https://hahaha.cc/blog/hidden/" class="home-nav-title inline-block text-center hover:text-rose-400 rounded-xl px-3 md:px-3 py-1 text-sm md:text-base mr-0 ml-0 md:ml-1 md:mr-2 ml-3 "> Hidden<i class="hidden md:inline-block text-slate-300 ml-3">/</i></a>
-       
-</div>
-<section class="article-list">
-    
 
-    
-    
-        
-            <article class="article" style="filter: blur(0.9px);" name="hiddenNode">
-  <a class="article__inner">
-       <div class="article__header">
-      
-      
+            .post__content a img{
+                 max-height: 900px;
+            }
 
-      
+            a.back_to_top {
+    text-decoration: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background: #f0f0f0;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    display: none;
+}
+ul{
+    padding-left: 20px;
+}
+li{
+    list-style: disc;
+}
 
-    </div>
-    <div class="article__text" >
-      <s style="color: #515c7e"><h3 class="article__title" style="color: #515c7e;filter: blur(1px);">朋友的审视</h3></s>
-    </div>
+    </style>
+
+<div class="post ">
+     
+
   
-  <footer class="article__footer">
-    <time datetime="2023-04-07 20:26:10 &#43;0800 &#43;0800" style="padding-left: 2px;color: #515c7e">2023/04/07</time>
-  </footer>
-   </a>
-</article>
-
-        
+  <div class="post__tags">
     
-        
-            <article class="article" style="filter: blur(0.9px);" name="hiddenNode">
-  <a class="article__inner">
-       <div class="article__header">
-      
-      
-
-      
-
-    </div>
-    <div class="article__text" >
-      <s style="color: #515c7e"><h3 class="article__title" style="color: #515c7e;filter: blur(1px);">换位思考</h3></s>
-    </div>
-  
-  <footer class="article__footer">
-    <time datetime="2023-04-07 18:17:30 &#43;0800 &#43;0800" style="padding-left: 2px;color: #515c7e">2023/04/07</time>
-  </footer>
-   </a>
-</article>
-
-        
+      <a class="post__tag" href="https://hahaha.cc/tags/%E6%84%9F%E5%8F%97">感受</a>
     
-        
-            <article class="article" style="filter: blur(0.9px);" name="hiddenNode">
-  <a class="article__inner">
-       <div class="article__header">
-      
-      
-
-      
-
-    </div>
-    <div class="article__text" >
-      <s style="color: #515c7e"><h3 class="article__title" style="color: #515c7e;filter: blur(1px);">又回到第一篇</h3></s>
-    </div>
-  
-  <footer class="article__footer">
-    <time datetime="2023-04-06 15:36:49 &#43;0800 &#43;0800" style="padding-left: 2px;color: #515c7e">2023/04/06</time>
-  </footer>
-   </a>
-</article>
-
-        
-    
-        
-            <article class="article" style="filter: blur(0.9px);" name="hiddenNode">
-  <a class="article__inner">
-       <div class="article__header">
-      
-      
-
-      
-
-    </div>
-    <div class="article__text" >
-      <s style="color: #515c7e"><h3 class="article__title" style="color: #515c7e;filter: blur(1px);">多巴胺</h3></s>
-    </div>
-  
-  <footer class="article__footer">
-    <time datetime="2023-03-28 01:55:49 &#43;0800 &#43;0800" style="padding-left: 2px;color: #515c7e">2023/03/28</time>
-  </footer>
-   </a>
-</article>
-
-        
-    
-        
-            <article class="article" style="filter: blur(0.9px);" name="hiddenNode">
-  <a class="article__inner">
-       <div class="article__header">
-      
-      
-
-      
-
-    </div>
-    <div class="article__text" >
-      <s style="color: #515c7e"><h3 class="article__title" style="color: #515c7e;filter: blur(1px);">北京，我来了，请为我开天辟地</h3></s>
-    </div>
-  
-  <footer class="article__footer">
-    <time datetime="2012-09-27 19:22:06 &#43;0800 &#43;0800" style="padding-left: 2px;color: #515c7e">2012/09/27</time>
-  </footer>
-   </a>
-</article>
-
-        
-    
-
-  </section>
-
-
-
-
-<div class="pagination"  >
-
-   
-    <div class="pagination__item">
-    <a class="pagination__link" href="/blog/hidden/page/2/" style="padding: 3px 6px; box-shadow: inset 1px 1px 0 rgba(255,255,255,0.25), inset 0 0 6px #d3d5da, inset 0 80px 80px -40px #ffffff, 1px 1px 3px rgb(235 235 241 / 75%); border: 1px solid #e3e5e9;color:#515c7e;">Prev</a>
   </div>
+  
 
+  <section class="post__content">
+    <h1 id="title"  style="color:#3c445e">取关槽边往事</h1>
+    
+    <div>
+      <article style="color:#3c445e">
+          <p>取关了槽边往事公众号。</p>
+<p>一直以来，对和菜头的感受比较模糊，觉得他的文字，虽然逻辑紧凑，但又尖刺过多，到处怼人怼读者，甚至很多时候为了怼而怼，永远证明自己是对的。</p>
+<p>看了不舒适，但是偶尔也能有点小启发。</p>
+<p>决定取关的原因，源于有人在群里发了一张槽边往事公众号下的评论截图，我便恍然大悟，果断取关。</p>
+<p>图片中这个索求生日祝福的行为，在我看来，无感，这个世界，没有人不喜欢被温柔以待，并不强求，和菜头也没有义务。</p>
+<p>可是，无论那位读者与和菜头是什么关系，和菜头可以骂她、和菜头可以哄她、和菜头可以置之不理，但他总是从不中断的，在各种文章和评论回复的时，硬找一种语言逻辑，去攻击、去傲娇、去把别人踩在泥巴里以凸显自己之逻辑完美、去凸显自己个性十足、去凸显自己语言艺术登峰造极，去凸显自己角度很刁钻，但这一切，在读者看来，令人生厌。</p>
+<p>这感觉，一次可以，两次还行，三次会让人抵触，四次会让人厌烦。</p>
+<p>还特意强调可以“祝福众生，却不能祝福你”，众生与和菜头也并无交集，为什么可以祝福众生，而不能祝福一个已关注你多年的读者？这逻辑甚至都是强词夺理，叫人难受。</p>
+<p>甚至和菜头完全可以用以下回复：<br>
+回复1：不可以<br>
+回复2：去尼玛的不可以<br>
+回复3：生日快乐</p>
+<p>总比现在这样让别人看起来舒服的多。</p>
+<p>以下，转自一位博友「涸河」的感受：</p>
+<blockquote>
+<p>我是觉得人可以有操守，可以不妥协、但不可有那种睥睨万物的高傲感，知识分子的任务也应该是去将知识传播给更多人而不是揣着知识自命不凡，闻道有先后，术业有专攻，再艰深的知识一旦束之高阁也就黯然失色了。<br>
+人类是由消极偏见的，即人对消极信息更为敏感，一条负面信息需要很多正面信息来抵消。</p>
+</blockquote>
+<p><img src="https://hanfiles.s3.bitiful.net/files/blog/life/25/img/WechatIMG466.jpg" alt=""></p>
 
+      </article>
+    </div>
+  </section>
 </div>
+<a id="back_to_top" href="#" class="back_to_top" style="display: block;"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3.0l192 192c12.5 12.5 12.5 32.8.0 45.3s-32.8 12.5-45.3.0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3.0s-12.5-32.8.0-45.3l192-192z"></path></svg></a>
 
+
+
+<script src=https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js>
+</script>
+<link href=https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css
+rel=stylesheet>
+<script src=https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.js>
+</script>
+
+
+<script type="text/javascript">
+
+
+     
+$(document).ready((function (_this) {
+     $('[data-fancybox="gallery"]').fancybox();
+$(".fancybox").fancybox();
+
+  return function () {
+    let bt
+    bt = $('#back_to_top')
+    if ($(document).width() > 480) {
+      $(window).scroll(function () {
+        let st
+        st = $(window).scrollTop()
+        if (st > 30) {
+          return bt.css('display', 'block')
+        } else {
+          return bt.css('display', 'none')
+        }
+      })
+      return bt.click(function () {
+        $('body,html').animate({
+          scrollTop: 0,
+        }, 800)
+        return false
+      })
+    }
+  }
+})(this));
+
+
+
+</script>
 
       </main><footer class="footer">
   <div style="display: block;">
