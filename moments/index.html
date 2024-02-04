@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="robots" content="noindex, nofollow">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="referrer" content="strict-origin">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover,shrink-to-fit=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>
+            好事发生
+        </title>
+        <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+        <link rel="apple-touch-icon" href="./assets/img/favicon.png">
+        <link href="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.css"
+              type="text/css" rel="stylesheet" />
+        <!-- <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.7.0/style.css"
+        media="print" onload="this.media='all'"> -->
+        <!-- <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"
+        type="text/css" rel="stylesheet" /> -->
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <style>
+            .image-container {
+               width: calc(100% / 3 - 2px);
+               height:120px;
+               max-width: 120px;
+               max-height: 120px;
+               position: relative;
+               margin: 1px;  
+               overflow: hidden;
+            }
+            .image-container img {
+               position: absolute;
+               width: 100%;
+               height: 100%;
+               max-width: 120px;
+               max-height: 120px;
+               object-fit: cover;  
+            }
+            .image-container .close {
+                position: absolute;
+                right: 0;
+                top: 0;
+                color: white;
+                cursor: pointer;
+                padding: 2px;
+            }
+
+            .footer {
+                clear: both;
+                max-width: 780px;
+                text-align: center;
+                font-size: 12px;
+                padding: 35px 0 0 0;
+                margin: 0 auto;
+            }
+            .footer .powered_by {
+                margin: 0;
+                font-size: 11px;
+            }
+
+            .footer .powered_by a {
+                color: #cccccc;
+                margin: 0 2px;
+            }
+        </style>
+
+    </head>
+    <body style="overflow: auto;" id="top">
+        <div id="app" v-cloak>
+            <header>
+                <div class="topimage" :style="'position: relative; background-image: url('+ image.topBg +');'">
+                    <div class="user_info">
+                        <div class="top">
+                            <div class="left">
+                                <div class="name">
+                                    {{ user.nickname }}
+                                </div>
+                                <div class="des">
+                                    <span id="jinrishici-sentence" style="color: #fff;font-size:14px">
+                                        <!-- {{ user.desc }} -->
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="avatar">
+                                <a :href="link.about" style="text-decoration: none;cursor: pointer;">
+                                    <img :src="image.topAvatar">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="menu">
+                <button class="menu-button" onclick="shows()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                        <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
+                        </path>
+                    </svg>
+                </button>
+                <div class="menu-list">
+                    <div class="menu-item" v-for="nav in button.navBtn">
+                        <button @click="currentChange(nav.url)" v-if="nav.show" class="rainbow-text" style="border-radius: 5px;
+                                    box-shadow: rgba(242, 242, 242, 0.5) 4px 4px 6px;
+                                    border: 1px dotted rgb(213, 213, 213);
+                                    height: 30px;
+                                    cursor: pointer;
+                                    background: 0px 0px;">{{nav.title}}
+                            <span class="rainbow-text" style="font-size: 0.8rem;">
+                                {{nav.subTitle}}
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div v-show="loginStatus && current == 'index'">
+                <div style="padding-left: 6%;padding-right: 6%;padding-bottom: 20px;padding-top: 10px;display: flex;flex-wrap: wrap">
+                    <div style="width:100%;text-align: center;">
+                        <textarea id="momentText" style="min-width:100%;max-width:100%;width:100%;height:60px;border-color: rgb(229 231 235);border-radius: 5px;"></textarea>
+                    </div>
+                    <div style="width:100%;text-align: left;">
+                        <div>
+                            <select id="radio-status" style="border:1px solid;background:transparent;border-radius:3px;height:23px;margin: 3px 5px 3px 0px;cursor: pointer;">
+                                <option value="1">自己可见</option>
+                                <option value="2">登录可见</option>
+                                <option value="3">公开</option>
+                            </select>
+                            <button id="uploadBtn" style="border:1px solid;background:transparent;border-radius:3px;margin: 3px 5px 3px 0px;cursor: pointer;">选择</button>
+                            <button @click="uploadFiles()" style="border:1px solid;background:transparent;border-radius:3px;margin: 3px 5px 3px 0px;cursor: pointer;">上传</button>
+                            <button @click="submit()" style="border:1px solid;background:transparent;border-radius:3px;margin: 3px 0px 3px 5px;cursor: pointer;float: right;">提交</button>
+                            <input type="file" id="fileInput" multiple style="display:none;" />
+                        </div>
+                        <div id="imageContainer" style="width:100%; overflow: auto;display: flex;flex-wrap: wrap"></div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="text nav">
+                <strong>
+                    <ul class="header-nav-ul">
+                        <li class="header-nav-ul-li" v-for="nav in button.navBtn">
+                            <a class="header-nav-ul-li-a" :href="nav.url">
+                                {{nav.title}}
+                            </a>
+                        </li>
+                    </ul>
+                </strong>
+            </div> -->
+            <hr style="margin-top:2px;margin-bottom: 15px;">
+            <div id="main" class="main">
+                <template v-if="current == 'index'">
+                    <div v-for="obj in items" :id="obj.id">
+                        <div class="user-info">
+                            <div class="avatar-block">
+                                <a style="text-decoration: none;cursor: pointer;">
+                                    <img :src="obj.creator_avatar" class="avatar">
+                                </a>
+                            </div>
+                            <div class="intro">
+                                <div class="name">
+                                    {{ obj.creator_name }}
+                                </div>
+                                <div>
+                                    <span class="tag text-muted">
+                                        {{ formatDate(obj.created_at) }}
+                                    </span>
+                                    <span class="tag text-muted" v-if="loginStatus"> | {{ visibilityFormat(obj.visibility) }}</span>
+                                    <span class="tag text-muted" v-if="loginStatus"> |  <a @click="deleteMoment(obj.id)" style="cursor: pointer;">DELETE</a></span>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-item" v-if="obj.content != undefined || obj.content != ''">
+                            <div>
+                                <div v-html="mark(obj.content)" class="text" style="padding-bottom:5px;word-break: break-all;">
+                                </div>
+                            </div>
+                            <div class="pic-group" style="display: flex;flex-wrap: wrap;align-content: center;">
+                                <div v-for="file in obj.resources" class="pic-group-in">
+                                    <template v-if="file.file_type.indexOf('image') != -1 || file.file_type == ''">
+                                        <a class="fancybox" rel="group" :href="file.file_path.split('?')[0]" :data-fancybox="'group'+obj.id"
+                                           data-caption="">
+                                            <img :src="fileDisplay(file)" :class="imgClassHanle(obj)" />
+                                        </a>
+                                    </template>
+                                    <template v-if="file.file_type.indexOf('video') != -1">
+                                        <a class="fancybox" rel="group" :href="file.externalLink" :data-fancybox="'group'+obj.id"
+                                           data-caption="">
+                                            <video preload="none" controls="controls" :poster="file.poster" :src="fileDisplay(file)"
+                                                   :class="imgClassHanle(obj)">
+                                            </video>
+                                        </a>
+                                    </template>
+                                </div>
+                            </div>
+                           
+                            <div class="tag" style="display:flex;justify-content: space-between;flex-wrap: wrap;margin-top:10px">
+                                <span>
+                                    <!--   <span v-for="tag in tags(obj).tags">
+                                        {{ tag }} &nbsp;
+                                    </span> -->
+                                    <!-- <span><a :href="'comment.html?comment_id='+obj.id" class="header-nav-ul-li-a2">评论</a></span> -->
+                                </span>
+                            </div>
+                        </div>
+                        <hr style="margin-top:10px;margin-bottom: 15px;">
+                    </div>
+                </template>
+                <template v-else-if="current == 'settings'">
+                    <div v-for="obj, key in settings">
+                        <div class="user-info">
+                            <div class="avatar-block">
+                                <!-- . -->
+                            </div>
+                            <div class="intro">
+                                <div class="name">
+                                    {{ obj.group_name }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-item">
+                            <div class="text" style="padding-bottom:5px;word-break: break-all;">
+
+                                <template v-if="key == 'storage'">
+                                    <div v-for="setting in obj.values" style="margin-bottom: 15px;">
+                                        <!-- 云存储设置 -->
+                                        <div style="display: block; block;min-width:70px;margin-right:25px;margin-top: 15px;color: blue;">
+                                            {{ setting.value_name }}
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                是否生效
+                                            </span>
+                                            <input type="checkbox" v-model="setting.enable" style="margin-left:0px">
+                                        </div>
+                                        <template v-for="json, jsonKey in setting.value">
+                                            <div>
+                                                <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                    {{ jsonKey }}
+                                                </span>
+                                                <input type="text" name="" v-model="json" style="width:250px">
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <button v-show="key == 'storage'" @click="newStorageShowClick()">增加</button>
+                                    <div v-if="newStorageShow">
+                                        <select id="storageType" style="border:1px solid;background:transparent;border-radius:3px;height:23px;margin: 10px 5px 10px 0px;cursor: pointer;" v-model="storageType">
+                                            <option v-for="option in storageTypeOptions" :value="option.value">{{ option.text }}</option>
+                                        </select>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                别名
+                                            </span>
+                                            <input type="text" name="" v-model="newStorage.value_name" style="width:250px">
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                是否生效
+                                            </span>
+                                            <input type="checkbox" v-model="newStorage.enable" style="margin-left:0px">
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                secret_id
+                                            </span>
+                                            <input type="text" name="" v-model="newStorage.secret_id" style="width:250px">
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                secret_key
+                                            </span>
+                                            <input type="text" name="" v-model="newStorage.secret_key" style="width:250px">
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                region
+                                            </span>
+                                            <input type="text" name="" v-model="newStorage.region" style="width:250px">
+                                        </div>
+                                        <div>
+                                            <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                bucket
+                                            </span>
+                                            <input type="text" name="" v-model="newStorage.bucket" style="width:250px">
+                                        </div>
+                                        <template v-if="storageType == 'cos'">
+                                            <!-- <div>
+                                                    <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                             appid
+                                                    </span>
+                                                    <input type="text" name="" v-model="" style="width:250px">
+                                                </div> -->
+                                            <div>
+                                                <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                    uri
+                                                </span>
+                                                <input type="text" name="" v-model="newStorage.uri" style="width:250px;background: #e5e5e5;" readonly>
+                                            </div>
+                                        </template>
+                                        <template v-else-if="storageType == 's3'">
+                                            <div>
+                                                <span style="display: inline-block; block;min-width:70px;margin-right:25px">
+                                                    endpoint
+                                                </span>
+                                                <input type="text" name="" v-model="newStorage.endpoint" style="width:250px">
+                                            </div>
+                                        </template>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div v-for="setting in obj.values" style="margin-bottom: 5px;">
+                                        <div style="display: inline-block; block; block;min-width:70px;margin-right:25px">
+                                            {{ setting.value_name }}
+                                        </div>
+                                        <input type="text" name="" v-model="setting.value" style="width:250px">
+                                    </div>
+                                </template>
+
+                            </div>
+                            <hr style="margin-top:10px;margin-bottom: 15px;">
+                        </div>
+
+                    </div>
+                    <div style="width:100%;text-align:center">
+                        <button @click="saveSettings()">保存</button>
+                    </div>
+                </template>
+                <template v-else>
+                    404
+                </template>
+
+            </div>
+            <a id="back-top-button" style="display: inline-block;" href="#top">
+                👆🏻
+            </a>
+            <div class="foot-menu" v-show="button.loadbtn.loadmore && current == 'index'">
+                <button id="buton" @click="next" class="loadbtn">
+                    {{ button.loadbtn.text }}
+                </button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="powered_by">
+                <img width="8px" src="./assets/img/ba.png" style="width:8px">
+                <a style="margin-right:0;padding:0" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502051850" target="_blank">
+                    <span>京公网安备11010502054254号</span> ·
+                </a>
+                <a style="margin-left:0;padding:0" href="https://beian.miit.gov.cn/" target="_blank">
+                    <span id="icp">京ICP备18031874号-10</span>
+                </a>
+            </div>
+        </footer>
+        <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
+                type="application/javascript">
+        </script>
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/fancybox/3.5.7/jquery.fancybox.min.js"
+                type="application/javascript">
+        </script>
+        <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"
+                type="application/javascript">
+        </script>
+        <script type="text/javascript" src="https://js.cybozu.com/markedjs/v0.3.5/marked.min.js">
+        </script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js">
+        </script>
+
+        <script type="text/javascript" src="./assets/js/common.js">
+        </script>
+        <script type="text/javascript" src="./assets/js/global.js">
+        </script>
+        <script type="text/javascript" src="./assets/js/upload.js">
+        </script>
+        <script type="text/javascript" src="./assets/js/index.js">
+        </script>
+    </body>
+
+</html>
