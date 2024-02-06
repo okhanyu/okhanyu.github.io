@@ -69,9 +69,80 @@
             }
         </style>
 
+        <style>
+            .overlay {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              z-index: 11;
+              
+            }
+
+            .overlay-content {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: white;
+              padding: 20px;
+              border-radius: 5px;
+/*              text-align: center;*/
+              max-height:  80%;
+              max-width: 750px ;
+              width:  80%;
+              overflow-y: auto; /* 允许遮罩层上下滚动 */
+            }
+
+            .overlay-content textarea{
+              margin-bottom: 10px;
+              width: 100%;
+              max-width: 100%;
+              min-height: 150px;
+              padding: 10px;
+              box-sizing: border-box;
+            }
+
+            .overlay-content select {
+              margin-bottom: 10px;
+              max-width: 100%;
+              padding: 10px;
+              box-sizing: border-box;
+              cursor: pointer;
+            }
+
+            #closeButton, #editSubmitButton {
+              display: block;
+              margin: 10px 10px 10px 0px;
+              display: inline-block;
+              width: 70px;height: 30px;
+              cursor: pointer;
+            }
+
+
+
+        </style>
+
     </head>
     <body style="overflow: auto;" id="top">
         <div id="app" v-cloak>
+
+            <div id="overlay" class="overlay" style="display:none;">
+                <div class="overlay-content">
+                  <textarea type="text" placeholder="Enter text" v-model="editObj.content"></textarea>
+                  <select v-model="editVisibility">
+                   <option v-for="option in editVisibilityOptions" :value="option.value">{{ option.text }}</option>
+                  </select>
+                  <div style="display:flex;flex-wrap: wrap;gap:5px"><div v-for="r in editObj.resources" style="width: 80px;position: relative;overflow: hidden;"><img :src="r.file_path"  style="width: 100%;max-width: 100%;" /><div style="cursor: pointer;position: absolute;right: 5px;top: 1px;" @click="editResourceDel(r.id)">❎</div></div></div>
+                  <button  id="editSubmitButton" @click="editSubmit()">Submit</button>
+                  <button id="closeButton" @click="closeButtonClick()">Cancel</button>
+                </div>
+              </div>
+
+
             <header>
                 <div class="topimage" :style="'position: relative; background-image: url('+ image.topBg +');'">
                     <div class="user_info">
@@ -183,8 +254,10 @@
                                     </svg>
                                 </button>
                                 <div class="item-menu-list" >
-                                    <div class="item-menu-item" v-if="loginStatus">
+                                    <div class="item-menu-item" v-if="loginStatus" >
+                                        <a @click="editBtnClick(obj)" style="cursor: pointer;">  
                                             Edit
+                                        </a>
                                     </div>
                                     <div class="item-menu-item" v-if="loginStatus">
                                         <a @click="deleteMoment(obj.id)" style="cursor: pointer;">

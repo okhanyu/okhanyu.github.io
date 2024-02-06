@@ -18,7 +18,7 @@ document.getElementById('loginButton').addEventListener('click', function() {
     })
     .then(data => {
         if (data == undefined || data.code != 100000){
-            console.log(data);
+            document.getElementById('tips').textContent = data.message;
             return;
         }
         var token = data.data.token;
@@ -29,7 +29,7 @@ document.getElementById('loginButton').addEventListener('click', function() {
         return;
     })
     .catch(error => {
-        // document.getElementById('tips').textContent = 'Login failed.';
+        document.getElementById('tips').textContent = 'Login failed.';
         console.error('Error:', error);
         return;
     });

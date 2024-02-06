@@ -1,5 +1,4 @@
 
-// const server = "http://127.0.0.1:8080/";
 const server = "https://s.hahaha.cc/api/hahaha/";
 
 const limit = 15;

@@ -11,6 +11,21 @@ const app = createApp({
             settings: {},
             loginStatus: false,
             current: "index",
+            editObj: {},
+            editVisibility: 1,  
+            editVisibilityOptions: [{
+                    text: '仅自己可见',
+                    value: 1
+                },
+                {
+                    text: '登录',
+                    value: 2
+                },
+                {
+                    text: '公开',
+                    value: 3
+                }
+            ],
             newStorageShow: false,
             newStorage: {
                 "uri": "https://%s.cos.%s.myqcloud.com"
@@ -40,6 +55,11 @@ const app = createApp({
                 navBtn: [{
                     title: "首页",
                     subTitle: "",
+                    url: "/",
+                    show:true
+                },{
+                    title: "片刻",
+                    subTitle: "",
                     url: "index",
                     show:true
                 }, {
@@ -68,6 +88,33 @@ const app = createApp({
 
     },
     methods: {
+        closeButtonClick(){
+              document.getElementById('overlay').style.display = 'none';
+                // 重新启用背后内容滚动
+              document.body.style.overflow = 'auto';
+             document.querySelectorAll('.item-menu-list').forEach(element => {
+              element.style.display = 'none';
+            });
+        },
+        editSubmit(){
+            editSubmit(this.editObj);
+            document.querySelectorAll('.item-menu-list').forEach(element => {
+              element.style.display = 'none';
+            });
+        },
+        editResourceDel(rid){
+            let newArray = this.editObj.resources.filter(obj => obj.id !== rid);
+            this.editObj.resources = newArray;
+            console.log(JSON.stringify(this.editObj.resources));
+        },
+        editBtnClick(obj){
+            this.editObj = obj;
+            this.editVisibility = obj.visibility;
+            document.getElementById('overlay').style.display = 'block';
+            // 禁止背后内容滚动
+            document.body.style.overflow = 'hidden';
+            console.log(JSON.stringify(this.editObj.resources));
+        },
         mark(content){
             return marked(content);
         },
@@ -89,6 +136,9 @@ const app = createApp({
             if (currentValue == 'logout'){
                 localStorage.clear();
                 window.location.href = "login.html";
+                return;
+            } else if (currentValue == '/'){
+                window.location.href = "/";
                 return;
             } else if (currentValue.indexOf('.html') == -1){
                  this.current = currentValue;
@@ -277,6 +327,54 @@ function submit() {
             window.location.reload();
         });
 
+}
+
+function editSubmit(editObj){
+
+    // var files = filesCos;
+    // var r = [];
+    // for (var i = 0; i < files.length; i++) {
+    //     r.push({
+    //         "file_path": files[i]
+    //     });
+    // }
+
+    editObj.visibility = vm.$data.editVisibility;
+
+
+    fetch(server + "moment", {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(editObj)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('失败');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data == undefined) {
+                alert("失败");
+            } else {
+                if (data.code == 100000) {
+                    alert("成功");
+                    document.getElementById('overlay').style.display = 'none';
+                    // 重新启用背后内容滚动
+                   document.body.style.overflow = 'auto';
+                } else if (data.code == 100002) {
+                    alert("登录失效，失败");
+                    window.location.href = 'login.html';
+                } else if (data.code != 100000) {
+                    alert("失败");
+                }
+
+            }
+            // window.location.reload();
+        });
 }
 
 
@@ -498,4 +596,8 @@ marked.setOptions({
 });
 
 hljs.initHighlightingOnLoad();
+
+// document.getElementById('openButton').addEventListener('click', function() {
+//   document.getElementById('overlay').style.display = 'block';
+// });
 
